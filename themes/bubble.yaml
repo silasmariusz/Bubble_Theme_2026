@@ -63,6 +63,7 @@ Bubble:
       background-color-2: "rgb(92, 83, 103)" #'#2e4a74'
       secondary-background-color: "var(--background-color-2)"
       markdown-code-background-color: "var(--background-color)"
+      lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/mamarguerat/Bubble/refs/heads/main/www/background.png') fixed"
 
       # Card
       card-background-color: "var(--ha-card-background)"
@@ -201,6 +202,7 @@ Bubble:
       background-color-2: "#ccd0da" #"rgb(92, 83, 103)" #'#2e4a74'
       secondary-background-color: "none"
       markdown-code-background-color: "var(--background-color)"
+      lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/mamarguerat/Bubble/refs/heads/main/www/background.png') fixed"
 
       # Card
       card-background-color: "var(--ha-card-background)"
