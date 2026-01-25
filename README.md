@@ -15,8 +15,7 @@ Themes designed for [QNAP Club Poland](https://forum.qnap.net.pl), [QNAP Forum](
 Report abuse or security issues: silas _AT&T_ qnapclub.pl
 
 
-Podziekowania dla UnderPl
-
+Podziekowania dla UberDudePL za ostanie fixy
 
 Based on clooos Buuble theme
 
