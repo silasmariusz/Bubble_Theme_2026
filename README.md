@@ -1,6 +1,13 @@
 # Bubble Theme 2026
 New look on a Bubble Cards with multiple variants and vibes
 
+| Main | Details | Settings |
+| :---: | :---: | :---: |
+| <img src="https://github.com/user-attachments/assets/6dea7d27-f6d8-49f3-9b16-c59e600cd899" height="400"> | <img src="https://github.com/user-attachments/assets/82f30b75-f39e-42b6-b822-b507eac29e23" height="400"> | <img src="https://github.com/user-attachments/assets/83857607-f988-4fc5-8506-b3862c992b6f" height="400"> |
+| Sth | Bubble? | or Dubble? |
+| <img src="https://github.com/user-attachments/assets/856d9a18-c79c-4caa-a4ff-4c60c2b713ba" height="400"> | <img src="https://github.com/user-attachments/assets/4564c1b6-0446-4788-98b4-5610a42442b1" height="400"> | <img src="https://github.com/user-attachments/assets/1c5e01c7-c078-4afc-9334-4a71ad6fae65" height="400"> |
+
+
 Silas Mariusz, BIO: [devspark.pl](https://devspark.pl)
 Themes designed for [QNAP Club Poland](https://forum.qnap.net.pl), [QNAP Forum](https://forum.qnap.net.pl) crew
 Report abuse or security issues: silas _AT&T_ qnapclub.pl
