@@ -59,3 +59,41 @@ frontend:
 ```
 9. Save and restart Home Assistant
 10. Now go to your personal account settings and select Bubble 2026 as your theme
+
+# FAQ
+
+## After installation cant find Bubble 2026 Dubble* themes
+
+Uuh
+
+I see. Did I mention mod card addon and card mod is required? XDDDDD
+
+PLEASE make sure you have installed it
+
+Here is SOP Guide for absolutely anyone modyfing his HA and should be performed always after changes are done:
+
+Have you checked your yaml config is healthy? Steps you should do you always after installing anything or modifying: 
+
+
+### (Home Assistant actions)
+
+1.	⁠go to Developer Tools from left sidebar
+2.	⁠Check if your configuration has no errors (warnings are not errors) but basically do not continue if there are errors (fix them first)
+3.	⁠If all is okay then click Actions in Developer tools and start typing reload or themes - you should fine action reload themes
+4.	⁠Click execute
+5.	⁠Leave developer tools, go to your profile settings in HA (hold on on that page)
+
+### (Browser actions)
+6. Hit F12 on keyboard to open Developed Tools (make sure you are on Home Assistant tab in your browser) 7. From the browser developer tools look for Network tab 8. Look for small check box DISABLE CACHE 9. Hit Ctrl+F5 in your browser 10. If there are no errors in console tab tab it’s fine. If there are errors resolve them
+
+### (iOS/Android troubleshooting)
+1. (if possivle) Swipe phone left/right to open debug menu if was already enabled, 
+2. If above is not working go to HA settings and find Companion App menu 
+3. Clear cache
+
+IMO Those steps should be done each time by user always when modyfing any settings in HA. Unfortunately Home Assistant is lack of implementation Test Changes button and if something is wrong Revert button and Apply button if all is fine. HA in Test action could automatically rebuild cache and js/css links. Yes this mean Home Assistant is not friendly for newbies and devs IMHO
+
+HOPE THIS HELPS
+
+## Text white colour on vibe Lime accents is not visible
+thats correct behavior. you have to redifine in such case conditionaly text styling
