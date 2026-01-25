@@ -1,14 +1,27 @@
-# Bubble Light & Dark v1.2
+# Bubble Light & Dark
 
 # Noctis from aFFekopp was my initial theme (thanks dude!)
 # Bubble is a modified one and is maintained by Clooos
-# Added a split between light and dark themes for automatic change 
+# Added a split between light and dark themes for automatic change
 
-Bubble:
+# Silas Mod (silas [at] qnapclub.pl)
+# additional custom styles and fixes, better compatibility
+
+Bubble 2026:
   modes:
     dark:
-      # Fonts
-      primary-font-family: "sans-serif"
+      # Fonts (User Customization Preserved)
+      primary-font-family: "Inter, Figtree, sans-serif"
+      ha-font-family-body: "var(--primary-font-family)"
+      ha-font-family-heading: var(--primary-font-family)
+      ha-font-family-code: var(--primary-font-family)
+      ha-font-family-longform: var(--primary-font-family)
+      ## Legacy
+      mdc-typography-font-family: var(--primary-font-family)
+      mdc-typography-button-font-family: var(--primary-font-family)
+      mdc-typography-body1-font-family: var(--primary-font-family)
+      md-list-item-label-text-font: var(--primary-font-family)
+
       paper-font-common-base_-_font-family: "var(--primary-font-family)"
       paper-font-common-code_-_font-family: "var(--primary-font-family)"
       paper-font-body1_-_font-family: "var(--primary-font-family)"
@@ -29,7 +42,7 @@ Bubble:
       pbs-button-rgb-default-color: "var(--text-color)"
       rgb-state-default-color: "var(--text-color)"
       pbs-button-rgb-fallback: "var(--text-color)"
-      secondary-text-color: "rgb(244, 238, 224)" #'rgb(193 211 170)' #"#BAC0C6"
+      secondary-text-color: "rgb(244, 238, 224)"
       text-medium-light-color: "#A0A2A8"
       text-medium-color: "#80828A"
       disabled-text-color: "#626569"
@@ -53,29 +66,32 @@ Bubble:
       codemirror-property: "var(--accent-color)"
 
       # Main Colors
-      app-header-background-color: "var(--background-color)" #'#242e42'
+      app-header-background-color: "var(--background-color)"
       accent-color: "rgb(80, 110, 172)"
       accent-medium-color: "var(--accent-color)"
 
+      bubble-accent-color: var(--accent-color);
+      bubble-button-accent-color: var(--accent-color);
+
       # Background
-      background-color: "rgba(57, 54, 70, 1)" #'rgb(23, 24, 26)'
+      background-color: "rgba(57, 54, 70, 1)"
       primary-background-color: "var(--background-color)"
-      background-color-2: "rgb(92, 83, 103)" #'#2e4a74'
+      background-color-2: "rgb(92, 83, 103)"
       secondary-background-color: "var(--background-color-2)"
       markdown-code-background-color: "var(--background-color)"
 
       # Card
       card-background-color: "var(--ha-card-background)"
-      ha-card-background: "rgba(79, 69, 87, 1)" #'rgb(36, 37, 41)'
+      ha-card-background: "rgba(79, 69, 87, 1)"
       ha-card-box-shadow: "none"
       ha-card-border-radius: "28px"
-      ha-card-border-style: "solid"
-      ha-card-border-width: "0px"
-      ha-card-border-color: "none"
+      ha-card-border-style: "solid !important"
+      ha-card-border-width: "1px !important"
+      ha-card-border-color: "none !important"
       border-color: "none"
       grid-card-gap: "18px"
       horizontal-stack-card-margin: "0 10px"
-      border-style: "none"
+      border-style: "none !important"
       ha-card-background-active: "rgba(103,114,209, 0.4) radial-gradient(at bottom, rgba(103,114,209, 0.5) 0%, rgba(103,114,209, 0) 70%)"
       control-button-border-radius: "50px"
       control-button-background-color: "var(--ha-card-background)"
@@ -94,10 +110,49 @@ Bubble:
       light-primary-color: "var(--ha-card-background)"
 
       # Sliders
+      ha-border-radius-sm: "8px"
+      ha-border-radius-md: "16px"
+      ha-border-radius-lg: "24px"
+      ha-border-radius-xl: "32px"
+      control-border-radius: "24px"
+      mush-control-border-radius: "24px"
       paper-slider-knob-color: "var(--accent-color)"
       paper-slider-pin-color: "var(--background-color-2)"
       paper-slider-active-color: "var(--accent-color)"
       paper-slider-container-color: "var(--background-color-2)"
+
+      # Badge Progress Bar idicator fix
+      epb-progress-bar-background-color: "var(--background-color-2, rgba(255, 255, 255, 0.05))"
+
+      bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, #e0e0e0)"
+
+      #################################################
+      # Semantic palette
+      #################################################
+      success-color: "rgba(0, 202, 139, 1)" # Original Green Badge
+      warning-color: "rgba(222, 176, 107, 1)" # Original Yellow Badge
+      error-color: "rgba(247, 53, 67, 1)" # Original Alarm Armed
+      info-color: "rgba(26, 137, 245, 1)" # Original Blue Badge
+
+      # Additional
+      alert-color: "var(--error-color)"
+      on-color: "var(--success-color)"
+      off-color: "rgba(152, 167, 185, 0.75)"
+      idle-color: "rgba(160, 162, 168, 0.70)"
+      unavailable-color: "rgba(160, 162, 168, 0.70)"
+      unknown-color: "rgba(160, 162, 168, 0.70)"
+
+      #################################################
+      # Alias pack
+      #################################################
+      red-color: "var(--error-color)"
+      blue-color: "var(--info-color)"
+      green-color: "var(--success-color)"
+      yellow-color: "var(--warning-color)"
+      orange-color: "var(--warning-color)"
+      purple-color: "rgba(181, 108, 255, 1)"
+      pink-color: "rgba(255, 120, 190, 1)"
+      teal-color: "#40c8baff"
 
       # Toggle:
       paper-toggle-button-checked-bar-color: "var(--accent-color)"
@@ -105,6 +160,7 @@ Bubble:
 
       # Switch
       switch-unchecked-color: "#70889e"
+      switch-unchecked-button-color: "#70889e"
       switch-checked-button-color: "var(--accent-color)"
       switch-unchecked-track-color: "var(--background-color-2)"
       switch-checked-track-color: "var(--background-color-2)"
@@ -127,6 +183,7 @@ Bubble:
       label-badge-blue: "rgba(26,137,245,1)"
       label-badge-green: "rgba(0,202,139,1)"
       label-badge-yellow: "rgba(222,176,107,1)"
+      label-badge-grey: "rgba(16, 18, 22, 0.25)"
 
       paper-input-container-focus-color: "var(--accent-color)"
 
@@ -145,8 +202,18 @@ Bubble:
       alarm-color-armed: "rgba(247,53,67,1)"
 
     light:
-      # Fonts
-      primary-font-family: "sans-serif"
+      # Fonts (User Customization Preserved)
+      primary-font-family: "Inter, Figtree, sans-serif"
+      ha-font-family-body: "var(--primary-font-family)"
+      ha-font-family-heading: var(--primary-font-family)
+      ha-font-family-code: var(--primary-font-family)
+      ha-font-family-longform: var(--primary-font-family)
+      ## Legacy
+      mdc-typography-font-family: var(--primary-font-family)
+      mdc-typography-button-font-family: var(--primary-font-family)
+      mdc-typography-body1-font-family: var(--primary-font-family)
+      md-list-item-label-text-font: var(--primary-font-family)
+
       paper-font-common-base_-_font-family: "var(--primary-font-family)"
       paper-font-common-code_-_font-family: "var(--primary-font-family)"
       paper-font-body1_-_font-family: "var(--primary-font-family)"
@@ -167,7 +234,7 @@ Bubble:
       pbs-button-rgb-default-color: "var(--text-color)"
       rgb-state-default-color: "var(--text-color)"
       pbs-button-rgb-fallback: "var(--text-color)"
-      secondary-text-color: "#5c5f77" #"rgb(244, 238, 224)" #'rgb(193 211 170)' #"#BAC0C6"
+      secondary-text-color: "#5c5f77"
       text-medium-light-color: "#6c6f85"
       text-medium-color: "#6c6f85"
       disabled-text-color: "#6c6f85"
@@ -191,20 +258,23 @@ Bubble:
       codemirror-property: "var(--accent-color)"
 
       # Main Colors
-      app-header-background-color: "var(--background-color)" #'#242e42'
-      accent-color: "#e69c9c" #84c3e5
+      app-header-background-color: "var(--background-color)"
+      accent-color: "#e69c9c"
       accent-medium-color: "var(--accent-color)"
 
+      bubble-accent-color: var(--accent-color);
+      bubble-button-accent-color: var(--accent-color);
+
       # Background
-      background-color: "#eff1f5" #"rgba(57, 54, 70, 1)" #'rgb(23, 24, 26)'
+      background-color: "#eff1f5"
       primary-background-color: "var(--background-color)"
-      background-color-2: "#ccd0da" #"rgb(92, 83, 103)" #'#2e4a74'
-      secondary-background-color: "none"
+      background-color-2: "#ccd0da"
+      secondary-background-color: "var(--background-color-2)"
       markdown-code-background-color: "var(--background-color)"
 
       # Card
       card-background-color: "var(--ha-card-background)"
-      ha-card-background: "#dce0e8" #"rgba(79, 69, 87, 1)" #'rgb(36, 37, 41)'
+      ha-card-background: "#dce0e8"
       ha-card-box-shadow: "none"
       ha-card-border-radius: "28px"
       ha-card-border-style: "solid !important"
@@ -232,17 +302,56 @@ Bubble:
       light-primary-color: "var(--ha-card-background)"
 
       # Sliders
+      ha-border-radius-sm: "8px"
+      ha-border-radius-md: "16px"
+      ha-border-radius-lg: "24px"
+      ha-border-radius-xl: "32px"
+      control-border-radius: "24px"
+      mush-control-border-radius: "24px"
       paper-slider-knob-color: "var(--accent-color)"
       paper-slider-pin-color: "var(--background-color-2)"
       paper-slider-active-color: "var(--accent-color)"
       paper-slider-container-color: "var(--background-color-2)"
+
+      # Badge Progress Bar idicator fix
+      epb-progress-bar-background-color: "var(--background-color-2, rgba(255, 255, 255, 0.05))"
+
+      bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, rgba(31, 31, 31, 1))"
+
+      #################################################
+      # Semantic palette
+      #################################################
+      success-color: "rgba(0, 202, 139, 1)" # Original Green Badge
+      warning-color: "rgba(222, 176, 107, 1)" # Original Yellow Badge
+      error-color: "rgba(247, 53, 67, 1)"
+      info-color: "rgba(26, 137, 245, 1)" # Original Blue Badge
+
+      alert-color: "var(--error-color)"
+      on-color: "var(--success-color)"
+      off-color: "rgba(16, 18, 22, 0.45)"
+      idle-color: "rgba(16, 18, 22, 0.35)"
+      unavailable-color: "rgba(16, 18, 22, 0.35)"
+      unknown-color: "rgba(16, 18, 22, 0.35)"
+
+      #################################################
+      # Alias pack
+      #################################################
+      red-color: "var(--error-color)"
+      blue-color: "var(--info-color)"
+      green-color: "var(--success-color)"
+      yellow-color: "var(--warning-color)"
+      orange-color: "var(--warning-color)"
+      purple-color: "rgba(142, 68, 173, 1)"
+      pink-color: "rgba(232, 67, 147, 1)"
+      teal-color: "rgba(22, 160, 133, 1)"
 
       # Toggle:
       paper-toggle-button-checked-bar-color: "var(--accent-color)"
       mdc-theme-primary: "var(--accent-color)"
 
       # Switch
-      switch-unchecked-color: "#9ca0b0"
+      switch-unchecked-color: "rgba(16, 18, 22, 0.45)"
+      switch-unchecked-button-color: "rgba(16, 18, 22, 0.45)"
       on: "#6c6f85"
       switch-checked-button-color: "var(--on)"
       switch-unchecked-track-color: "var(--background-color-2)"
@@ -266,6 +375,7 @@ Bubble:
       label-badge-blue: "rgba(26,137,245,1)"
       label-badge-green: "rgba(0,202,139,1)"
       label-badge-yellow: "rgba(222,176,107,1)"
+      label-badge-grey: "rgba(16, 18, 22, 0.25)"
 
       paper-input-container-focus-color: "var(--accent-color)"
 
@@ -280,7 +390,7 @@ Bubble:
       mini-media-player-base-color: "var(--text-color)"
       mini-media-player-accent-color: "var(--accent-color)"
 
-  card-mod-theme: Bubble
+  card-mod-theme: Bubble 2026
 
   card-mod-root-yaml: |
     .: |
@@ -331,6 +441,9 @@ Bubble:
                 border-radius: 14px !important;
         }
       .: |
+        hui-view {
+          transform: translate3d(0px, -60px, 0px);
+        }
         "#view>hui-view>hui-sidebar-view$#main>hui-card-options:nth-child(7)>vertical-stack-in-card$ha-card>div>hui-horizontal-stack-card$#root>hui-grid-card$#root>hui-entities-card$#states>div:nth-child(4)>slider-entity-row$div>ha-slider$#sliderBar$#progressContainer" {
             border-radius: 14px !important;
         }
