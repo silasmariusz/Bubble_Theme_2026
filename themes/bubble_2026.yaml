@@ -1,455 +1,348 @@
-# Bubble Light & Dark
+# ------------------------------------------------------------------------------
+# THEME PACK 2025/2026 - BUBBLE & DUBBLE
+# ------------------------------------------------------------------------------
+# Fixes:
+# 1. Text visibility on active accents (Black text on Lime/Cyan).
+# 2. Sidebar icon visibility.
+# 3. Correct Bubble borders for Dark/Light modes.
+# ------------------------------------------------------------------------------
 
-# Noctis from aFFekopp was my initial theme (thanks dude!)
-# Bubble is a modified one and is maintained by Clooos
-# Added a split between light and dark themes for automatic change
-
-# Silas Mod (silas [at] qnapclub.pl)
-# additional custom styles and fixes, better compatibility
-
-Bubble 2026:
-  modes:
-    dark:
-      # Fonts (User Customization Preserved)
-      primary-font-family: "Inter, Figtree, sans-serif"
-      ha-font-family-body: "var(--primary-font-family)"
-      ha-font-family-heading: var(--primary-font-family)
-      ha-font-family-code: var(--primary-font-family)
-      ha-font-family-longform: var(--primary-font-family)
-      ## Legacy
-      mdc-typography-font-family: var(--primary-font-family)
-      mdc-typography-button-font-family: var(--primary-font-family)
-      mdc-typography-body1-font-family: var(--primary-font-family)
-      md-list-item-label-text-font: var(--primary-font-family)
-
-      paper-font-common-base_-_font-family: "var(--primary-font-family)"
-      paper-font-common-code_-_font-family: "var(--primary-font-family)"
-      paper-font-body1_-_font-family: "var(--primary-font-family)"
-      paper-font-subhead_-_font-family: "var(--primary-font-family)"
-      paper-font-headline_-_font-family: "var(--primary-font-family)"
-      paper-font-caption_-_font-family: "var(--primary-font-family)"
-      paper-font-title_-_font-family: "var(--primary-font-family)"
-      ha-card-header-font-family: "var(--primary-font-family)"
-
-      # Text
-      text-color: "#ffffff"
-      primary-text-color: "var(--text-color)"
-      text-primary-color: "var(--text-color)"
-      sidebar-text-color: "var(--text-color)"
-      pbs-button-color: "var(--text-color)"
-      pbs-button-rgb-color: "var(--text-color)"
-      pbs-button-rgb-state-color: "var(--text-color)"
-      pbs-button-rgb-default-color: "var(--text-color)"
-      rgb-state-default-color: "var(--text-color)"
-      pbs-button-rgb-fallback: "var(--text-color)"
-      secondary-text-color: "rgb(244, 238, 224)"
-      text-medium-light-color: "#A0A2A8"
-      text-medium-color: "#80828A"
-      disabled-text-color: "#626569"
-      primary-color: "var(--accent-color)"
-
-      # Text Fields an Dropdown
-      mdc-text-field-fill-color: "var(--background-color)"
-      mdc-text-field-ink-color: "var(--text-color)"
-      mdc-select-fill-color: "var(--background-color)"
-      mdc-text-field-label-ink-color: "var(--secondary-text-color)"
-      input-fill-color: "var(--background-color)"
-      input-ink-color: "var(--text-color)"
-      input-label-ink-color: "var(--text-color)"
-      input-disabled-fill-color: "var(--background-color)"
-      input-disabled-ink-color: "var(--disabled-text-color)"
-      input-disabled-label-ink-color: "var(--disabled-text-color)"
-      input-idle-line-color: "var(--background-color)"
-      input-dropdown-icon-color: "var(--secondary-text-color)"
-      input-hover-line-color: "var(--primary-color)"
-      code-editor-background-color: "#222c40"
-      codemirror-property: "var(--accent-color)"
-
-      # Main Colors
-      app-header-background-color: "var(--background-color)"
-      accent-color: "rgb(80, 110, 172)"
-      accent-medium-color: "var(--accent-color)"
-
-      bubble-accent-color: var(--accent-color);
-      bubble-button-accent-color: var(--accent-color);
-
-      # Background
-      background-color: "rgba(57, 54, 70, 1)"
-      primary-background-color: "var(--background-color)"
-      background-color-2: "rgb(92, 83, 103)"
-      secondary-background-color: "var(--background-color-2)"
-      markdown-code-background-color: "var(--background-color)"
-
-      # Card
-      card-background-color: "var(--ha-card-background)"
-      ha-card-background: "rgba(79, 69, 87, 1)"
-      ha-card-box-shadow: "none"
-      ha-card-border-radius: "28px"
-      ha-card-border-style: "solid !important"
-      ha-card-border-width: "1px !important"
-      ha-card-border-color: "none !important"
-      border-color: "none"
-      grid-card-gap: "18px"
-      horizontal-stack-card-margin: "0 10px"
-      border-style: "none !important"
-      ha-card-background-active: "rgba(103,114,209, 0.4) radial-gradient(at bottom, rgba(103,114,209, 0.5) 0%, rgba(103,114,209, 0) 70%)"
-      control-button-border-radius: "50px"
-      control-button-background-color: "var(--ha-card-background)"
-
-      # Icons
-      paper-item-icon-color: "var(--text-color)"
-      paper-item-icon-active-color: "var(--accent-color)"
-
-      # Sidebar
-      sidebar-background-color: "var(--background-color)"
-      sidebar-icon-color: "#98a7b9"
-      sidebar-selected-icon-color: "var(--accent-color)"
-      sidebar-selected-text-color: "var(--text-color)"
-      paper-listbox-background-color: "var(--sidebar-background-color)"
-      divider-color: "var(--background-color)"
-      light-primary-color: "var(--ha-card-background)"
-
-      # Sliders
-      ha-border-radius-sm: "8px"
-      ha-border-radius-md: "16px"
-      ha-border-radius-lg: "24px"
-      ha-border-radius-xl: "32px"
-      control-border-radius: "24px"
-      mush-control-border-radius: "24px"
-      paper-slider-knob-color: "var(--accent-color)"
-      paper-slider-pin-color: "var(--background-color-2)"
-      paper-slider-active-color: "var(--accent-color)"
-      paper-slider-container-color: "var(--background-color-2)"
-
-      # Badge Progress Bar idicator fix
-      epb-progress-bar-background-color: "var(--background-color-2, rgba(255, 255, 255, 0.05))"
-
-      bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, #e0e0e0)"
-
-      #################################################
-      # Semantic palette
-      #################################################
-      success-color: "rgba(0, 202, 139, 1)" # Original Green Badge
-      warning-color: "rgba(222, 176, 107, 1)" # Original Yellow Badge
-      error-color: "rgba(247, 53, 67, 1)" # Original Alarm Armed
-      info-color: "rgba(26, 137, 245, 1)" # Original Blue Badge
-
-      # Additional
-      alert-color: "var(--error-color)"
-      on-color: "var(--success-color)"
-      off-color: "rgba(152, 167, 185, 0.75)"
-      idle-color: "rgba(160, 162, 168, 0.70)"
-      unavailable-color: "rgba(160, 162, 168, 0.70)"
-      unknown-color: "rgba(160, 162, 168, 0.70)"
-
-      #################################################
-      # Alias pack
-      #################################################
-      red-color: "var(--error-color)"
-      blue-color: "var(--info-color)"
-      green-color: "var(--success-color)"
-      yellow-color: "var(--warning-color)"
-      orange-color: "var(--warning-color)"
-      purple-color: "rgba(181, 108, 255, 1)"
-      pink-color: "rgba(255, 120, 190, 1)"
-      teal-color: "#40c8baff"
-
-      # Toggle:
-      paper-toggle-button-checked-bar-color: "var(--accent-color)"
-      mdc-theme-primary: "var(--accent-color)"
-
-      # Switch
-      switch-unchecked-color: "#70889e"
-      switch-unchecked-button-color: "#70889e"
-      switch-checked-button-color: "var(--accent-color)"
-      switch-unchecked-track-color: "var(--background-color-2)"
-      switch-checked-track-color: "var(--background-color-2)"
-
-      # Radio Button
-      paper-radio-button-checked-color: "var(--accent-color)"
-
-      # Popups
-      more-info-header-background: "var(--secondary-background-color)"
-      paper-dialog-background-color: "var(--background-color)"
-
-      # Tables
-      table-row-background-color: "var(--background-color)"
-      table-row-alternative-background-color: "var(--ha-card-background)"
-
-      # Badges
-      label-badge-background-color: "var(--background-color)"
-      label-badge-text-color: "var(--text-primary-color)"
-      label-badge-red: "rgba(73,85,108,1)"
-      label-badge-blue: "rgba(26,137,245,1)"
-      label-badge-green: "rgba(0,202,139,1)"
-      label-badge-yellow: "rgba(222,176,107,1)"
-      label-badge-grey: "rgba(16, 18, 22, 0.25)"
-
-      paper-input-container-focus-color: "var(--accent-color)"
-
-      # Custom Header
-      ch-background: "var(--background-color)"
-      ch-active-tab-color: "var(--accent-color)"
-      ch-notification-dot-color: "var(--accent-color)"
-      ch-all-tabs-color: "var(--sidebar-icon-color)"
-      ch-tab-indicator-color: "var(--accent-color)"
-
-      # Mini Mediaplayer
-      mini-media-player-base-color: "var(--text-color)"
-      mini-media-player-accent-color: "var(--accent-color)"
-
-      # Alarm
-      alarm-color-armed: "rgba(247,53,67,1)"
-
-    light:
-      # Fonts (User Customization Preserved)
-      primary-font-family: "Inter, Figtree, sans-serif"
-      ha-font-family-body: "var(--primary-font-family)"
-      ha-font-family-heading: var(--primary-font-family)
-      ha-font-family-code: var(--primary-font-family)
-      ha-font-family-longform: var(--primary-font-family)
-      ## Legacy
-      mdc-typography-font-family: var(--primary-font-family)
-      mdc-typography-button-font-family: var(--primary-font-family)
-      mdc-typography-body1-font-family: var(--primary-font-family)
-      md-list-item-label-text-font: var(--primary-font-family)
-
-      paper-font-common-base_-_font-family: "var(--primary-font-family)"
-      paper-font-common-code_-_font-family: "var(--primary-font-family)"
-      paper-font-body1_-_font-family: "var(--primary-font-family)"
-      paper-font-subhead_-_font-family: "var(--primary-font-family)"
-      paper-font-headline_-_font-family: "var(--primary-font-family)"
-      paper-font-caption_-_font-family: "var(--primary-font-family)"
-      paper-font-title_-_font-family: "var(--primary-font-family)"
-      ha-card-header-font-family: "var(--primary-font-family)"
-
-      # Text
-      text-color: "#4c4f69"
-      primary-text-color: "var(--text-color)"
-      text-primary-color: "var(--text-color)"
-      sidebar-text-color: "var(--text-color)"
-      pbs-button-color: "var(--text-color)"
-      pbs-button-rgb-color: "var(--text-color)"
-      pbs-button-rgb-state-color: "var(--text-color)"
-      pbs-button-rgb-default-color: "var(--text-color)"
-      rgb-state-default-color: "var(--text-color)"
-      pbs-button-rgb-fallback: "var(--text-color)"
-      secondary-text-color: "#5c5f77"
-      text-medium-light-color: "#6c6f85"
-      text-medium-color: "#6c6f85"
-      disabled-text-color: "#6c6f85"
-      primary-color: "var(--accent-color)"
-
-      # Text Fields an Dropdown
-      mdc-text-field-fill-color: "var(--background-color)"
-      mdc-text-field-ink-color: "var(--text-color)"
-      mdc-select-fill-color: "var(--background-color)"
-      mdc-text-field-label-ink-color: "var(--secondary-text-color)"
-      input-fill-color: "var(--background-color)"
-      input-ink-color: "var(--text-color)"
-      input-label-ink-color: "var(--text-color)"
-      input-disabled-fill-color: "var(--background-color)"
-      input-disabled-ink-color: "var(--disabled-text-color)"
-      input-disabled-label-ink-color: "var(--disabled-text-color)"
-      input-idle-line-color: "var(--background-color)"
-      input-dropdown-icon-color: "var(--secondary-text-color)"
-      input-hover-line-color: "var(--primary-color)"
-      code-editor-background-color: "#ccd0da"
-      codemirror-property: "var(--accent-color)"
-
-      # Main Colors
-      app-header-background-color: "var(--background-color)"
-      accent-color: "#e69c9c"
-      accent-medium-color: "var(--accent-color)"
-
-      bubble-accent-color: var(--accent-color);
-      bubble-button-accent-color: var(--accent-color);
-
-      # Background
-      background-color: "#eff1f5"
-      primary-background-color: "var(--background-color)"
-      background-color-2: "#ccd0da"
-      secondary-background-color: "var(--background-color-2)"
-      markdown-code-background-color: "var(--background-color)"
-
-      # Card
-      card-background-color: "var(--ha-card-background)"
-      ha-card-background: "#dce0e8"
-      ha-card-box-shadow: "none"
-      ha-card-border-radius: "28px"
-      ha-card-border-style: "solid !important"
-      ha-card-border-width: "1px !important"
-      ha-card-border-color: "none !important"
-      border-color: "none"
-      grid-card-gap: "18px"
-      horizontal-stack-card-margin: "0 10px"
-      border-style: "none !important"
-      ha-card-background-active: "rgba(220, 224, 232, 0.4) radial-gradient(at bottom, rgba(220, 224, 232, 0.5) 0%, rgba(220, 224, 232, 0) 70%)"
-      control-button-border-radius: "50px"
-      control-button-background-color: "var(--ha-card-background)"
-
-      # Icons
-      paper-item-icon-color: "var(--text-color)"
-      paper-item-icon-active-color: "var(--accent-color)"
-
-      # Sidebar
-      sidebar-background-color: "var(--background-color)"
-      sidebar-icon-color: "#ccd0da"
-      sidebar-selected-icon-color: "var(--accent-color)"
-      sidebar-selected-text-color: "var(--text-color)"
-      paper-listbox-background-color: "var(--sidebar-background-color)"
-      divider-color: "var(--background-color)"
-      light-primary-color: "var(--ha-card-background)"
-
-      # Sliders
-      ha-border-radius-sm: "8px"
-      ha-border-radius-md: "16px"
-      ha-border-radius-lg: "24px"
-      ha-border-radius-xl: "32px"
-      control-border-radius: "24px"
-      mush-control-border-radius: "24px"
-      paper-slider-knob-color: "var(--accent-color)"
-      paper-slider-pin-color: "var(--background-color-2)"
-      paper-slider-active-color: "var(--accent-color)"
-      paper-slider-container-color: "var(--background-color-2)"
-
-      # Badge Progress Bar idicator fix
-      epb-progress-bar-background-color: "var(--background-color-2, rgba(255, 255, 255, 0.05))"
-
-      bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, rgba(31, 31, 31, 1))"
-
-      #################################################
-      # Semantic palette
-      #################################################
-      success-color: "rgba(0, 202, 139, 1)" # Original Green Badge
-      warning-color: "rgba(222, 176, 107, 1)" # Original Yellow Badge
-      error-color: "rgba(247, 53, 67, 1)"
-      info-color: "rgba(26, 137, 245, 1)" # Original Blue Badge
-
-      alert-color: "var(--error-color)"
-      on-color: "var(--success-color)"
-      off-color: "rgba(16, 18, 22, 0.45)"
-      idle-color: "rgba(16, 18, 22, 0.35)"
-      unavailable-color: "rgba(16, 18, 22, 0.35)"
-      unknown-color: "rgba(16, 18, 22, 0.35)"
-
-      #################################################
-      # Alias pack
-      #################################################
-      red-color: "var(--error-color)"
-      blue-color: "var(--info-color)"
-      green-color: "var(--success-color)"
-      yellow-color: "var(--warning-color)"
-      orange-color: "var(--warning-color)"
-      purple-color: "rgba(142, 68, 173, 1)"
-      pink-color: "rgba(232, 67, 147, 1)"
-      teal-color: "rgba(22, 160, 133, 1)"
-
-      # Toggle:
-      paper-toggle-button-checked-bar-color: "var(--accent-color)"
-      mdc-theme-primary: "var(--accent-color)"
-
-      # Switch
-      switch-unchecked-color: "rgba(16, 18, 22, 0.45)"
-      switch-unchecked-button-color: "rgba(16, 18, 22, 0.45)"
-      on: "#6c6f85"
-      switch-checked-button-color: "var(--on)"
-      switch-unchecked-track-color: "var(--background-color-2)"
-      switch-checked-track-color: "var(--background-color-2)"
-
-      # Radio Button
-      paper-radio-button-checked-color: "var(--accent-color)"
-
-      # Popups
-      more-info-header-background: "var(--secondary-background-color)"
-      paper-dialog-background-color: "var(--background-color)"
-
-      # Tables
-      table-row-background-color: "var(--background-color)"
-      table-row-alternative-background-color: "var(--ha-card-background)"
-
-      # Badges
-      label-badge-background-color: "var(--background-color)"
-      label-badge-text-color: "var(--text-primary-color)"
-      label-badge-red: "rgba(73,85,108,1)"
-      label-badge-blue: "rgba(26,137,245,1)"
-      label-badge-green: "rgba(0,202,139,1)"
-      label-badge-yellow: "rgba(222,176,107,1)"
-      label-badge-grey: "rgba(16, 18, 22, 0.25)"
-
-      paper-input-container-focus-color: "var(--accent-color)"
-
-      # Custom Header
-      ch-background: "var(--background-color)"
-      ch-active-tab-color: "var(--accent-color)"
-      ch-notification-dot-color: "var(--accent-color)"
-      ch-all-tabs-color: "var(--sidebar-icon-color)"
-      ch-tab-indicator-color: "var(--accent-color)"
-
-      # Mini Mediaplayer
-      mini-media-player-base-color: "var(--text-color)"
-      mini-media-player-accent-color: "var(--accent-color)"
-
-  card-mod-theme: Bubble 2026
-
+# ==============================================================================
+# BASE LOGIC & CARD MODS (SHARED) - DO NOT EDIT THIS BLOCK
+# ==============================================================================
+x-bubble-shared: &bubble_shared
   card-mod-root-yaml: |
     .: |
       @media only screen and (max-width: 768px) {
-          .header {
-            display: none;
-            opacity: 0;
-          }
-          #view {
-            padding-top: 0 !important;
-            margin-top: 0 !important;
-            height: calc(100vh - env(safe-area-inset-top)) !important;
-          }
+          .header { display: none; opacity: 0; }
+          #view { padding-top: 0 !important; margin-top: 0 !important; height: calc(100vh - env(safe-area-inset-top)) !important; }
       }
-
   card-mod-more-info-yaml: |
     $: |
-     .mdc-dialog .mdc-dialog__scrim {
-        backdrop-filter: blur(15px);
-        -webkit-backdrop-filter: blur(15px);
-        background: rgba(0,0,0,.6);
-     } 
-     .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
-        box-shadow: none !important;
-        border-radius: var(--ha-card-border-radius);
-     }
+     .mdc-dialog .mdc-dialog__scrim { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); background: rgba(0,0,0,.6); } 
+     .mdc-dialog .mdc-dialog__container .mdc-dialog__surface { box-shadow: none !important; border-radius: var(--ha-card-border-radius); }
     .: |
-     :host {
-        --ha-card-box-shadow: none;
-     }
+     :host { --ha-card-box-shadow: none; }
   card-mod-view-yaml: |
     hui-sidebar-view:
       $: |
-        .container {
-            overflow: hidden;
-            /* padding: 6px; */
-        }
-        @media only screen and (min-width: 768px) {
-            .container {
-              max-width: 520px;
-              margin: auto !important;
-              width: -webkit-fill-available;
-            }
-        }
+        .container { overflow: hidden; }
+        @media only screen and (min-width: 768px) { .container { max-width: 520px; margin: auto !important; width: -webkit-fill-available; } }
         #wrapper: |
           $: |
-            #progressContainer {
-                border-radius: 14px !important;
-        }
+            #progressContainer { border-radius: 14px !important; }
       .: |
-        hui-view {
-          transform: translate3d(0px, -60px, 0px);
-        }
-        "#view>hui-view>hui-sidebar-view$#main>hui-card-options:nth-child(7)>vertical-stack-in-card$ha-card>div>hui-horizontal-stack-card$#root>hui-grid-card$#root>hui-entities-card$#states>div:nth-child(4)>slider-entity-row$div>ha-slider$#sliderBar$#progressContainer" {
-            border-radius: 14px !important;
-        }
-
+        hui-view { transform: translate3d(0px, -60px, 0px); }
+        "#view>hui-view>hui-sidebar-view$#main>hui-card-options:nth-child(7)>vertical-stack-in-card$ha-card>div>hui-horizontal-stack-card$#root>hui-grid-card$#root>hui-entities-card$#states>div:nth-child(4)>slider-entity-row$div>ha-slider$#sliderBar$#progressContainer" { border-radius: 14px !important; }
   card-mod-card: |
-    ha-card {
-      transition: none;
-      border-style: none !important;
-    }
+    ha-card { transition: none; border-style: none !important; }
+
+# ==============================================================================
+# BASE COLORS LOGIC (ANCHORS)
+# ==============================================================================
+x-bubble-colors-dark: &bubble_colors_dark # Fonts
+  primary-font-family: "Inter, Figtree, sans-serif"
+  ha-font-family-body: "var(--primary-font-family)"
+  ha-font-family-heading: var(--primary-font-family)
+  ha-card-header-font-family: "var(--primary-font-family)"
+
+  # ----------------------------------------------------------------------------
+  # CORE MAPPING
+  # ----------------------------------------------------------------------------
+  primary-color: var(--token-accent)
+  accent-color: var(--token-accent)
+
+  # Text Colors
+  text-color: var(--token-text)
+  primary-text-color: var(--token-text)
+  secondary-text-color: var(--token-text-secondary)
+
+  # CRITICAL FIX: Explicitly controls text color on active elements (Buttons/Badges)
+  text-primary-color: var(--token-text-on-accent)
+
+  # Backgrounds
+  background-color: var(--token-bg)
+  primary-background-color: var(--token-bg)
+  secondary-background-color: var(--token-bg-secondary)
+  ha-card-background: var(--token-card)
+  card-background-color: var(--token-card)
+
+  # Header
+  app-header-background-color: var(--token-bg)
+  app-header-text-color: var(--token-text)
+
+  # Sidebar (Fixed Visibility)
+  sidebar-background-color: var(--token-bg)
+  sidebar-text-color: var(--token-text)
+  sidebar-icon-color: var(--token-sidebar-icon)
+  sidebar-selected-icon-color: var(--token-accent)
+  sidebar-selected-text-color: var(--token-text)
+
+  # Controls
+  switch-checked-button-color: var(--token-accent)
+  switch-checked-track-color: var(--token-card)
+  switch-unchecked-button-color: var(--token-text-secondary)
+  switch-unchecked-track-color: var(--token-bg-secondary)
+
+  slider-color: var(--token-accent)
+  paper-slider-knob-color: var(--token-accent)
+  paper-slider-active-color: var(--token-accent)
+  paper-slider-pin-color: var(--token-accent)
+
+  # Bubble Specific
+  bubble-accent-color: var(--token-accent)
+  bubble-button-accent-color: var(--token-accent)
+
+  # REQUIRED BORDER FIX FOR DARK MODE
+  bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, #e0e0e0)"
+
+  # Shapes
+  ha-card-border-radius: "28px"
+  ha-card-box-shadow: "none"
+  ha-card-border-width: "0px"
+  control-button-border-radius: "24px"
+
+  # Semantics
+  success-color: var(--token-success)
+  warning-color: var(--token-warning)
+  error-color: var(--token-error)
+  info-color: var(--token-info)
+
+  # Semantic Aliases
+  red-color: var(--error-color)
+  green-color: var(--success-color)
+  yellow-color: var(--warning-color)
+  blue-color: var(--info-color)
+
+# Light mode anchor (inherits structure, overrides border)
+x-bubble-colors-light: &bubble_colors_light
+  <<: *bubble_colors_dark
+  # REQUIRED BORDER FIX FOR LIGHT MODE
+  bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, rgba(31, 31, 31, 1))"
+
+# ==============================================================================
+# 1. BUBBLE 2026
+# ==============================================================================
+Bubble 2026:
+  card-mod-theme: Bubble 2026
+  <<: *bubble_shared
+  modes:
+    dark:
+      # Color Tokens
+      token-accent: "rgb(80, 110, 172)" # Original Blue/Indigo
+      token-text-on-accent: "#ffffff" # White text on Blue is OK
+
+      token-bg: "rgba(57, 54, 70, 1)" # Original Purple-Grey
+      token-bg-secondary: "rgb(92, 83, 103)"
+      token-card: "rgba(79, 69, 87, 1)" # Original Card
+
+      token-text: "#ffffff"
+      token-text-secondary: "#b0b0b0"
+      token-sidebar-icon: "#98a7b9" # Distinct Grey Blue
+
+      token-success: "rgba(0, 202, 139, 1)"
+      token-warning: "rgba(222, 176, 107, 1)"
+      token-error: "rgba(247, 53, 67, 1)"
+      token-info: "rgba(26, 137, 245, 1)"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#e69c9c" # Original Pinkish
+      token-text-on-accent: "#ffffff" # White on Pink
+
+      token-bg: "#eff1f5"
+      token-bg-secondary: "#ccd0da"
+      token-card: "#dce0e8"
+
+      token-text: "#4c4f69"
+      token-text-secondary: "#6c6f85"
+      token-sidebar-icon: "#8c8fa1"
+
+      token-success: "rgba(46, 204, 113, 1)"
+      token-warning: "rgba(245, 166, 35, 1)"
+      token-error: "rgba(231, 76, 60, 1)"
+      token-info: "rgba(0, 122, 255, 1)"
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 2. DUBBLE DARK 2025 LIME (YOUR CUSTOM MOD)
+# ==============================================================================
+Dubble Dark 2025 Lime:
+  card-mod-theme: Dubble Dark 2025 Lime
+  <<: *bubble_shared
+  modes:
+    dark:
+      # High Contrast Setup
+      token-accent: "rgba(173, 255, 92, 1)" # Neon Lime
+      token-text-on-accent: "#000000" # FIX: BLACK TEXT on Lime
+
+      token-bg: "rgba(25, 27, 26, 1)" # Deep Dark Grey
+      token-bg-secondary: "rgba(44, 51, 47, 1)"
+      token-card: "rgba(37, 41, 42, 1)" # Dark Card
+
+      token-text: "#ffffff"
+      token-text-secondary: "rgb(244, 238, 224)"
+      token-sidebar-icon: "#98a7b9" # Visible Grey
+
+      token-success: "rgba(173, 255, 92, 1)"
+      token-warning: "rgba(255, 177, 92, 1)"
+      token-error: "rgba(255, 92, 122, 1)"
+      token-info: "rgba(70, 164, 255, 1)"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#78be20" # Darker Lime for Light Mode
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#f4f7f6"
+      token-bg-secondary: "#e0e4e2"
+      token-card: "#ffffff"
+
+      token-text: "#202020"
+      token-text-secondary: "#606060"
+      token-sidebar-icon: "#808080"
+
+      token-success: "#2ecc71"
+      token-warning: "#f5a623"
+      token-error: "#e74c3c"
+      token-info: "#007aff"
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 3. BUBBLE DUBBLE (Noir Nebula Style - User Favorite)
+# ==============================================================================
+Bubble Dubble:
+  card-mod-theme: Bubble Dubble
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#5ee9f2" # Neon Cyan
+      token-text-on-accent: "#000000" # FIX: BLACK TEXT on Cyan
+
+      token-bg: "#0b0e14" # Deep Space Noir
+      token-bg-secondary: "#151a23"
+      token-card: "#161b22" # GitHub Dark / VSCode style
+
+      token-text: "#e6f5ff"
+      token-text-secondary: "#8b949e"
+      token-sidebar-icon: "#8b949e" # Muted Blue-Grey (Visible)
+
+      token-success: "#3fb950"
+      token-warning: "#d29922"
+      token-error: "#f85149"
+      token-info: "#58a6ff"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#0969da" # Standard Blue
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#ffffff"
+      token-bg-secondary: "#f6f8fa"
+      token-card: "#f6f8fa"
+
+      token-text: "#24292f"
+      token-text-secondary: "#57606a"
+      token-sidebar-icon: "#57606a"
+
+      token-success: "#2da44e"
+      token-warning: "#bf8700"
+      token-error: "#cf222e"
+      token-info: "#0969da"
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 4. BUBBLE IDDQD (God Mode / High Contrast / Doom Inspired)
+# ==============================================================================
+Bubble IDDQD:
+  card-mod-theme: Bubble IDDQD
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#ffd700" # Gold / Amber
+      token-text-on-accent: "#000000" # FIX: BLACK TEXT on Gold
+
+      token-bg: "#1d1f21" # Gunmetal Black
+      token-bg-secondary: "#282a2e"
+      token-card: "#373b41" # Dark Grey Card
+
+      token-text: "#c5c8c6"
+      token-text-secondary: "#969896"
+      token-sidebar-icon: "#e0e0e0" # High visibility white/grey
+
+      token-success: "#b5bd68"
+      token-warning: "#f0c674"
+      token-error: "#cc6666"
+      token-info: "#81a2be"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#e0ac00" # Darker Gold
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#ffffff"
+      token-bg-secondary: "#f0f0f0"
+      token-card: "#f5f5f5"
+
+      token-text: "#202020"
+      token-text-secondary: "#505050"
+      token-sidebar-icon: "#505050"
+
+      token-success: "#718c00"
+      token-warning: "#e18a07"
+      token-error: "#c82829"
+      token-info: "#4271ae"
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 5. DUBBLE PEBKAC (Gruvbox Style / Retro)
+# ==============================================================================
+Dubble PEBKAC:
+  card-mod-theme: Dubble PEBKAC
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#fe8019" # Bright Orange
+      token-text-on-accent: "#000000" # FIX: BLACK TEXT on Orange
+
+      token-bg: "#282828" # Gruvbox Dark
+      token-bg-secondary: "#3c3836"
+      token-card: "#504945" # Lighter Brown/Grey
+
+      token-text: "#ebdbb2" # Creamy White
+      token-text-secondary: "#a89984"
+      token-sidebar-icon: "#d5c4a1" # Beige (Visible)
+
+      token-success: "#b8bb26"
+      token-warning: "#fabd2f"
+      token-error: "#fb4934"
+      token-info: "#83a598"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#af3a03" # Dark Orange/Red
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#fbf1c7" # Gruvbox Light Cream
+      token-bg-secondary: "#ebdbb2"
+      token-card: "#f9f5d7"
+
+      token-text: "#3c3836"
+      token-text-secondary: "#7c6f64"
+      token-sidebar-icon: "#7c6f64"
+
+      token-success: "#98971a"
+      token-warning: "#d79921"
+      token-error: "#cc241d"
+      token-info: "#458588"
+
+      <<: *bubble_colors_light
