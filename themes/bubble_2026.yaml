@@ -1,14 +1,12 @@
 # ------------------------------------------------------------------------------
 # BUBBLE 2026 THEME PACK
 # ------------------------------------------------------------------------------
-# Fixes:
-# 1. Text visibility on active accents (Black text on Lime/Cyan).
-# 2. Sidebar icon visibility.
-# 3. Correct Bubble borders for Dark/Light modes.
+# Silas, Mariusz Grzybacz - forum QNAP [ forum.qnap.net.pl ]
+# BIO: devspark.pl
 # ------------------------------------------------------------------------------
 
 # ==============================================================================
-# BASE LOGIC & CARD MODS (SHARED) - DO NOT EDIT THIS BLOCK
+# (SHARED) - DO NOT EDIT THIS BLOCK
 # ==============================================================================
 x-bubble-shared: &bubble_shared
   card-mod-root-yaml: |
@@ -19,7 +17,7 @@ x-bubble-shared: &bubble_shared
       }
   card-mod-more-info-yaml: |
     $: |
-     .mdc-dialog .mdc-dialog__scrim { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); background: rgba(0,0,0,.6); } 
+     .mdc-dialog .mdc-dialog__scrim { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); background: rgba(0,0,0,.6); }
      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface { box-shadow: none !important; border-radius: var(--ha-card-border-radius); }
     .: |
      :host { --ha-card-box-shadow: none; }
@@ -41,12 +39,28 @@ x-bubble-shared: &bubble_shared
       opacity: 0.6;
       filter: saturate(0.7);
     }
+  $: |
+    .bubble-button-card-container {
+      --primary-text-color: var(--token-text);
+      color: var(--token-text) !important;
+    }
+    .bubble-button-card-container[style*="background-color"], 
+    .bubble-sub-button[style*="background-color"] {
+      --primary-text-color: var(--token-text-on-accent) !important;
+      --bubble-icon-color: var(--token-text-on-accent) !important;
+      --bubble-name-color: var(--token-text-on-accent) !important;
+      --bubble-state-color: var(--token-text-on-accent) !important;
+      color: var(--token-text-on-accent) !important;
+    }
+    ha-icon {
+      color: inherit !important;
+    }
 
 # ==============================================================================
-# BASE COLORS LOGIC (ANCHORS)
+# (SHARED ANCHORS)
 # ==============================================================================
 x-bubble-colors-dark: &bubble_colors_dark # Fonts
-  primary-font-family: "Inter, Figtree, sans-serif"
+  primary-font-family: "Roboto, Inter, Figtree, sans-serif"
   ha-font-family-body: "var(--primary-font-family)"
   ha-font-family-heading: "var(--primary-font-family)"
   ha-font-family-code: "var(--primary-font-family)"
@@ -135,6 +149,7 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
   pbs-button-rgb-fallback: "var(--token-text)"
 
   # CRITICAL FIX: Explicitly controls text color on active elements (Buttons/Badges)
+  # Not working - for Bubble Cards :(
   text-primary-color: var(--token-text-on-accent)
 
   # Backgrounds
@@ -154,6 +169,7 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
   sidebar-icon-color: var(--token-sidebar-icon)
   sidebar-selected-icon-color: var(--token-accent)
   sidebar-selected-text-color: var(--token-text)
+  divider-color: var(--token-bg)
 
   # Controls
   switch-checked-button-color: var(--token-accent)
@@ -167,13 +183,16 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
   paper-slider-pin-color: var(--token-accent)
 
   # Bubble Specific
+  # Set accent colors also on Bubble Cards
   #bubble-accent-color: var(--token-accent)
   #bubble-button-accent-color: var(--token-accent)
+  # However we have to tune background and contrast it to text-color
   bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
   bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
 
-  # REQUIRED BORDER FIX FOR DARK MODE
-  bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, #e0e0e0)"
+  # IF YOU DONT LIKE OUTLINE BORDER,
+  # JUST COMMENT THIS LINE
+  bubble-border: "1.8px solid var(--divider-color, #e0e0e0)"
 
   # Shapes
   ha-card-border-radius: "28px"
@@ -196,8 +215,10 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
 # Light mode anchor (inherits structure, overrides border)
 x-bubble-colors-light: &bubble_colors_light
   <<: *bubble_colors_dark
-  # REQUIRED BORDER FIX FOR LIGHT MODE
-  bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, rgba(31, 31, 31, 1))"
+  # IF YOU DONT LIKE OUTLINE BORDER,
+  # JUST COMMENT THIS LINE
+  bubble-border: "1.8px solid var(--divider-color, rgba(31, 31, 31, 1))"
+  dummy_entry: "none"
 
 # ==============================================================================
 # THEME: BUBBLE 2026
@@ -1194,3 +1215,259 @@ Bubble Horizon:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
+
+# ==============================================================================
+# 21. BUBBLE DRACULA (Vampire theme, very popular, high contrast)
+# ==============================================================================
+Bubble Dracula:
+  card-mod-theme: Bubble Dracula
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#bd93f9" # Dracula Purple
+      token-text-on-accent: "#282a36" # Dark BG color as text (Good contrast on light purple)
+
+      token-bg: "#282a36" # Background
+      token-bg-secondary: "#44475a" # Current Line
+      token-card: "#44475a" # Selection
+
+      token-text: "#f8f8f2" # Foreground
+      token-text-secondary: "#6272a4" # Comment
+      token-sidebar-icon: "#bd93f9" # Purple Icon
+
+      token-success: "#50fa7b"
+      token-warning: "#ffb86c"
+      token-error: "#ff5555"
+      token-info: "#8be9fd"
+
+      # Dracula accent is already bright, we shift it slightly lighter for visibility
+      bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#9580ff"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#FFFFFF"
+      token-bg-secondary: "#F8F8F2"
+      token-card: "#F8F8F2"
+      token-text: "#282A36"
+      token-text-secondary: "#6272A4"
+      token-sidebar-icon: "#6272A4"
+      token-success: "#50fa7b"
+      token-warning: "#ffb86c"
+      token-error: "#ff5555"
+      token-info: "#8be9fd"
+
+      bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 22. BUBBLE CYBERPUNK (Neon Pink/Blue, Pitch Black)
+# ==============================================================================
+Bubble Cyberpunk:
+  card-mod-theme: Bubble Cyberpunk
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#ff0055" # Neon Pink
+      token-text-on-accent: "#ffffff" # White on Pink
+
+      token-bg: "#000b1e" # Deep Cyber Blue/Black
+      token-bg-secondary: "#05162e"
+      token-card: "#0a1f3d" # Hologram Blue tint
+
+      token-text: "#00f3ff" # Neon Cyan Text
+      token-text-secondary: "#bc13fe" # Neon Purple Secondary
+      token-sidebar-icon: "#00f3ff"
+
+      token-success: "#00ff9f"
+      token-warning: "#fcee0a"
+      token-error: "#ff003c"
+      token-info: "#00f3ff"
+
+      # Neon colors need to stay saturated. We barely touch lightness.
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 2))
+
+      <<: *bubble_colors_dark
+
+    light:
+      # Cyberpunk typically doesn't have a "light" mode, creating a "Glitch" light mode
+      token-accent: "#ff0055"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#e0e0e0"
+      token-bg-secondary: "#d1d1d1"
+      token-card: "#ffffff"
+      token-text: "#202020"
+      token-text-secondary: "#ff0055"
+      token-sidebar-icon: "#202020"
+      token-success: "#009960"
+      token-warning: "#b8ad06"
+      token-error: "#cc0030"
+      token-info: "#0095a0"
+
+      bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 23. BUBBLE LATTE (Warm, Coffee/Beige tones, Cozy)
+# ==============================================================================
+Bubble Latte:
+  card-mod-theme: Bubble Latte
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#d4a373" # Caramel
+      token-text-on-accent: "#281b16" # Dark Coffee text
+
+      token-bg: "#281b16" # Dark Espresso
+      token-bg-secondary: "#3e2f2a"
+      token-card: "#4a3b36" # Mocha
+
+      token-text: "#faedcd" # Cream
+      token-text-secondary: "#d4a373"
+      token-sidebar-icon: "#d4a373"
+
+      token-success: "#a3b18a"
+      token-warning: "#e9c46a"
+      token-error: "#bc6c25"
+      token-info: "#8d99ae"
+
+      # Warm tones benefit from slightly higher lightness for visibility
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 8))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#a98467"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fefae0" # Milk foam
+      token-bg-secondary: "#faedcd"
+      token-card: "#ffffff"
+      token-text: "#5f4638"
+      token-text-secondary: "#adc178"
+      token-sidebar-icon: "#adc178"
+      token-success: "#606c38"
+      token-warning: "#dda15e"
+      token-error: "#bc6c25"
+      token-info: "#6c757d"
+
+      bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 24. BUBBLE MATRIX (The Terminal, Green on Black)
+# ==============================================================================
+Bubble Matrix:
+  card-mod-theme: Bubble Matrix
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#00FF41" # Matrix Green
+      token-text-on-accent: "#000000" # Black text on Green (Classic terminal cursor)
+
+      token-bg: "#000000" # Pure Black
+      token-bg-secondary: "#0D0D0D"
+      token-card: "#121212" # Very Dark Grey
+
+      token-text: "#008F11" # Dimmer Green for text
+      token-text-secondary: "#003B00" # Very dim green
+      token-sidebar-icon: "#00FF41"
+
+      token-success: "#00FF41"
+      token-warning: "#008F11" # Everything is shades of green/terminal
+      token-error: "#003B00"
+      token-info: "#00FF41"
+
+      # Matrix green needs to be SUPER bright to pop on black
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 5))
+
+      <<: *bubble_colors_dark
+
+    light:
+      # Inverted Matrix (White lab vibe)
+      token-accent: "#008F11"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#f0fff4"
+      token-bg-secondary: "#dcffe4"
+      token-card: "#ffffff"
+      token-text: "#003B00"
+      token-text-secondary: "#5c8a5c"
+      token-sidebar-icon: "#008F11"
+      token-success: "#22c55e"
+      token-warning: "#eab308"
+      token-error: "#ef4444"
+      token-info: "#3b82f6"
+
+      bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# 25. BUBBLE GRAPHITE - Buggy Buggy
+# ==============================================================================
+
+Bubble Graphite Buggy Experimental:
+  card-mod-theme: Bubble Graphite Buggy Experimental
+
+  <<: *bubble_shared
+
+  card-mod-card: |
+    ha-card {
+      border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
+      background: linear-gradient(196deg, #25262D 9.8%, #1B1C24 91.72%) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
+      transition: none;
+    }
+    vertical-stack-in-card ha-card,
+    badge-horizontal-container-card ha-card,
+    mushroom-chips-card ha-card,
+    .chip-container,
+    .horizontal-buttons-stack-card,
+    ha-card:has(div[class*="chip-container"]),
+    ring-tile ha-card {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+    badge-horizontal-container-card,
+    mushroom-chips-card,
+    ring-tile {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+      --ha-card-box-shadow: none !important;
+      --ha-card-border-width: 0px !important;
+    }
+    ha-card:has(> .bubble-separator-container),
+    ha-card:has(div[class*="bubble-separator"]) {
+      background: none !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+
+  modes:
+    dark:
+      # --- Graphite Colors ---
+      token-accent: "#E08A00" # Orange Primary
+      token-text-on-accent: "#000000"
+
+      token-bg: "#101215"
+      token-bg-secondary: "#1C1D21"
+      token-card: "#23242B"
+
+      token-text: "#E4E4E7"
+      token-text-secondary: "#8A8C99"
+      token-sidebar-icon: "#93959F"
+
+      token-success: "#76D698"
+      token-warning: "#FFDB75"
+      token-error: "#EA7287"
+      token-info: "#27D1F6"
+
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 5))
+
+      <<: *bubble_colors_dark
