@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# THEME PACK 2025/2026 - BUBBLE & DUBBLE
+# BUBBLE 2026 THEME PACK
 # ------------------------------------------------------------------------------
 # Fixes:
 # 1. Text visibility on active accents (Black text on Lime/Cyan).
@@ -36,6 +36,11 @@ x-bubble-shared: &bubble_shared
         "#view>hui-view>hui-sidebar-view$#main>hui-card-options:nth-child(7)>vertical-stack-in-card$ha-card>div>hui-horizontal-stack-card$#root>hui-grid-card$#root>hui-entities-card$#states>div:nth-child(4)>slider-entity-row$div>ha-slider$#sliderBar$#progressContainer" { border-radius: 14px !important; }
   card-mod-card: |
     ha-card { transition: none; border-style: none !important; }
+    .is-light .bubble-range-fill,
+    .is-light .slider-use-light-color {
+      opacity: 0.6;
+      filter: saturate(0.7);
+    }
 
 # ==============================================================================
 # BASE COLORS LOGIC (ANCHORS)
@@ -43,19 +48,91 @@ x-bubble-shared: &bubble_shared
 x-bubble-colors-dark: &bubble_colors_dark # Fonts
   primary-font-family: "Inter, Figtree, sans-serif"
   ha-font-family-body: "var(--primary-font-family)"
-  ha-font-family-heading: var(--primary-font-family)
+  ha-font-family-heading: "var(--primary-font-family)"
+  ha-font-family-code: "var(--primary-font-family)"
+  ha-font-family-longform: "var(--primary-font-family)"
+  ## ::Legacy:: Font Family Tokens
   ha-card-header-font-family: "var(--primary-font-family)"
+  mdc-typography-font-family: "var(--primary-font-family)"
+  mdc-typography-button-font-family: "var(--primary-font-family)"
+  mdc-typography-body1-font-family: "var(--primary-font-family)"
+  md-list-item-label-text-font: "var(--primary-font-family)"
+  paper-font-common-base_-_font-family: "var(--primary-font-family)"
+  paper-font-common-code_-_font-family: "var(--primary-font-family)"
+  paper-font-body1_-_font-family: "var(--primary-font-family)"
+  paper-font-subhead_-_font-family: "var(--primary-font-family)"
+  paper-font-headline_-_font-family: "var(--primary-font-family)"
+  paper-font-caption_-_font-family: "var(--primary-font-family)"
+  paper-font-title_-_font-family: "var(--primary-font-family)"
 
+  # Font Weight
+  token-weight-font-body: 400
+  token-weight-font-title: 600
+  token-weight-font-title-card: var(--token-weight-font-title)
+  # Font
+  token-size-font-xs: calc(10px * var(--ha-font-size-scale))
+  token-size-font-s: calc(12px * var(--ha-font-size-scale))
+  token-size-font-m: calc(14px * var(--ha-font-size-scale))
+  token-size-font-l: calc(15px * var(--ha-font-size-scale))
+  token-size-font-xl: calc(20px * var(--ha-font-size-scale))
+  token-size-font-2xl: calc(24px * var(--ha-font-size-scale))
+  token-size-font-3xl: calc(28px * var(--ha-font-size-scale))
+  token-size-font-4xl: calc(32px * var(--ha-font-size-scale))
+  token-size-font-5xl: calc(40px * var(--ha-font-size-scale))
+  token-size-font-title: var(--token-size-font-3xl)
+  token-size-font-title-card: var(--token-size-font-l)
+  ## ::Legacy:: Size
+  title-font-size: var(--token-size-font-title)
+  ha-heading-card-title-font-size: var(--token-size-font-title-card)
+  ha-heading-card-title-font-weight: var(--token-weight-font-title-card)
+  ## Font Smoothing
+  ha-font-smoothing: antialiased
+  ## Font Weight Tokens
+  ha-font-weight-normal: var(--token-weight-font-body)
+  ha-font-weight-medium: var(--token-weight-font-title)
+  ha-font-weight-bold: var(--token-weight-font-title)
+  ha-font-weight-body: var(--token-weight-font-body)
+  ha-font-weight-heading: var(--token-weight-font-title)
+  ha-font-weight-action: var(--token-weight-font-title)
+  ## ::Legacy:: Font Weight
+  mdc-typography-button-font-weight: var(--token-weight-font-title)
+  title-font-weight: var(--token-weight-font-title)
+  ## Font Size Tokens
+  ha-font-size-xs: var(--token-size-font-xs)
+  ha-font-size-s: var(--token-size-font-s)
+  ha-font-size-m: var(--token-size-font-m)
+  ha-font-size-l: var(--token-size-font-l)
+  ha-font-size-xl: var(--token-size-font-xl)
+  ha-font-size-2xl: var(--token-size-font-2xl)
+  ha-font-size-3xl: var(--token-size-font-3xl)
+  ha-font-size-4xl: var(--token-size-font-4xl)
+  ha-font-size-5xl: var(--token-size-font-5xl)
+
+  # ------------------------------------------------------------------------------
+  # Extentions
+  # ------------------------------------------------------------------------------
+  # Mini graph card
+  mcg-title-font-weight: 400
+  # ..............................................................................
+  # Mushroom
+  mush-title-font-weight: var(--title-font-weight)
+  mush-title-font-size: var(--title-font-size)
   # ----------------------------------------------------------------------------
   # CORE MAPPING
   # ----------------------------------------------------------------------------
-  primary-color: var(--token-accent)
-  accent-color: var(--token-accent)
+  primary-color: "var(--token-accent)"
+  accent-color: "var(--token-accent)"
 
   # Text Colors
-  text-color: var(--token-text)
-  primary-text-color: var(--token-text)
-  secondary-text-color: var(--token-text-secondary)
+  text-color: "var(--token-text)"
+  primary-text-color: "var(--token-text)"
+  secondary-text-color: "var(--token-text-secondary)"
+  pbs-button-color: "var(--token-text)"
+  pbs-button-rgb-color: "var(--token-text)"
+  pbs-button-rgb-state-color: "var(--token-text)"
+  pbs-button-rgb-default-color: "var(--token-text)"
+  rgb-state-default-color: "var(--token-text)"
+  pbs-button-rgb-fallback: "var(--token-text)"
 
   # CRITICAL FIX: Explicitly controls text color on active elements (Buttons/Badges)
   text-primary-color: var(--token-text-on-accent)
@@ -90,8 +167,10 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
   paper-slider-pin-color: var(--token-accent)
 
   # Bubble Specific
-  bubble-accent-color: var(--token-accent)
-  bubble-button-accent-color: var(--token-accent)
+  #bubble-accent-color: var(--token-accent)
+  #bubble-button-accent-color: var(--token-accent)
+  bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+  bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
 
   # REQUIRED BORDER FIX FOR DARK MODE
   bubble-border: "var(--ha-card-border-width, 1.8px) solid var(--divider-color, #e0e0e0)"
@@ -145,6 +224,9 @@ Bubble 2026:
       token-error: "rgba(247, 53, 67, 1)"
       token-info: "rgba(26, 137, 245, 1)"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+
       <<: *bubble_colors_dark
 
     light:
@@ -163,6 +245,9 @@ Bubble 2026:
       token-warning: "rgba(245, 166, 35, 1)"
       token-error: "rgba(231, 76, 60, 1)"
       token-info: "rgba(0, 122, 255, 1)"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -193,6 +278,9 @@ Bubble 2026 BFG:
 
       lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/refs/heads/main/www/bubble_2026_bfg_background.png') fixed"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+
       <<: *bubble_colors_dark
 
     light:
@@ -214,13 +302,16 @@ Bubble 2026 BFG:
 
       lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/refs/heads/main/www/bubble_2026_bfg_background-light.png') fixed"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+
       <<: *bubble_colors_light
 
 # ==============================================================================
-# THEME: DUBBLE DARK 2025 LIME (YOUR CUSTOM MOD)
+# THEME: YUPI
 # ==============================================================================
-Dubble Dark 2025 Lime:
-  card-mod-theme: Dubble Dark 2025 Lime
+Bubble Silas PEBKAC:
+  card-mod-theme: Bubble Silas PEBKAC
   <<: *bubble_shared
   modes:
     dark:
@@ -259,6 +350,9 @@ Dubble Dark 2025 Lime:
       token-warning: "#f5a623"
       token-error: "#e74c3c"
       token-info: "#007aff"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 10))
 
       <<: *bubble_colors_light
 
@@ -305,6 +399,9 @@ Bubble Dubble:
       token-error: "#cf222e"
       token-info: "#0969da"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
+
       <<: *bubble_colors_light
 
 # ==============================================================================
@@ -312,6 +409,7 @@ Bubble Dubble:
 # ==============================================================================
 Bubble IDDQD:
   card-mod-theme: Bubble IDDQD
+
   <<: *bubble_shared
   modes:
     dark:
@@ -322,14 +420,17 @@ Bubble IDDQD:
       token-bg-secondary: "#282a2e"
       token-card: "#373b41" # Dark Grey Card
 
-      token-text: "#c5c8c6"
-      token-text-secondary: "#969896"
+      token-text: "#FFFFFF" # "#c5c8c6"
+      token-text-secondary: "#CACBCA"
       token-sidebar-icon: "#e0e0e0" # High visibility white/grey
 
       token-success: "#b5bd68"
       token-warning: "#f0c674"
       token-error: "#cc6666"
       token-info: "#81a2be"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l - 15))
 
       <<: *bubble_colors_dark
 
@@ -350,13 +451,16 @@ Bubble IDDQD:
       token-error: "#c82829"
       token-info: "#4271ae"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 25) calc(l + 20))
+
       <<: *bubble_colors_light
 
 # ==============================================================================
-# 5. DUBBLE PEBKAC (Gruvbox Style / Retro)
+# BUBBLE GRUVBOX (Gruvbox Style / Retro)
 # ==============================================================================
-Dubble PEBKAC:
-  card-mod-theme: Dubble PEBKAC
+Bubble GRUVBOX:
+  card-mod-theme: Bubble GRUVBOX
   <<: *bubble_shared
   modes:
     dark:
@@ -376,6 +480,9 @@ Dubble PEBKAC:
       token-error: "#fb4934"
       token-info: "#83a598"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l - 15))
+
       <<: *bubble_colors_dark
 
     light:
@@ -394,5 +501,696 @@ Dubble PEBKAC:
       token-warning: "#d79921"
       token-error: "#cc241d"
       token-info: "#458588"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 6. BUBBLE NORD (Arctic, bluish-grey, very muted)
+# ------------------------------------------------------------------------------
+Bubble Nord:
+  card-mod-theme: Bubble Nord
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#88C0D0" # Nord Frost (Ice Blue)
+      token-text-on-accent: "#2E3440" # Dark Grey text on Ice Blue
+
+      token-bg: "#2E3440" # Polar Night
+      token-bg-secondary: "#3B4252"
+      token-card: "#434C5E" # Lighter Polar Night
+
+      token-text: "#D8DEE9" # Snow Storm
+      token-text-secondary: "#E5E9F0"
+      token-sidebar-icon: "#D8DEE9"
+
+      token-success: "#A3BE8C"
+      token-warning: "#EBCB8B"
+      token-error: "#BF616A"
+      token-info: "#5E81AC"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#5E81AC"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#ECEFF4"
+      token-bg-secondary: "#E5E9F0"
+      token-card: "#ffffff"
+      token-text: "#2E3440"
+      token-text-secondary: "#4C566A"
+      token-sidebar-icon: "#4C566A"
+      token-success: "#A3BE8C"
+      token-warning: "#EBCB8B"
+      token-error: "#BF616A"
+      token-info: "#5E81AC"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 30))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 7. BUBBLE ONE DARK PRO (Atom standard, balanced grey)
+# ------------------------------------------------------------------------------
+Bubble One Dark Pro:
+  card-mod-theme: Bubble One Dark Pro
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#61afef" # Soft Blue
+      token-text-on-accent: "#282c34" # Dark text on blue
+
+      token-bg: "#282c34" # One Dark Grey
+      token-bg-secondary: "#21252b"
+      token-card: "#343a45" # Lighter Grey
+
+      token-text: "#abb2bf"
+      token-text-secondary: "#828997"
+      token-sidebar-icon: "#abb2bf"
+
+      token-success: "#98c379"
+      token-warning: "#e5c07b"
+      token-error: "#e06c75"
+      token-info: "#56b6c2"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#0184bc"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fafafa"
+      token-bg-secondary: "#f0f0f0"
+      token-card: "#ffffff"
+      token-text: "#383a42"
+      token-text-secondary: "#a0a1a7"
+      token-sidebar-icon: "#a0a1a7"
+      token-success: "#50a14f"
+      token-warning: "#c18401"
+      token-error: "#e45649"
+      token-info: "#0184bc"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 8. BUBBLE GITHUB DIMMED (Professional, low contrast)
+# ------------------------------------------------------------------------------
+Bubble GitHub Dimmed:
+  card-mod-theme: Bubble GitHub Dimmed
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#539bf5" # GitHub Blue
+      token-text-on-accent: "#ffffff" # White on Blue
+
+      token-bg: "#22272e" # Dimmed Grey
+      token-bg-secondary: "#1c2128"
+      token-card: "#2d333b" # Borders/Card
+
+      token-text: "#adbac7"
+      token-text-secondary: "#768390"
+      token-sidebar-icon: "#adbac7"
+
+      token-success: "#57ab5a"
+      token-warning: "#c69026"
+      token-error: "#e5534b"
+      token-info: "#539bf5"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#0969da"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#ffffff"
+      token-bg-secondary: "#f6f8fa"
+      token-card: "#f6f8fa"
+      token-text: "#24292f"
+      token-text-secondary: "#57606a"
+      token-sidebar-icon: "#57606a"
+      token-success: "#1a7f37"
+      token-warning: "#9a6700"
+      token-error: "#cf222e"
+      token-info: "#0969da"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 9. BUBBLE AYU MIRAGE (Warm dark grey/blue, elegant)
+# ------------------------------------------------------------------------------
+Bubble Ayu Mirage:
+  card-mod-theme: Bubble Ayu Mirage
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#ffcc66" # Ayu Yellow/Orange
+      token-text-on-accent: "#1f2430" # Dark text on Yellow
+
+      token-bg: "#1f2430" # Mirage BG
+      token-bg-secondary: "#191e2a"
+      token-card: "#2a3140" # Lighter Mirage
+
+      token-text: "#cccac2"
+      token-text-secondary: "#707a8c"
+      token-sidebar-icon: "#cccac2"
+
+      token-success: "#bae67e"
+      token-warning: "#ffcc66"
+      token-error: "#ff3333"
+      token-info: "#5ccfe6"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#ff9940"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fafafa"
+      token-bg-secondary: "#f0f0f0"
+      token-card: "#ffffff"
+      token-text: "#5c6773"
+      token-text-secondary: "#abb0b6"
+      token-sidebar-icon: "#abb0b6"
+      token-success: "#86b300"
+      token-warning: "#fa8d3e"
+      token-error: "#f07178"
+      token-info: "#399ee6"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 10. BUBBLE CATPPUCCIN MACCHIATO (Soft pastel, middle contrast)
+# ------------------------------------------------------------------------------
+Bubble Catppuccin Macchiato:
+  card-mod-theme: Bubble Catppuccin Macchiato
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#c6a0f6" # Mauve
+      token-text-on-accent: "#24273a" # Dark text on Mauve
+
+      token-bg: "#24273a" # Macchiato Base
+      token-bg-secondary: "#1e2030"
+      token-card: "#363a4f" # Surface 1
+
+      token-text: "#cad3f5"
+      token-text-secondary: "#939ab7"
+      token-sidebar-icon: "#cad3f5"
+
+      token-success: "#a6da95"
+      token-warning: "#eed49f"
+      token-error: "#ed8796"
+      token-info: "#8aadf4"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#8839ef"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#eff1f5"
+      token-bg-secondary: "#e6e9ef"
+      token-card: "#ffffff"
+      token-text: "#4c4f69"
+      token-text-secondary: "#7c7f93"
+      token-sidebar-icon: "#7c7f93"
+      token-success: "#40a02b"
+      token-warning: "#df8e1d"
+      token-error: "#d20f39"
+      token-info: "#1e66f5"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 11. BUBBLE TOKYO NIGHT STORM (Deep blue-grey, soothing)
+# ------------------------------------------------------------------------------
+Bubble Tokyo Night Storm:
+  card-mod-theme: Bubble Tokyo Night Storm
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#7aa2f7" # Tokyo Blue
+      token-text-on-accent: "#1a1b26" # Dark text on Blue
+
+      token-bg: "#24283b" # Storm BG
+      token-bg-secondary: "#1f2335"
+      token-card: "#2f3549" # Lighter Storm
+
+      token-text: "#c0caf5"
+      token-text-secondary: "#787c99"
+      token-sidebar-icon: "#c0caf5"
+
+      token-success: "#9ece6a"
+      token-warning: "#e0af68"
+      token-error: "#f7768e"
+      token-info: "#7dcfff"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#34548a"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#d5d6db"
+      token-bg-secondary: "#cfc9c2"
+      token-card: "#e1e2e7"
+      token-text: "#343b58"
+      token-text-secondary: "#565f89"
+      token-sidebar-icon: "#565f89"
+      token-success: "#485e30"
+      token-warning: "#8f5e15"
+      token-error: "#8c4351"
+      token-info: "#0f4b6e"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 25))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 12. BUBBLE PALENIGHT (Material Theme, Muted Purple)
+# ------------------------------------------------------------------------------
+Bubble Palenight:
+  card-mod-theme: Bubble Palenight
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#c792ea" # Muted Purple
+      token-text-on-accent: "#292d3e" # Dark text on Purple
+
+      token-bg: "#292d3e" # Deep Purple Grey
+      token-bg-secondary: "#232632"
+      token-card: "#34394e" # Lighter
+
+      token-text: "#bfc7d5"
+      token-text-secondary: "#697098"
+      token-sidebar-icon: "#bfc7d5"
+
+      token-success: "#c3e88d"
+      token-warning: "#ffcb6b"
+      token-error: "#ff5370"
+      token-info: "#82aaff"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#7c4dff"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fafafa"
+      token-bg-secondary: "#f5f5f5"
+      token-card: "#ffffff"
+      token-text: "#292d3e"
+      token-text-secondary: "#697098"
+      token-sidebar-icon: "#697098"
+      token-success: "#91b859"
+      token-warning: "#e6a540"
+      token-error: "#e53935"
+      token-info: "#6182b8"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 20))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 13. BUBBLE SOLARIZED DARK (Classic, teal-based, very low eye strain)
+# ------------------------------------------------------------------------------
+Bubble Solarized Dark:
+  card-mod-theme: Bubble Solarized Dark
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#268bd2" # Solarized Blue
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#002b36" # Base 03
+      token-bg-secondary: "#073642" # Base 02
+      token-card: "#073642" # Base 02
+
+      token-text: "#839496" # Base 0
+      token-text-secondary: "#586e75" # Base 01
+      token-sidebar-icon: "#839496"
+
+      token-success: "#859900"
+      token-warning: "#b58900"
+      token-error: "#dc322f"
+      token-info: "#2aa198"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 45) calc(l + 40))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#268bd2"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fdf6e3" # Base 3
+      token-bg-secondary: "#eee8d5" # Base 2
+      token-card: "#ffffff"
+      token-text: "#657b83" # Base 00
+      token-text-secondary: "#93a1a1" # Base 1
+      token-sidebar-icon: "#93a1a1"
+      token-success: "#859900"
+      token-warning: "#b58900"
+      token-error: "#dc322f"
+      token-info: "#2aa198"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 35))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 14. BUBBLE GRUVBOX MATERIAL (Retro, warm, "hard" variant)
+# ------------------------------------------------------------------------------
+Bubble Gruvbox Material:
+  card-mod-theme: Bubble Gruvbox Material
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#d3869b" # Soft Purple/Pink
+      token-text-on-accent: "#282828" # Dark text on Accent
+
+      token-bg: "#282828" # Gruvbox Hard Dark
+      token-bg-secondary: "#32302f"
+      token-card: "#3c3836" # Surface
+
+      token-text: "#d4be98" # Milk
+      token-text-secondary: "#a89984"
+      token-sidebar-icon: "#d4be98"
+
+      token-success: "#a9b665"
+      token-warning: "#d8a657"
+      token-error: "#ea6962"
+      token-info: "#7daea3"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#8f3f71"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fbf1c7"
+      token-bg-secondary: "#f2e5bc"
+      token-card: "#fffbf1"
+      token-text: "#5c6a72"
+      token-text-secondary: "#928374"
+      token-sidebar-icon: "#928374"
+      token-success: "#6c782e"
+      token-warning: "#b47109"
+      token-error: "#c14a4a"
+      token-info: "#45707a"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 15. BUBBLE KANAGAWA (Desaturated, inspired by Hokusai paintings)
+# ------------------------------------------------------------------------------
+Bubble Kanagawa:
+  card-mod-theme: Bubble Kanagawa
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#7E9CD8" # Crystal Blue
+      token-text-on-accent: "#1F1F28"
+
+      token-bg: "#1F1F28" # Sumi Ink
+      token-bg-secondary: "#2A2A37"
+      token-card: "#223249" # Wave Blue
+
+      token-text: "#DCD7BA" # Fuji White
+      token-text-secondary: "#727169"
+      token-sidebar-icon: "#DCD7BA"
+
+      token-success: "#76946A"
+      token-warning: "#DCA561"
+      token-error: "#C34043"
+      token-info: "#658594"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l - 20))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#4c556a"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#F2F0E5"
+      token-bg-secondary: "#E6E4D9"
+      token-card: "#ffffff"
+      token-text: "#5C5C5C"
+      token-text-secondary: "#8C8C8C"
+      token-sidebar-icon: "#8C8C8C"
+      token-success: "#596646"
+      token-warning: "#9E7B3A"
+      token-error: "#8E3B3B"
+      token-info: "#405C6E"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 7) calc(l + 50))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 16. BUBBLE EVERFOREST (Natural, green-grey, very muted)
+# ------------------------------------------------------------------------------
+Bubble Everforest:
+  card-mod-theme: Bubble Everforest
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#a7c080" # Soft Green
+      token-text-on-accent: "#2d353b" # Dark on Green
+
+      token-bg: "#2d353b" # Hard Dark
+      token-bg-secondary: "#343f44"
+      token-card: "#3d484d" # Medium Dark
+
+      token-text: "#d3c6aa" # Foreground
+      token-text-secondary: "#859289"
+      token-sidebar-icon: "#d3c6aa"
+
+      token-success: "#a7c080"
+      token-warning: "#dbbc7f"
+      token-error: "#e67e80"
+      token-info: "#7fbbb3"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#8da101"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#f8f6f2"
+      token-bg-secondary: "#f2efdf"
+      token-card: "#ffffff"
+      token-text: "#5c6a72"
+      token-text-secondary: "#939f91"
+      token-sidebar-icon: "#939f91"
+      token-success: "#8da101"
+      token-warning: "#b47109"
+      token-error: "#f85552"
+      token-info: "#3a94c5"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 17. BUBBLE ROSÉ PINE (Warm, vintage, muted)
+# ------------------------------------------------------------------------------
+Bubble Rose Pine:
+  card-mod-theme: Bubble Rose Pine
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#ebbcba" # Rose
+      token-text-on-accent: "#191724" # Dark on Rose
+
+      token-bg: "#191724" # Base
+      token-bg-secondary: "#1f1d2e"
+      token-card: "#26233a" # Surface
+
+      token-text: "#e0def4" # Text
+      token-text-secondary: "#908caa" # Subtle
+      token-sidebar-icon: "#e0def4"
+
+      token-success: "#9ccfd8" # Foam
+      token-warning: "#f6c177" # Gold
+      token-error: "#eb6f92" # Love
+      token-info: "#31748f" # Pine
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#d7827e"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#faf4ed"
+      token-bg-secondary: "#fffaf3"
+      token-card: "#ffffff"
+      token-text: "#575279"
+      token-text-secondary: "#797593"
+      token-sidebar-icon: "#797593"
+      token-success: "#56949f"
+      token-warning: "#ea9d34"
+      token-error: "#b4637a"
+      token-info: "#286983"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 15))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 18. BUBBLE NIGHT OWL (Deep blue, focused, popular)
+# ------------------------------------------------------------------------------
+Bubble Night Owl:
+  card-mod-theme: Bubble Night Owl
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#82AAFF" # Blue
+      token-text-on-accent: "#011627" # Dark on Blue
+
+      token-bg: "#011627" # Deep Blue
+      token-bg-secondary: "#0b253a"
+      token-card: "#0b2942" # Lighter Blue
+
+      token-text: "#d6deeb"
+      token-text-secondary: "#637777"
+      token-sidebar-icon: "#d6deeb"
+
+      token-success: "#22da6e"
+      token-warning: "#ffeb95"
+      token-error: "#ef5350"
+      token-info: "#82aaff"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#403f53"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#f0f0f0"
+      token-bg-secondary: "#e0e0e0"
+      token-card: "#ffffff"
+      token-text: "#403f53"
+      token-text-secondary: "#989fb1"
+      token-sidebar-icon: "#989fb1"
+      token-success: "#0c966c"
+      token-warning: "#deb320"
+      token-error: "#de3d3b"
+      token-info:
+        "#2b5cce"
+
+        # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 15) calc(l + 40))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 19. BUBBLE MONOKAI PRO (Spectrum - Modern Classic)
+# ------------------------------------------------------------------------------
+Bubble Monokai Pro:
+  card-mod-theme: Bubble Monokai Pro
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#ffd866" # Yellow
+      token-text-on-accent: "#2d2a2e" # Dark on Yellow
+
+      token-bg: "#2d2a2e" # Dark Grey
+      token-bg-secondary: "#403e41"
+      token-card: "#403e41" # Lighter
+
+      token-text: "#fcfcfa"
+      token-text-secondary: "#939293"
+      token-sidebar-icon: "#fcfcfa"
+
+      token-success: "#a9dc76"
+      token-warning: "#ff6188"
+      token-error: "#ff6188"
+      token-info: "#78dce8"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#ab9df2"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#fafafa"
+      token-bg-secondary: "#f0f0f0"
+      token-card: "#ffffff"
+      token-text: "#3a3a3a"
+      token-text-secondary: "#a0a0a0"
+      token-sidebar-icon: "#a0a0a0"
+      token-success: "#78a652"
+      token-warning: "#c94e6c"
+      token-error: "#c94e6c"
+      token-info: "#5b9ca6"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 10))
+
+      <<: *bubble_colors_light
+
+# ------------------------------------------------------------------------------
+# 20. BUBBLE HORIZON (Warm accent, deep purple/blue bg)
+# ------------------------------------------------------------------------------
+Bubble Horizon:
+  card-mod-theme: Bubble Horizon
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#E95678" # Red/Pinkish
+      token-text-on-accent: "#ffffff"
+
+      token-bg: "#1C1E26" # Deep Dark
+      token-bg-secondary: "#232530"
+      token-card: "#2E303E" # Purple/Grey Tint
+
+      token-text: "#D5D8DA"
+      token-text-secondary: "#9DA0A2"
+      token-sidebar-icon: "#D5D8DA"
+
+      token-success: "#29D398"
+      token-warning: "#FAB795"
+      token-error: "#EC6A88"
+      token-info: "#26BBD9"
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#B83E5D"
+      token-text-on-accent: "#ffffff"
+      token-bg: "#FFFBF6"
+      token-bg-secondary: "#FADAD1"
+      token-card: "#ffffff"
+      token-text: "#201c1c"
+      token-text-secondary: "#5c5858"
+      token-sidebar-icon: "#5c5858"
+      token-success: "#1E9C70"
+      token-warning: "#E38A5F"
+      token-error: "#D4496A"
+      token-info: "#1C8FA3"
+
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
