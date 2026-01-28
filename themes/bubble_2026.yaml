@@ -186,9 +186,7 @@ x-bubble-colors-dark: &bubble_colors_dark # Fonts
   # Set accent colors also on Bubble Cards
   #bubble-accent-color: var(--token-accent)
   #bubble-button-accent-color: var(--token-accent)
-  # However we have to tune background and contrast it to text-color
-  bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
-  bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+  # moved to each theme
 
   # IF YOU DONT LIKE OUTLINE BORDER,
   # JUST COMMENT THIS LINE
@@ -247,6 +245,7 @@ Bubble 2026:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_dark
 
@@ -269,6 +268,7 @@ Bubble 2026:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -301,6 +301,7 @@ Bubble 2026 BFG:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_dark
 
@@ -325,6 +326,7 @@ Bubble 2026 BFG:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -353,6 +355,10 @@ Bubble Silas PEBKAC:
       token-error: "rgba(255, 92, 122, 1)"
       token-info: "rgba(70, 164, 255, 1)"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -374,6 +380,7 @@ Bubble Silas PEBKAC:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 10))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 10))
 
       <<: *bubble_colors_light
 
@@ -401,6 +408,10 @@ Bubble Dubble:
       token-error: "#f85149"
       token-info: "#58a6ff"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
+
       <<: *bubble_colors_dark
 
     light:
@@ -422,6 +433,7 @@ Bubble Dubble:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
 
       <<: *bubble_colors_light
 
@@ -452,6 +464,7 @@ Bubble IDDQD:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l - 15))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l - 15))
 
       <<: *bubble_colors_dark
 
@@ -474,6 +487,7 @@ Bubble IDDQD:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 25) calc(l + 20))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 25) calc(l + 20))
 
       <<: *bubble_colors_light
 
@@ -503,6 +517,7 @@ Bubble GRUVBOX:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l - 15))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l - 15))
 
       <<: *bubble_colors_dark
 
@@ -525,6 +540,7 @@ Bubble GRUVBOX:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
 
       <<: *bubble_colors_light
 
@@ -554,6 +570,7 @@ Bubble Nord:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
 
       <<: *bubble_colors_dark
 
@@ -573,6 +590,7 @@ Bubble Nord:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -600,6 +618,10 @@ Bubble One Dark Pro:
       token-error: "#e06c75"
       token-info: "#56b6c2"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -618,6 +640,7 @@ Bubble One Dark Pro:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -645,6 +668,10 @@ Bubble GitHub Dimmed:
       token-error: "#e5534b"
       token-info: "#539bf5"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -663,6 +690,7 @@ Bubble GitHub Dimmed:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -690,6 +718,10 @@ Bubble Ayu Mirage:
       token-error: "#ff3333"
       token-info: "#5ccfe6"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -708,6 +740,7 @@ Bubble Ayu Mirage:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -735,6 +768,10 @@ Bubble Catppuccin Macchiato:
       token-error: "#ed8796"
       token-info: "#8aadf4"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -753,6 +790,7 @@ Bubble Catppuccin Macchiato:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -780,6 +818,10 @@ Bubble Tokyo Night Storm:
       token-error: "#f7768e"
       token-info: "#7dcfff"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -798,6 +840,7 @@ Bubble Tokyo Night Storm:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 25))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 25))
 
       <<: *bubble_colors_light
 
@@ -825,6 +868,10 @@ Bubble Palenight:
       token-error: "#ff5370"
       token-info: "#82aaff"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -843,6 +890,7 @@ Bubble Palenight:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 20))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 20))
 
       <<: *bubble_colors_light
 
@@ -872,6 +920,7 @@ Bubble Solarized Dark:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 45) calc(l + 40))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 45) calc(l + 40))
 
       <<: *bubble_colors_dark
 
@@ -891,6 +940,7 @@ Bubble Solarized Dark:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 35))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 35))
 
       <<: *bubble_colors_light
 
@@ -920,6 +970,7 @@ Bubble Gruvbox Material:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l - 30))
 
       <<: *bubble_colors_dark
 
@@ -939,6 +990,7 @@ Bubble Gruvbox Material:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -968,6 +1020,7 @@ Bubble Kanagawa:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l - 20))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l - 20))
 
       <<: *bubble_colors_dark
 
@@ -987,6 +1040,7 @@ Bubble Kanagawa:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 7) calc(l + 50))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 7) calc(l + 50))
 
       <<: *bubble_colors_light
 
@@ -1014,6 +1068,10 @@ Bubble Everforest:
       token-error: "#e67e80"
       token-info: "#7fbbb3"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -1032,6 +1090,7 @@ Bubble Everforest:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
 
       <<: *bubble_colors_light
 
@@ -1059,6 +1118,10 @@ Bubble Rose Pine:
       token-error: "#eb6f92" # Love
       token-info: "#31748f" # Pine
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -1077,6 +1140,7 @@ Bubble Rose Pine:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 15))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 15))
 
       <<: *bubble_colors_light
 
@@ -1104,6 +1168,10 @@ Bubble Night Owl:
       token-error: "#ef5350"
       token-info: "#82aaff"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -1118,11 +1186,11 @@ Bubble Night Owl:
       token-success: "#0c966c"
       token-warning: "#deb320"
       token-error: "#de3d3b"
-      token-info:
-        "#2b5cce"
+      token-info: "#2b5cce"
 
-        # Special setting:
+      # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 15) calc(l + 40))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 15) calc(l + 40))
 
       <<: *bubble_colors_light
 
@@ -1150,6 +1218,10 @@ Bubble Monokai Pro:
       token-error: "#ff6188"
       token-info: "#78dce8"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -1168,6 +1240,7 @@ Bubble Monokai Pro:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 10))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 10))
 
       <<: *bubble_colors_light
 
@@ -1195,6 +1268,10 @@ Bubble Horizon:
       token-error: "#EC6A88"
       token-info: "#26BBD9"
 
+      # Special setting:
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
+
       <<: *bubble_colors_dark
 
     light:
@@ -1213,6 +1290,7 @@ Bubble Horizon:
 
       # Special setting:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
 
       <<: *bubble_colors_light
 
@@ -1242,6 +1320,7 @@ Bubble Dracula:
 
       # Dracula accent is already bright, we shift it slightly lighter for visibility
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
 
       <<: *bubble_colors_dark
 
@@ -1260,6 +1339,7 @@ Bubble Dracula:
       token-info: "#8be9fd"
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -1289,6 +1369,7 @@ Bubble Cyberpunk:
 
       # Neon colors need to stay saturated. We barely touch lightness.
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 2))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 2))
 
       <<: *bubble_colors_dark
 
@@ -1308,6 +1389,7 @@ Bubble Cyberpunk:
       token-info: "#0095a0"
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -1337,6 +1419,7 @@ Bubble Latte:
 
       # Warm tones benefit from slightly higher lightness for visibility
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 8))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 8))
 
       <<: *bubble_colors_dark
 
@@ -1355,6 +1438,7 @@ Bubble Latte:
       token-info: "#6c757d"
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -1384,6 +1468,7 @@ Bubble Matrix:
 
       # Matrix green needs to be SUPER bright to pop on black
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 5))
 
       <<: *bubble_colors_dark
 
@@ -1403,6 +1488,7 @@ Bubble Matrix:
       token-info: "#3b82f6"
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
 
       <<: *bubble_colors_light
 
@@ -1469,5 +1555,6 @@ Bubble Graphite Buggy Experimental:
       token-info: "#27D1F6"
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 5))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 5))
 
       <<: *bubble_colors_dark
