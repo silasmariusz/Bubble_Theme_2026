@@ -97,3 +97,7 @@ HOPE THIS HELPS
 
 ## Text white colour on vibe Lime accents is not visible
 thats correct behavior. you have to redifine in such case conditionaly text styling
+
+![themes_60](https://github.com/user-attachments/assets/3113ecf8-68d5-4345-aea2-3950e95f4e5e)
+
+
