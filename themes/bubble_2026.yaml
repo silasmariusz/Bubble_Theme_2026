@@ -280,10 +280,31 @@ x-bubble-colors-dark: &bubble_colors_dark
   mush-rgb-black: var(--rgb-black-color)
   mush-rgb-disabled: var(--rgb-disabled-color)
 
-# Light mode anchor (inherits structure, overrides border)
+# Light mode anchor (inherits structure, overrides border + light-appropriate RGB palette)
+# HA default light-mode RGB (color.globals.ts) – named palette for light backgrounds
 x-bubble-colors-light: &bubble_colors_light
   <<: *bubble_colors_dark
   bubble-border: "1.8px solid var(--divider-color, rgba(31, 31, 31, 1))"
+  # Light-appropriate token-rgb-* (HA defaults for light mode; semantic green/yellow/red/blue per theme)
+  token-rgb-purple: 146, 107, 199
+  token-rgb-pink: 233, 30, 99
+  token-rgb-red: 244, 67, 54
+  token-rgb-deep-purple: 110, 65, 171
+  token-rgb-indigo: 63, 81, 181
+  token-rgb-blue: 33, 150, 243
+  token-rgb-light-blue: 3, 169, 244
+  token-rgb-cyan: 0, 188, 212
+  token-rgb-teal: 0, 150, 136
+  token-rgb-green: 76, 175, 80
+  token-rgb-light-green: 139, 195, 74
+  token-rgb-lime: 205, 220, 57
+  token-rgb-yellow: 255, 235, 59
+  token-rgb-amber: 255, 193, 7
+  token-rgb-orange: 255, 152, 0
+  token-rgb-deep-orange: 255, 111, 34
+  token-rgb-brown: 121, 85, 72
+  token-rgb-grey: 158, 158, 158
+  token-rgb-blue-grey: 96, 125, 139
   dummy_entry: "none"
 
 # ==============================================================================
@@ -307,9 +328,13 @@ Bubble 2026:
       token-sidebar-icon: "#98a7b9"
 
       token-success: "rgba(0, 202, 139, 1)"
+      token-rgb-green: 0, 202, 139
       token-warning: "rgba(222, 176, 107, 1)"
+      token-rgb-yellow: 222, 176, 107
       token-error: "rgba(247, 53, 67, 1)"
+      token-rgb-red: 247, 53, 67
       token-info: "rgba(26, 137, 245, 1)"
+      token-rgb-blue: 26, 137, 245
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
@@ -330,9 +355,13 @@ Bubble 2026:
       token-sidebar-icon: "#8c8fa1"
 
       token-success: "rgba(46, 204, 113, 1)"
+      token-rgb-green: 46, 204, 113
       token-warning: "rgba(245, 166, 35, 1)"
+      token-rgb-yellow: 245, 166, 35
       token-error: "rgba(231, 76, 60, 1)"
+      token-rgb-red: 231, 76, 60
       token-info: "rgba(0, 122, 255, 1)"
+      token-rgb-blue: 0, 122, 255
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
@@ -360,9 +389,13 @@ Bubble 2026 BFG:
       token-sidebar-icon: "#98a7b9"
 
       token-success: "rgba(0, 202, 139, 1)"
+      token-rgb-green: 0, 202, 139
       token-warning: "rgba(222, 176, 107, 1)"
+      token-rgb-yellow: 222, 176, 107
       token-error: "rgba(247, 53, 67, 1)"
+      token-rgb-red: 247, 53, 67
       token-info: "rgba(26, 137, 245, 1)"
+      token-rgb-blue: 26, 137, 245
 
       lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/refs/heads/main/www/bubble_2026_bfg_background.png') fixed"
 
@@ -385,9 +418,13 @@ Bubble 2026 BFG:
       token-sidebar-icon: "#8c8fa1"
 
       token-success: "rgba(46, 204, 113, 1)"
+      token-rgb-green: 46, 204, 113
       token-warning: "rgba(245, 166, 35, 1)"
+      token-rgb-yellow: 245, 166, 35
       token-error: "rgba(231, 76, 60, 1)"
+      token-rgb-red: 231, 76, 60
       token-info: "rgba(0, 122, 255, 1)"
+      token-rgb-blue: 0, 122, 255
 
       lovelace-background: "center / cover no-repeat url('https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/refs/heads/main/www/bubble_2026_bfg_background-light.png') fixed"
 
@@ -397,7 +434,7 @@ Bubble 2026 BFG:
       <<: *bubble_colors_light
 
 # ==============================================================================
-# THEME: YUPI
+# THEME: BUBBLE SILAS PEBKAC
 # ==============================================================================
 Bubble Silas PEBKAC:
   card-mod-theme: Bubble Silas PEBKAC
@@ -417,9 +454,13 @@ Bubble Silas PEBKAC:
       token-sidebar-icon: "#98a7b9"
 
       token-success: "rgba(173, 255, 92, 1)"
+      token-rgb-green: 173, 255, 92
       token-warning: "rgba(255, 177, 92, 1)"
+      token-rgb-yellow: 255, 177, 92
       token-error: "rgba(255, 92, 122, 1)"
+      token-rgb-red: 255, 92, 122
       token-info: "rgba(70, 164, 255, 1)"
+      token-rgb-blue: 70, 164, 255
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 50) calc(l - 30))
@@ -440,12 +481,113 @@ Bubble Silas PEBKAC:
       token-sidebar-icon: "#808080"
 
       token-success: "#2ecc71"
+      token-rgb-green: 46, 204, 113
       token-warning: "#f5a623"
+      token-rgb-yellow: 245, 166, 35
       token-error: "#e74c3c"
+      token-rgb-red: 231, 76, 60
       token-info: "#007aff"
+      token-rgb-blue: 0, 122, 255
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 10))
+
+      <<: *bubble_colors_light
+
+# ==============================================================================
+# THEME: BUBBLE IDKFA (Grayscale / Graphite – PEBKAC-style; light ≤ #D3D3D3)
+# ==============================================================================
+Bubble IDKFA:
+  card-mod-theme: Bubble IDKFA
+  <<: *bubble_shared
+  modes:
+    dark:
+      token-accent: "#a0a0a0"
+      token-rgb-primary: 160, 160, 160
+      token-text-on-accent: "#0d0d0d"
+
+      token-bg: "#0d0d0d"
+      token-bg-secondary: "#1a1a1a"
+      token-card: "#252525"
+
+      token-text: "#e0e0e0"
+      token-text-secondary: "#a0a0a0"
+      token-sidebar-icon: "#b0b0b0"
+
+      token-success: "#6b6b6b"
+      token-rgb-green: 107, 107, 107
+      token-warning: "#8c8c8c"
+      token-rgb-yellow: 140, 140, 140
+      token-error: "#525252"
+      token-rgb-red: 82, 82, 82
+      token-info: "#787878"
+      token-rgb-blue: 120, 120, 120
+
+      token-rgb-purple: 140, 140, 140
+      token-rgb-pink: 145, 145, 145
+      token-rgb-cyan: 115, 115, 115
+      token-rgb-teal: 105, 105, 105
+      token-rgb-orange: 130, 130, 130
+      token-rgb-lime: 125, 125, 125
+      token-rgb-amber: 135, 135, 135
+      token-rgb-deep-orange: 115, 115, 115
+      token-rgb-brown: 95, 95, 95
+      token-rgb-grey: 158, 158, 158
+      token-rgb-blue-grey: 110, 110, 110
+      token-rgb-indigo: 100, 100, 100
+      token-rgb-deep-purple: 90, 90, 90
+      token-rgb-light-blue: 125, 125, 125
+      token-rgb-light-green: 130, 130, 130
+      token-rgb-disabled: 100, 100, 100
+      token-rgb-state-inactive: 90, 90, 90
+
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s - 20) calc(l - 10))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 20) calc(l - 10))
+
+      <<: *bubble_colors_dark
+
+    light:
+      token-accent: "#505050"
+      token-rgb-primary: 80, 80, 80
+      token-text-on-accent: "#d3d3d3"
+
+      token-bg: "#d3d3d3"
+      token-bg-secondary: "#c0c0c0"
+      token-card: "#b8b8b8"
+
+      token-text: "#2d2d2d"
+      token-text-secondary: "#505050"
+      token-sidebar-icon: "#606060"
+
+      token-success: "#5a5a5a"
+      token-rgb-green: 90, 90, 90
+      token-warning: "#656565"
+      token-rgb-yellow: 101, 101, 101
+      token-error: "#454545"
+      token-rgb-red: 69, 69, 69
+      token-info: "#555555"
+      token-rgb-blue: 85, 85, 85
+
+      token-rgb-purple: 95, 95, 95
+      token-rgb-pink: 98, 98, 98
+      token-rgb-cyan: 88, 88, 88
+      token-rgb-teal: 82, 82, 82
+      token-rgb-orange: 92, 92, 92
+      token-rgb-lime: 90, 90, 90
+      token-rgb-amber: 94, 94, 94
+      token-rgb-deep-orange: 85, 85, 85
+      token-rgb-brown: 75, 75, 75
+      token-rgb-grey: 115, 115, 115
+      token-rgb-blue-grey: 100, 100, 100
+      token-rgb-indigo: 88, 88, 88
+      token-rgb-deep-purple: 80, 80, 80
+      token-rgb-light-blue: 90, 90, 90
+      token-rgb-light-green: 92, 92, 92
+      token-rgb-disabled: 105, 105, 105
+      token-rgb-state-inactive: 95, 95, 95
+
+      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 25))
+      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 25))
 
       <<: *bubble_colors_light
 
@@ -497,9 +639,13 @@ Bubble Dubble:
       token-sidebar-icon: "#57606a"
 
       token-success: "#2da44e"
+      token-rgb-green: 45, 164, 78
       token-warning: "#bf8700"
+      token-rgb-yellow: 191, 135, 0
       token-error: "#cf222e"
+      token-rgb-red: 207, 34, 46
       token-info: "#0969da"
+      token-rgb-blue: 9, 105, 218
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 10) calc(l + 20))
@@ -554,9 +700,13 @@ Bubble IDDQD:
       token-sidebar-icon: "#505050"
 
       token-success: "#718c00"
+      token-rgb-green: 113, 140, 0
       token-warning: "#e18a07"
+      token-rgb-yellow: 225, 138, 7
       token-error: "#c82829"
+      token-rgb-red: 200, 40, 41
       token-info: "#4271ae"
+      token-rgb-blue: 66, 113, 174
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 25) calc(l + 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 25) calc(l + 20))
@@ -612,9 +762,13 @@ Bubble GRUVBOX:
       token-sidebar-icon: "#7c6f64"
 
       token-success: "#98971a"
+      token-rgb-green: 152, 151, 26
       token-warning: "#d79921"
+      token-rgb-yellow: 215, 153, 33
       token-error: "#cc241d"
+      token-rgb-red: 204, 36, 29
       token-info: "#458588"
+      token-rgb-blue: 69, 133, 136
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
@@ -667,9 +821,13 @@ Bubble Nord:
       token-text-secondary: "#4C566A"
       token-sidebar-icon: "#4C566A"
       token-success: "#A3BE8C"
+      token-rgb-green: 163, 190, 140
       token-warning: "#EBCB8B"
+      token-rgb-yellow: 235, 203, 139
       token-error: "#BF616A"
+      token-rgb-red: 191, 97, 106
       token-info: "#5E81AC"
+      token-rgb-blue: 94, 129, 172
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 30))
@@ -722,9 +880,13 @@ Bubble One Dark Pro:
       token-text-secondary: "#a0a1a7"
       token-sidebar-icon: "#a0a1a7"
       token-success: "#50a14f"
+      token-rgb-green: 80, 161, 79
       token-warning: "#c18401"
+      token-rgb-yellow: 193, 132, 1
       token-error: "#e45649"
+      token-rgb-red: 228, 86, 73
       token-info: "#0184bc"
+      token-rgb-blue: 1, 132, 188
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
@@ -776,9 +938,13 @@ Bubble GitHub Dimmed:
       token-text-secondary: "#57606a"
       token-sidebar-icon: "#57606a"
       token-success: "#1a7f37"
+      token-rgb-green: 26, 127, 55
       token-warning: "#9a6700"
+      token-rgb-yellow: 154, 103, 0
       token-error: "#cf222e"
+      token-rgb-red: 207, 34, 46
       token-info: "#0969da"
+      token-rgb-blue: 9, 105, 218
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
@@ -830,9 +996,13 @@ Bubble Ayu Mirage:
       token-text-secondary: "#abb0b6"
       token-sidebar-icon: "#abb0b6"
       token-success: "#86b300"
+      token-rgb-green: 134, 179, 0
       token-warning: "#fa8d3e"
+      token-rgb-yellow: 250, 141, 62
       token-error: "#f07178"
+      token-rgb-red: 240, 113, 120
       token-info: "#399ee6"
+      token-rgb-blue: 57, 158, 230
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 5))
@@ -883,12 +1053,16 @@ Bubble Catppuccin Macchiato:
       token-bg-secondary: "#e6e9ef"
       token-card: "#ffffff"
       token-text: "#4c4f69"
+      token-success: "#40a02b"
+      token-rgb-green: 64, 160, 43
+      token-warning: "#df8e1d"
+      token-rgb-yellow: 223, 142, 29
+      token-error: "#d20f39"
+      token-rgb-red: 210, 15, 57
+      token-info: "#1e66f5"
+      token-rgb-blue: 30, 102, 245
       token-text-secondary: "#7c7f93"
       token-sidebar-icon: "#7c7f93"
-      token-success: "#40a02b"
-      token-warning: "#df8e1d"
-      token-error: "#d20f39"
-      token-info: "#1e66f5"
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
@@ -941,9 +1115,13 @@ Bubble Tokyo Night Storm:
       token-text-secondary: "#565f89"
       token-sidebar-icon: "#565f89"
       token-success: "#485e30"
+      token-rgb-green: 72, 94, 48
       token-warning: "#8f5e15"
+      token-rgb-yellow: 143, 94, 21
       token-error: "#8c4351"
+      token-rgb-red: 140, 67, 81
       token-info: "#0f4b6e"
+      token-rgb-blue: 15, 75, 110
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 25))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 25))
@@ -995,9 +1173,13 @@ Bubble Palenight:
       token-text-secondary: "#697098"
       token-sidebar-icon: "#697098"
       token-success: "#91b859"
+      token-rgb-green: 145, 184, 89
       token-warning: "#e6a540"
+      token-rgb-yellow: 230, 165, 64
       token-error: "#e53935"
+      token-rgb-red: 229, 57, 53
       token-info: "#6182b8"
+      token-rgb-blue: 97, 130, 184
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 20))
@@ -1051,9 +1233,13 @@ Bubble Solarized Dark:
       token-text-secondary: "#93a1a1"
       token-sidebar-icon: "#93a1a1"
       token-success: "#859900"
+      token-rgb-green: 133, 153, 0
       token-warning: "#b58900"
+      token-rgb-yellow: 181, 137, 0
       token-error: "#dc322f"
+      token-rgb-red: 220, 50, 47
       token-info: "#2aa198"
+      token-rgb-blue: 42, 161, 152
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 35))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 35))
@@ -1105,9 +1291,13 @@ Bubble Gruvbox Material:
       token-text-secondary: "#928374"
       token-sidebar-icon: "#928374"
       token-success: "#6c782e"
+      token-rgb-green: 108, 120, 46
       token-warning: "#b47109"
+      token-rgb-yellow: 180, 113, 9
       token-error: "#c14a4a"
+      token-rgb-red: 193, 74, 74
       token-info: "#45707a"
+      token-rgb-blue: 69, 112, 122
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
@@ -1159,9 +1349,13 @@ Bubble Kanagawa:
       token-text-secondary: "#8C8C8C"
       token-sidebar-icon: "#8C8C8C"
       token-success: "#596646"
+      token-rgb-green: 89, 102, 70
       token-warning: "#9E7B3A"
+      token-rgb-yellow: 158, 123, 58
       token-error: "#8E3B3B"
+      token-rgb-red: 142, 59, 59
       token-info: "#405C6E"
+      token-rgb-blue: 64, 92, 110
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 7) calc(l + 50))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 7) calc(l + 50))
@@ -1213,9 +1407,13 @@ Bubble Everforest:
       token-text-secondary: "#939f91"
       token-sidebar-icon: "#939f91"
       token-success: "#8da101"
+      token-rgb-green: 141, 161, 1
       token-warning: "#b47109"
+      token-rgb-yellow: 180, 113, 9
       token-error: "#f85552"
+      token-rgb-red: 248, 85, 82
       token-info: "#3a94c5"
+      token-rgb-blue: 58, 148, 197
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 2) calc(l + 15))
@@ -1267,9 +1465,13 @@ Bubble Rose Pine:
       token-text-secondary: "#797593"
       token-sidebar-icon: "#797593"
       token-success: "#56949f"
+      token-rgb-green: 86, 148, 159
       token-warning: "#ea9d34"
+      token-rgb-yellow: 234, 157, 52
       token-error: "#b4637a"
+      token-rgb-red: 180, 99, 122
       token-info: "#286983"
+      token-rgb-blue: 40, 105, 131
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 15))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 15))
@@ -1321,9 +1523,13 @@ Bubble Night Owl:
       token-text-secondary: "#989fb1"
       token-sidebar-icon: "#989fb1"
       token-success: "#0c966c"
+      token-rgb-green: 12, 150, 108
       token-warning: "#deb320"
+      token-rgb-yellow: 222, 179, 32
       token-error: "#de3d3b"
+      token-rgb-red: 222, 61, 59
       token-info: "#2b5cce"
+      token-rgb-blue: 43, 92, 206
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 15) calc(l + 40))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 15) calc(l + 40))
@@ -1374,9 +1580,13 @@ Bubble Monokai Pro:
       token-text-secondary: "#a0a0a0"
       token-sidebar-icon: "#a0a0a0"
       token-success: "#78a652"
+      token-rgb-green: 120, 166, 82
       token-warning: "#c94e6c"
+      token-rgb-yellow: 201, 78, 108
       token-error: "#c94e6c"
+      token-rgb-red: 201, 78, 108
       token-info: "#5b9ca6"
+      token-rgb-blue: 91, 156, 166
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l + 10))
@@ -1428,9 +1638,13 @@ Bubble Horizon:
       token-text-secondary: "#5c5858"
       token-sidebar-icon: "#5c5858"
       token-success: "#1E9C70"
+      token-rgb-green: 30, 158, 112
       token-warning: "#E38A5F"
+      token-rgb-yellow: 227, 138, 95
       token-error: "#D4496A"
+      token-rgb-red: 212, 73, 106
       token-info: "#1C8FA3"
+      token-rgb-blue: 28, 143, 163
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 5) calc(l + 30))
@@ -1485,9 +1699,13 @@ Bubble Dracula:
       token-text-secondary: "#6272A4"
       token-sidebar-icon: "#6272A4"
       token-success: "#50fa7b"
+      token-rgb-green: 80, 250, 123
       token-warning: "#ffb86c"
+      token-rgb-yellow: 255, 184, 108
       token-error: "#ff5555"
+      token-rgb-red: 255, 85, 85
       token-info: "#8be9fd"
+      token-rgb-blue: 139, 233, 253
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
@@ -1540,9 +1758,13 @@ Bubble Cyberpunk:
       token-text-secondary: "#ff0055"
       token-sidebar-icon: "#202020"
       token-success: "#009960"
+      token-rgb-green: 0, 153, 96
       token-warning: "#b8ad06"
+      token-rgb-yellow: 184, 173, 6
       token-error: "#cc0030"
+      token-rgb-red: 204, 0, 48
       token-info: "#0095a0"
+      token-rgb-blue: 0, 149, 160
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
@@ -1594,9 +1816,13 @@ Bubble Latte:
       token-text-secondary: "#adc178"
       token-sidebar-icon: "#adc178"
       token-success: "#606c38"
+      token-rgb-green: 96, 108, 56
       token-warning: "#dda15e"
+      token-rgb-yellow: 221, 161, 94
       token-error: "#bc6c25"
+      token-rgb-red: 188, 108, 37
       token-info: "#6c757d"
+      token-rgb-blue: 108, 117, 125
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
@@ -1630,6 +1856,7 @@ Bubble Matrix:
       token-error: "#003B00"
       token-rgb-red: 0, 59, 0
       token-info: "#00FF41"
+      token-rgb-blue: 0, 255, 65
 
       bubble-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 10) calc(l + 5))
@@ -1647,252 +1874,15 @@ Bubble Matrix:
       token-text-secondary: "#5c8a5c"
       token-sidebar-icon: "#008F11"
       token-success: "#22c55e"
+      token-rgb-green: 34, 197, 94
       token-warning: "#eab308"
+      token-rgb-yellow: 234, 179, 8
       token-error: "#ef4444"
+      token-rgb-red: 239, 68, 68
       token-info: "#3b82f6"
+      token-rgb-blue: 59, 130, 246
 
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 5))
-
-      <<: *bubble_colors_light
-
-# ==============================================================================
-# 25. BUBBLE GRAPHITE - Buggy Buggy
-# ==============================================================================
-
-Bubble Graphite Buggy Experimental:
-  card-mod-theme: Bubble Graphite Buggy Experimental
-
-  <<: *bubble_shared
-
-  card-mod-card: |
-    ha-card {
-      border-top: 1px solid rgba(255, 255, 255, 0.09) !important;
-      background: linear-gradient(196deg, #25262D 9.8%, #1B1C24 91.72%) !important;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3) !important;
-      transition: none;
-    }
-    vertical-stack-in-card ha-card,
-    badge-horizontal-container-card ha-card,
-    mushroom-chips-card ha-card,
-    .chip-container,
-    .horizontal-buttons-stack-card,
-    ha-card:has(div[class*="chip-container"]),
-    ring-tile ha-card {
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    badge-horizontal-container-card,
-    mushroom-chips-card,
-    ring-tile {
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      --ha-card-box-shadow: none !important;
-      --ha-card-border-width: 0px !important;
-    }
-    ha-card:has(> .bubble-separator-container),
-    ha-card:has(div[class*="bubble-separator"]) {
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-
-  modes:
-    dark:
-      # --- Graphite Colors ---
-      token-accent: "#E08A00" # Orange Primary
-      token-rgb-primary: 224, 138, 0
-      token-text-on-accent: "#000000"
-
-      token-bg: "#101215"
-      token-bg-secondary: "#1C1D21"
-      token-card: "#23242B"
-
-      token-text: "#E4E4E7"
-      token-text-secondary: "#8A8C99"
-      token-sidebar-icon: "#93959F"
-
-      token-success: "#76D698"
-      token-rgb-green: 118, 214, 152
-      token-warning: "#FFDB75"
-      token-rgb-yellow: 255, 219, 117
-      token-error: "#EA7287"
-      token-rgb-red: 234, 114, 135
-      token-info: "#27D1F6"
-      token-rgb-cyan: 39, 209, 246
-
-      bubble-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 5))
-      bubble-button-accent-color: hsl(from var(--token-accent) h calc(s + 5) calc(l + 5))
-
-      <<: *bubble_colors_dark
-
-# ==============================================================================
-# EXPERIMENTAL: GLASSMORPHISM VARIANT
-# ==============================================================================
-# Based on user request: Glassmorphism with exclusions for nested elements
-# and Bubble Card internals.
-# ==============================================================================
-Bubble Glass Experimental:
-  card-mod-theme: Bubble Glass Experimental
-  <<: *bubble_shared
-  
-  # Override the shared card-mod-card with the specific Glass logic
-  card-mod-card: |
-    /* GLOBAL SETTINGS */
-    ha-card {
-      --ha-card-border-radius: 40px !important;
-    }
-
-    /* --- RESET / EXCLUSIONS (Priority 1) --- */
-    /* Internal Bubble elements, Nested cards in Stack-In, Chips, Badges, Rings, Separators */
-    .bubble-card-container ha-card,
-    ha-card[class*="bubble-sub-button"],
-    vertical-stack-in-card ha-card,
-    .type-custom-vertical-stack-in-card ha-card,
-    ha-card.type-custom-mushroom-chips-card,
-    ha-card.type-custom-badge-horizontal-container-card,
-    ring-tile ha-card,
-    ha-card.type-custom-bubble-card:has(.bubble-separator-container) {
-      background: none !important;
-      backdrop-filter: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      --ha-card-border-width: 0px;
-    }
-
-    /* --- APPLY GLASS (Priority 2) --- */
-    /* Target standard cards, and the StackIn wrapper itself, excluding the specific types listed above */
-    ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card):not(.type-custom-badge-horizontal-container-card):not(.type-custom-bubble-card) {
-      background: rgba(30, 32, 36, 0.6);
-      backdrop-filter: blur(12px) !important;
-      -webkit-backdrop-filter: blur(12px) !important;
-      border-radius: 40px !important;
-      border: 1px solid rgba(255,255,255,0.05);
-      border-top: 1px solid rgba(255, 255, 255, 0.15) !important;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.4) !important;
-      box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 2px 4px rgba(0,0,0,0.3) !important;
-      --primary-text-color: #e0e0e0;
-      --secondary-text-color: #999;
-      transition: all 0.2s ease-in-out;
-      margin-bottom: 8px; 
-      width: 95% !important; 
-      margin-left: auto !important; 
-      margin-right: auto !important; 
-      display: flex; 
-      flex-direction: column; 
-      justify-content: center;
-    }
-
-    /* --- ACTIVE STATE (PRESSED) --- */
-    /* Wrapped in safety check for config.entity */
-    {% if config is defined and config.entity is defined %}
-      /* Check if the card is NOT one of the excluded types before applying active styles */
-      /* Note: In card-mod, we can't easily check 'type' in jinja here, but we apply CSS to ha-card selectors */
-      
-      {% if (is_state(config.entity, 'on') and not is_state(config.entity, 'unlocked')) or is_state(config.entity, 'locked') or is_state(config.entity, 'open') or is_state(config.entity, 'heat') or is_state(config.entity, 'auto') %}
-        /* Only apply to cards that are NOT excluded */
-        ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card):not(.type-custom-badge-horizontal-container-card):not(.type-custom-bubble-card) {
-          background: rgba(20, 20, 20, 0.6) !important;
-          box-shadow: inset 2px 2px 5px rgba(0,0,0,0.8), inset -1px -1px 2px rgba(255,255,255,0.1) !important;
-          border-top: 1px solid rgba(0,0,0,0.1) !important;
-          border-bottom: 1px solid rgba(255,255,255,0.05) !important;
-          transform: translateY(2px);
-        }
-      {% endif %}
-
-      /* --- ICON GLOW EFFECTS --- */
-      
-      /* 1. LOCKS */
-      {% if config.entity.startswith('lock.') %}
-        {% if is_state(config.entity, 'locked') %}
-           ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card) mushroom-shape-icon {
-            --icon-color: rgb(76, 175, 80) !important;
-            --shape-color: rgba(76, 175, 80, 0.2) !important;
-            filter: drop-shadow(0 0 6px rgba(76, 175, 80, 0.6));
-          }
-        {% elif is_state(config.entity, 'unlocked') %}
-           ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card) mushroom-shape-icon {
-            --icon-color: rgb(244, 67, 54) !important;
-            --shape-color: rgba(244, 67, 54, 0.2) !important;
-            filter: drop-shadow(0 0 6px rgba(244, 67, 54, 0.6));
-          }
-        {% endif %}
-      
-      /* 2. CLIMATE */
-      {% elif config.entity.startswith('climate.') %}
-         {% if is_state(config.entity, 'heat') or is_state(config.entity, 'auto') %}
-          ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card) mushroom-shape-icon {
-            --icon-color: rgb(255, 152, 0) !important;
-            --shape-color: rgba(255, 152, 0, 0.2) !important;
-            filter: drop-shadow(0 0 6px rgba(255, 152, 0, 0.6));
-          }
-         {% endif %}
-      
-      /* 3. STANDARD LIGHT/SWITCH */
-      {% else %}
-        {% if is_state(config.entity, 'on') or is_state(config.entity, 'open') %}
-          ha-card:not(.bubble-card-container):not(.type-custom-mushroom-chips-card) mushroom-shape-icon {
-            --icon-color: rgb(255, 200, 100) !important;
-            --shape-color: rgba(255, 200, 100, 0.2) !important;
-            filter: drop-shadow(0 0 6px rgba(255, 200, 100, 0.6));
-          }
-        {% endif %}
-      {% endif %}
-    {% endif %}
-
-    ha-card:active { transform: scale(0.98); }
-
-  modes:
-    dark:
-      # Using Dark Grey/Black base to match the Glass style
-      token-accent: "#ffffff"
-      token-rgb-primary: 255, 255, 255
-      token-text-on-accent: "#000000"
-
-      token-bg: "#121212"
-      token-bg-secondary: "#1E1E1E"
-      token-card: "rgba(30, 32, 36, 0.6)" # Matches CSS background
-
-      token-text: "#e0e0e0"
-      token-text-secondary: "#999999"
-      token-sidebar-icon: "#e0e0e0"
-
-      token-success: "#4caf50"
-      token-rgb-green: 76, 175, 80
-      token-warning: "#ff9800"
-      token-rgb-yellow: 255, 152, 0
-      token-error: "#f44336"
-      token-rgb-red: 244, 67, 54
-      token-info: "#2196f3"
-      token-rgb-blue: 33, 150, 243
-
-      bubble-accent-color: hsl(from var(--token-accent) h s l)
-      bubble-button-accent-color: hsl(from var(--token-accent) h s l)
-
-      <<: *bubble_colors_dark
-
-    light:
-      # Experimental Light Glass (Inverted)
-      token-accent: "#333333"
-      token-rgb-primary: 51, 51, 51
-      token-text-on-accent: "#ffffff"
-      
-      token-bg: "#e0e0e0"
-      token-bg-secondary: "#d6d6d6"
-      token-card: "rgba(255, 255, 255, 0.6)"
-
-      token-text: "#202020"
-      token-text-secondary: "#505050"
-      token-sidebar-icon: "#505050"
-
-      token-success: "#4caf50"
-      token-warning: "#ff9800"
-      token-error: "#f44336"
-      token-info: "#2196f3"
-
-      bubble-accent-color: hsl(from var(--token-accent) h s l)
-      bubble-button-accent-color: hsl(from var(--token-accent) h s l)
 
       <<: *bubble_colors_light
