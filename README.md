@@ -1,6 +1,9 @@
 # Bubble Theme 2026
 New look on a Bubble Cards with multiple variants and vibes
 
+> Latest release: **v0.666-stable1**  
+> See [`CHANGELOG.md`](CHANGELOG.md) for update details.
+
 | Bubble 2026 | sample1 | sample2 |
 | :---: | :---: | :---: |
 | <img src="https://github.com/user-attachments/assets/6dea7d27-f6d8-49f3-9b16-c59e600cd899" height="400"> | <img src="https://github.com/user-attachments/assets/82f30b75-f39e-42b6-b822-b507eac29e23" height="400"> | <img src="https://github.com/user-attachments/assets/83857607-f988-4fc5-8506-b3862c992b6f" height="400"> |

@@ -1,3 +1,6 @@
 {
-    "name": "Bubble Theme 2026"
+  "name": "Bubble Theme 2026",
+  "filename": "themes/bubble_2026.yaml",
+  "render_readme": true,
+  "homeassistant": "2024.2.0"
 }
