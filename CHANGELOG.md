@@ -1,5 +1,12 @@
 ## Changelog
 
+### v0.666-ave7 · 2026-03-01
+
+- Naprawa duplikatów YAML (ostrzeżenia HA)
+- Usunięto duplikaty Bubble Twilight i Dubble Twilight
+- Usunięto zbędny token-rgb-blue-grey z bubble_colors_light
+- Usunięto redundantne token-rgb-* z bloków motywów (duplikaty z anchor merge)
+
 ### v0.666-ave6 · 2026-03-01
 
 - **Nowe pliki motywów:**

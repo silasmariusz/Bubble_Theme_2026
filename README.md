@@ -1,7 +1,7 @@
 # Bubble Theme 2026
 New look on a Bubble Cards with multiple variants and vibes
 
-> Latest release: **v0.666-ave6**  
+> Latest release: **v0.666-ave7**  
 > See [`CHANGELOG.md`](CHANGELOG.md) for update details.
 
 | Bubble 2026 | sample1 | sample2 |
