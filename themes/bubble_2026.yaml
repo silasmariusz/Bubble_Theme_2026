@@ -97,18 +97,16 @@ x-bubble-shared: &bubble_shared
       }
 
 # ==============================================================================
-# (W-HEADER) - Header widoczny (card-mod nie chowa headera na mobile)
+# (W-HEADER) - Header widoczny - NIE uzywa (12-17) ani (24-35) z shared
+# Nadpisuje card-mod-root-yaml i card-mod-view-yaml pustymi - bez hide headera, bez view transform
 # ==============================================================================
 x-bubble-w-header-mod: &bubble_w_header_mod
   card-mod-root-yaml: |
     .: |
-      @media only screen and (max-width: 768px) {
-          .header { display: block !important; opacity: 1 !important; }
-          #view { padding-top: 0 !important; margin-top: 0 !important; height: calc(100vh - env(safe-area-inset-top)) !important; }
-      }
+  card-mod-view-yaml: |
 
 # ==============================================================================
-# (W-VIEWBAR) - Header na dole, toolbar, viewbar layout
+# (W-VIEWBAR) - Header na dole, toolbar, viewbar layout - DODATKOWO tylko dla viewbar (114-227)
 # ==============================================================================
 x-bubble-w-viewbar-mod: &bubble_w_viewbar_mod
   header-height: "78px"
