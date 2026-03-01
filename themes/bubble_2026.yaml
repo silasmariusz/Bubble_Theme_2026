@@ -97,13 +97,79 @@ x-bubble-shared: &bubble_shared
       }
 
 # ==============================================================================
-# (W-HEADER) - Header widoczny - NIE uzywa (12-17) ani (24-35) z shared
-# Nadpisuje card-mod-root-yaml i card-mod-view-yaml pustymi - bez hide headera, bez view transform
+# (SHARED-HEADER) - Odrębny blok dla _w_header - BEZ (12-17) i (24-35)
+# Header themes idą z tego bloku, NIE z bubble_shared
 # ==============================================================================
-x-bubble-w-header-mod: &bubble_w_header_mod
-  card-mod-root-yaml: |
+x-bubble-shared-header: &bubble_shared_header
+  card-mod-more-info-yaml: |
+    $: |
+     .mdc-dialog .mdc-dialog__scrim { backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); background: rgba(0,0,0,.6); }
+     .mdc-dialog .mdc-dialog__container .mdc-dialog__surface { box-shadow: none !important; border-radius: var(--ha-card-border-radius); }
     .: |
-  card-mod-view-yaml: |
+     :host { --ha-card-box-shadow: none; }
+  card-mod-card: |
+    ha-card {
+      transition: none;
+      border-style: none !important;
+      --bubble-text-on-accent: var(--token-text-on-accent);
+    }
+    .is-light .bubble-range-fill,
+    .is-light .slider-use-light-color {
+      opacity: 0.6;
+      filter: saturate(0.7);
+    }
+  $: |
+    .bubble-button-card-container {
+      --primary-text-color: var(--token-text);
+      color: var(--token-text) !important;
+    }
+    /* Tekst na tle accent – przycisk, sub-button, slider (background-on = tło accent) */
+    .bubble-button-card-container[style*="background-color"],
+    .bubble-button-card-container.background-on,
+    .bubble-sub-button[style*="background-color"],
+    .bubble-sub-button[style*="bubble-accent-color"],
+    .bubble-sub-button[style*="bubble-sub-button-light-background-color"],
+    .bubble-sub-button.background-on {
+      --primary-text-color: var(--token-text-on-accent) !important;
+      --bubble-icon-color: var(--token-text-on-accent) !important;
+      --bubble-name-color: var(--token-text-on-accent) !important;
+      --bubble-state-color: var(--token-text-on-accent) !important;
+      color: var(--token-text-on-accent) !important;
+    }
+    .bubble-sub-button.background-on .bubble-sub-button-name-container,
+    .bubble-sub-button.background-on .bubble-sub-button-icon,
+    .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
+    .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-icon {
+      color: var(--token-text-on-accent) !important;
+    }
+    ha-icon {
+      color: inherit !important;
+    }
+  card-mod-card-yaml: |
+    "ha-card$": |
+      .bubble-sub-button.background-on,
+      .bubble-sub-button[style*="bubble-accent-color"],
+      .bubble-sub-button[style*="bubble-sub-button-light-background-color"] {
+        --primary-text-color: var(--token-text-on-accent) !important;
+        --bubble-icon-color: var(--token-text-on-accent) !important;
+        --bubble-name-color: var(--token-text-on-accent) !important;
+        --bubble-state-color: var(--token-text-on-accent) !important;
+        color: var(--token-text-on-accent) !important;
+      }
+
+      .bubble-sub-button.background-on .bubble-sub-button-name-container,
+      .bubble-sub-button.background-on ha-icon,
+      .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
+      .bubble-sub-button[style*="bubble-accent-color"] ha-icon {
+        color: var(--token-text-on-accent) !important;
+      }
+
+    "hui-element$ha-card$": |
+      .bubble-sub-button.background-on,
+      .bubble-sub-button[style*="bubble-accent-color"] {
+        --primary-text-color: var(--token-text-on-accent) !important;
+        color: var(--token-text-on-accent) !important;
+      }
 
 # ==============================================================================
 # (W-VIEWBAR) - Header na dole, toolbar, viewbar layout - DODATKOWO tylko dla viewbar (114-227)
@@ -538,8 +604,7 @@ Bubble 2026:
 
 Bubble 2026 _w_header:
   card-mod-theme: Bubble 2026
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "rgb(80, 110, 172)"
@@ -721,8 +786,7 @@ Bubble 2026 BFG:
 
 Bubble 2026 BFG _w_header:
   card-mod-theme: Bubble 2026 BFG
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "rgb(80, 110, 172)"
@@ -908,8 +972,7 @@ Bubble Silas PEBKAC:
 
 Bubble Silas PEBKAC _w_header:
   card-mod-theme: Bubble Silas PEBKAC
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "rgba(173, 255, 92, 1)"
@@ -1123,8 +1186,7 @@ Bubble IDKFA:
 
 Bubble IDKFA _w_header:
   card-mod-theme: Bubble IDKFA
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a0a0a0"
@@ -1374,8 +1436,7 @@ Bubble Dubble:
 
 Bubble Dubble _w_header:
   card-mod-theme: Bubble Dubble
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#5ee9f2"
@@ -1553,8 +1614,7 @@ Bubble IDDQD:
 
 Bubble IDDQD _w_header:
   card-mod-theme: Bubble IDDQD
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffd700"
@@ -1736,8 +1796,7 @@ Bubble GRUVBOX:
 # ------------------------------------------------------------------------------
 Bubble GRUVBOX _w_header:
   card-mod-theme: Bubble GRUVBOX
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fe8019"
@@ -1921,8 +1980,7 @@ Bubble Nord:
 # ------------------------------------------------------------------------------
 Bubble Nord _w_header:
   card-mod-theme: Bubble Nord
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#88C0D0"
@@ -2100,8 +2158,7 @@ Bubble One Dark Pro:
 # ------------------------------------------------------------------------------
 Bubble One Dark Pro _w_header:
   card-mod-theme: Bubble One Dark Pro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#61afef"
@@ -2278,8 +2335,7 @@ Bubble GitHub Dimmed:
 # ------------------------------------------------------------------------------
 Bubble GitHub Dimmed _w_header:
   card-mod-theme: Bubble GitHub Dimmed
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#539bf5"
@@ -2454,8 +2510,7 @@ Bubble Ayu Mirage:
 # ------------------------------------------------------------------------------
 Bubble Ayu Mirage _w_header:
   card-mod-theme: Bubble Ayu Mirage
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffcc66"
@@ -2632,8 +2687,7 @@ Bubble Catppuccin Macchiato:
 # ------------------------------------------------------------------------------
 Bubble Catppuccin Macchiato _w_header:
   card-mod-theme: Bubble Catppuccin Macchiato
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c6a0f6"
@@ -2813,8 +2867,7 @@ Bubble Tokyo Night Storm:
 # ------------------------------------------------------------------------------
 Bubble Tokyo Night Storm _w_header:
   card-mod-theme: Bubble Tokyo Night Storm
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7aa2f7"
@@ -2991,8 +3044,7 @@ Bubble Palenight:
 # ------------------------------------------------------------------------------
 Bubble Palenight _w_header:
   card-mod-theme: Bubble Palenight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c792ea"
@@ -3169,8 +3221,7 @@ Bubble Solarized Dark:
 # ------------------------------------------------------------------------------
 Bubble Solarized Dark _w_header:
   card-mod-theme: Bubble Solarized Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#268bd2"
@@ -3349,8 +3400,7 @@ Bubble Gruvbox Material:
 # ------------------------------------------------------------------------------
 Bubble Gruvbox Material _w_header:
   card-mod-theme: Bubble Gruvbox Material
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d3869b"
@@ -3525,8 +3575,7 @@ Bubble Kanagawa:
 # ------------------------------------------------------------------------------
 Bubble Kanagawa _w_header:
   card-mod-theme: Bubble Kanagawa
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7E9CD8"
@@ -3701,8 +3750,7 @@ Bubble Everforest:
 # ------------------------------------------------------------------------------
 Bubble Everforest _w_header:
   card-mod-theme: Bubble Everforest
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a7c080"
@@ -3877,8 +3925,7 @@ Bubble Rose Pine:
 # ------------------------------------------------------------------------------
 Bubble Rose Pine _w_header:
   card-mod-theme: Bubble Rose Pine
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ebbcba"
@@ -4053,8 +4100,7 @@ Bubble Night Owl:
 # ------------------------------------------------------------------------------
 Bubble Night Owl _w_header:
   card-mod-theme: Bubble Night Owl
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82AAFF"
@@ -4228,8 +4274,7 @@ Bubble Monokai Pro:
 # ------------------------------------------------------------------------------
 Bubble Monokai Pro _w_header:
   card-mod-theme: Bubble Monokai Pro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffd866"
@@ -4399,8 +4444,7 @@ Bubble Horizon:
 
 Bubble Horizon _w_header:
   card-mod-theme: Bubble Horizon
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#E95678"
@@ -4572,8 +4616,7 @@ Bubble Dracula:
 
 Bubble Dracula _w_header:
   card-mod-theme: Bubble Dracula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#bd93f9"
@@ -4749,8 +4792,7 @@ Bubble Cyberpunk:
 
 Bubble Cyberpunk _w_header:
   card-mod-theme: Bubble Cyberpunk
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff0055"
@@ -4921,8 +4963,7 @@ Bubble Latte:
 
 Bubble Latte _w_header:
   card-mod-theme: Bubble Latte
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d4a373"
@@ -5094,8 +5135,7 @@ Bubble Matrix:
 # ------------------------------------------------------------------------------
 Bubble Matrix _w_header:
   card-mod-theme: Bubble Matrix
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00FF41"
@@ -5301,8 +5341,7 @@ Dubble Dracula:
 # ------------------------------------------------------------------------------
 Dubble Dracula _w_header:
   card-mod-theme: Dubble Dracula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#bd93fa"
@@ -5570,8 +5609,7 @@ Dubble Nord:
 # ------------------------------------------------------------------------------
 Dubble Nord _w_header:
   card-mod-theme: Dubble Nord
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8ec8d9"
@@ -5839,8 +5877,7 @@ Dubble One Dark Pro:
 # ------------------------------------------------------------------------------
 Dubble One Dark Pro _w_header:
   card-mod-theme: Dubble One Dark Pro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#62b1f2"
@@ -6108,8 +6145,7 @@ Dubble GitHub Dimmed:
 # ------------------------------------------------------------------------------
 Dubble GitHub Dimmed _w_header:
   card-mod-theme: Dubble GitHub Dimmed
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#539cf7"
@@ -6377,8 +6413,7 @@ Dubble Tokyo Night Storm:
 # ------------------------------------------------------------------------------
 Dubble Tokyo Night Storm _w_header:
   card-mod-theme: Dubble Tokyo Night Storm
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7aa3f8"
@@ -6646,8 +6681,7 @@ Dubble Catppuccin Macchiato:
 # ------------------------------------------------------------------------------
 Dubble Catppuccin Macchiato _w_header:
   card-mod-theme: Dubble Catppuccin Macchiato
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c7a1f7"
@@ -6915,8 +6949,7 @@ Dubble Ayu Mirage:
 # ------------------------------------------------------------------------------
 Dubble Ayu Mirage _w_header:
   card-mod-theme: Dubble Ayu Mirage
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffcc66"
@@ -7184,8 +7217,7 @@ Dubble Palenight:
 # ------------------------------------------------------------------------------
 Dubble Palenight _w_header:
   card-mod-theme: Dubble Palenight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ca94ee"
@@ -7453,8 +7485,7 @@ Dubble Solarized Dark:
 # ------------------------------------------------------------------------------
 Dubble Solarized Dark _w_header:
   card-mod-theme: Dubble Solarized Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#2790db"
@@ -7722,8 +7753,7 @@ Bubble Gruvbox:
 # ------------------------------------------------------------------------------
 Bubble Gruvbox _w_header:
   card-mod-theme: Bubble Gruvbox
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fe943f"
@@ -7991,8 +8021,7 @@ Dubble Gruvbox:
 # ------------------------------------------------------------------------------
 Dubble Gruvbox _w_header:
   card-mod-theme: Dubble Gruvbox
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fe8019"
@@ -8260,8 +8289,7 @@ Dubble Kanagawa:
 # ------------------------------------------------------------------------------
 Dubble Kanagawa _w_header:
   card-mod-theme: Dubble Kanagawa
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82a1df"
@@ -8529,8 +8557,7 @@ Dubble Everforest:
 # ------------------------------------------------------------------------------
 Dubble Everforest _w_header:
   card-mod-theme: Dubble Everforest
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b1cc88"
@@ -8798,8 +8825,7 @@ Dubble Rose Pine:
 # ------------------------------------------------------------------------------
 Dubble Rose Pine _w_header:
   card-mod-theme: Dubble Rose Pine
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#efbfbd"
@@ -9067,8 +9093,7 @@ Dubble Night Owl:
 # ------------------------------------------------------------------------------
 Dubble Night Owl _w_header:
   card-mod-theme: Dubble Night Owl
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82aaff"
@@ -9336,8 +9361,7 @@ Dubble Monokai Pro:
 # ------------------------------------------------------------------------------
 Dubble Monokai Pro _w_header:
   card-mod-theme: Dubble Monokai Pro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffd866"
@@ -9605,8 +9629,7 @@ Dubble Horizon:
 # ------------------------------------------------------------------------------
 Dubble Horizon _w_header:
   card-mod-theme: Dubble Horizon
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ed577a"
@@ -9874,8 +9897,7 @@ Dubble Cyberpunk:
 # ------------------------------------------------------------------------------
 Dubble Cyberpunk _w_header:
   card-mod-theme: Dubble Cyberpunk
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff0055"
@@ -10143,8 +10165,7 @@ Dubble Latte:
 # ------------------------------------------------------------------------------
 Dubble Latte _w_header:
   card-mod-theme: Dubble Latte
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#dca977"
@@ -10412,8 +10433,7 @@ Dubble Matrix:
 # ------------------------------------------------------------------------------
 Dubble Matrix _w_header:
   card-mod-theme: Dubble Matrix
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00ff41"
@@ -10681,8 +10701,7 @@ Bubble Shades of Purple:
 # ------------------------------------------------------------------------------
 Bubble Shades of Purple _w_header:
   card-mod-theme: Bubble Shades of Purple
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c3b0fa"
@@ -10950,8 +10969,7 @@ Dubble Shades of Purple:
 # ------------------------------------------------------------------------------
 Dubble Shades of Purple _w_header:
   card-mod-theme: Dubble Shades of Purple
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a78bfb"
@@ -11219,8 +11237,7 @@ Bubble Cobalt2:
 # ------------------------------------------------------------------------------
 Bubble Cobalt2 _w_header:
   card-mod-theme: Bubble Cobalt2
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffce26"
@@ -11488,8 +11505,7 @@ Dubble Cobalt2:
 # ------------------------------------------------------------------------------
 Dubble Cobalt2 _w_header:
   card-mod-theme: Dubble Cobalt2
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffc600"
@@ -11757,8 +11773,7 @@ Bubble SynthWave:
 # ------------------------------------------------------------------------------
 Bubble SynthWave _w_header:
   card-mod-theme: Bubble SynthWave
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#f94fba"
@@ -12026,8 +12041,7 @@ Dubble SynthWave:
 # ------------------------------------------------------------------------------
 Dubble SynthWave _w_header:
   card-mod-theme: Dubble SynthWave
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fa2aad"
@@ -12295,8 +12309,7 @@ Bubble Winter is Coming:
 # ------------------------------------------------------------------------------
 Bubble Winter is Coming _w_header:
   card-mod-theme: Bubble Winter is Coming
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#90b5ae"
@@ -12564,8 +12577,7 @@ Dubble Winter is Coming:
 # ------------------------------------------------------------------------------
 Dubble Winter is Coming _w_header:
   card-mod-theme: Dubble Winter is Coming
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ec3b7"
@@ -12833,8 +12845,7 @@ Bubble Andromeda:
 # ------------------------------------------------------------------------------
 Bubble Andromeda _w_header:
   card-mod-theme: Bubble Andromeda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#cd99dd"
@@ -13102,8 +13113,7 @@ Dubble Andromeda:
 # ------------------------------------------------------------------------------
 Dubble Andromeda _w_header:
   card-mod-theme: Dubble Andromeda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#cc7be3"
@@ -13371,8 +13381,7 @@ Bubble Panda:
 # ------------------------------------------------------------------------------
 Bubble Panda _w_header:
   card-mod-theme: Bubble Panda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9bc9"
@@ -13640,8 +13649,7 @@ Dubble Panda:
 # ------------------------------------------------------------------------------
 Dubble Panda _w_header:
   card-mod-theme: Dubble Panda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff74b5"
@@ -13909,8 +13917,7 @@ Bubble Noctis:
 # ------------------------------------------------------------------------------
 Bubble Noctis _w_header:
   card-mod-theme: Bubble Noctis
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#5bc2e6"
@@ -14178,8 +14185,7 @@ Dubble Noctis:
 # ------------------------------------------------------------------------------
 Dubble Noctis _w_header:
   card-mod-theme: Dubble Noctis
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#3abeeb"
@@ -14447,8 +14453,7 @@ Bubble Omni:
 # ------------------------------------------------------------------------------
 Bubble Omni _w_header:
   card-mod-theme: Bubble Omni
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#afa8c7"
@@ -14716,8 +14721,7 @@ Dubble Omni:
 # ------------------------------------------------------------------------------
 Dubble Omni _w_header:
   card-mod-theme: Dubble Omni
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a092d2"
@@ -14985,8 +14989,7 @@ Bubble Eva Dark:
 # ------------------------------------------------------------------------------
 Bubble Eva Dark _w_header:
   card-mod-theme: Bubble Eva Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9074c2"
@@ -15254,8 +15257,7 @@ Dubble Eva Dark:
 # ------------------------------------------------------------------------------
 Dubble Eva Dark _w_header:
   card-mod-theme: Dubble Eva Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#855cce"
@@ -15523,8 +15525,7 @@ Bubble Atom One Dark:
 # ------------------------------------------------------------------------------
 Bubble Atom One Dark _w_header:
   card-mod-theme: Bubble Atom One Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84bfef"
@@ -15792,8 +15793,7 @@ Dubble Atom One Dark:
 # ------------------------------------------------------------------------------
 Dubble Atom One Dark _w_header:
   card-mod-theme: Dubble Atom One Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#62b1f2"
@@ -16061,8 +16061,7 @@ Bubble JellyFish:
 # ------------------------------------------------------------------------------
 Bubble JellyFish _w_header:
   card-mod-theme: Bubble JellyFish
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#26deff"
@@ -16330,8 +16329,7 @@ Dubble JellyFish:
 # ------------------------------------------------------------------------------
 Dubble JellyFish _w_header:
   card-mod-theme: Dubble JellyFish
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00d8ff"
@@ -16599,8 +16597,7 @@ Bubble Darcula:
 # ------------------------------------------------------------------------------
 Bubble Darcula _w_header:
   card-mod-theme: Bubble Darcula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84a3bb"
@@ -16868,8 +16865,7 @@ Dubble Darcula:
 # ------------------------------------------------------------------------------
 Dubble Darcula _w_header:
   card-mod-theme: Dubble Darcula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6fa1c8"
@@ -17137,8 +17133,7 @@ Bubble Vue:
 # ------------------------------------------------------------------------------
 Bubble Vue _w_header:
   card-mod-theme: Bubble Vue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#5db88f"
@@ -17406,8 +17401,7 @@ Dubble Vue:
 # ------------------------------------------------------------------------------
 Dubble Vue _w_header:
   card-mod-theme: Dubble Vue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#47c68d"
@@ -17675,8 +17669,7 @@ Bubble Min Dark:
 # ------------------------------------------------------------------------------
 Bubble Min Dark _w_header:
   card-mod-theme: Bubble Min Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#76aad6"
@@ -17944,8 +17937,7 @@ Dubble Min Dark:
 # ------------------------------------------------------------------------------
 Dubble Min Dark _w_header:
   card-mod-theme: Dubble Min Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59a1de"
@@ -18213,8 +18205,7 @@ Bubble Bearded:
 # ------------------------------------------------------------------------------
 Bubble Bearded _w_header:
   card-mod-theme: Bubble Bearded
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#abbcbb"
@@ -18482,8 +18473,7 @@ Dubble Bearded:
 # ------------------------------------------------------------------------------
 Dubble Bearded _w_header:
   card-mod-theme: Dubble Bearded
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#99c9c8"
@@ -18751,8 +18741,7 @@ Bubble Poimandres:
 # ------------------------------------------------------------------------------
 Bubble Poimandres _w_header:
   card-mod-theme: Bubble Poimandres
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b7e8ff"
@@ -19020,8 +19009,7 @@ Dubble Poimandres:
 # ------------------------------------------------------------------------------
 Dubble Poimandres _w_header:
   card-mod-theme: Dubble Poimandres
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#91ddff"
@@ -19289,8 +19277,7 @@ Bubble Tokyo Night:
 # ------------------------------------------------------------------------------
 Bubble Tokyo Night _w_header:
   card-mod-theme: Bubble Tokyo Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9fbbf7"
@@ -19558,8 +19545,7 @@ Dubble Tokyo Night:
 # ------------------------------------------------------------------------------
 Dubble Tokyo Night _w_header:
   card-mod-theme: Dubble Tokyo Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7aa3f8"
@@ -19827,8 +19813,7 @@ Bubble Catppuccin Mocha:
 # ------------------------------------------------------------------------------
 Bubble Catppuccin Mocha _w_header:
   card-mod-theme: Bubble Catppuccin Mocha
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#dfcbf7"
@@ -20096,8 +20081,7 @@ Dubble Catppuccin Mocha:
 # ------------------------------------------------------------------------------
 Dubble Catppuccin Mocha _w_header:
   card-mod-theme: Dubble Catppuccin Mocha
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#cca7f8"
@@ -20365,8 +20349,7 @@ Bubble Catppuccin Latte:
 # ------------------------------------------------------------------------------
 Bubble Catppuccin Latte _w_header:
   card-mod-theme: Bubble Catppuccin Latte
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9c5cef"
@@ -20634,8 +20617,7 @@ Dubble Catppuccin Latte:
 # ------------------------------------------------------------------------------
 Dubble Catppuccin Latte _w_header:
   card-mod-theme: Dubble Catppuccin Latte
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8939f2"
@@ -20903,8 +20885,7 @@ Bubble Atom One Light:
 # ------------------------------------------------------------------------------
 Bubble Atom One Light _w_header:
   card-mod-theme: Bubble Atom One Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1d8cbc"
@@ -21172,8 +21153,7 @@ Dubble Atom One Light:
 # ------------------------------------------------------------------------------
 Dubble Atom One Light _w_header:
   card-mod-theme: Dubble Atom One Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#018dc9"
@@ -21441,8 +21421,7 @@ Bubble GitHub Light:
 # ------------------------------------------------------------------------------
 Bubble GitHub Light _w_header:
   card-mod-theme: Bubble GitHub Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#297ada"
@@ -21710,8 +21689,7 @@ Dubble GitHub Light:
 # ------------------------------------------------------------------------------
 Dubble GitHub Light _w_header:
   card-mod-theme: Dubble GitHub Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#096ce1"
@@ -21979,8 +21957,7 @@ Bubble GitHub Dark:
 # ------------------------------------------------------------------------------
 Bubble GitHub Dark _w_header:
   card-mod-theme: Bubble GitHub Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ebaff"
@@ -22248,8 +22225,7 @@ Dubble GitHub Dark:
 # ------------------------------------------------------------------------------
 Dubble GitHub Dark _w_header:
   card-mod-theme: Dubble GitHub Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#58a6ff"
@@ -22517,8 +22493,7 @@ Bubble Solarized Light:
 # ------------------------------------------------------------------------------
 Bubble Solarized Light _w_header:
   card-mod-theme: Bubble Solarized Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#4598d2"
@@ -22786,8 +22761,7 @@ Dubble Solarized Light:
 # ------------------------------------------------------------------------------
 Dubble Solarized Light _w_header:
   card-mod-theme: Dubble Solarized Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#2790db"
@@ -23055,8 +23029,7 @@ Bubble Monokai:
 # ------------------------------------------------------------------------------
 Bubble Monokai _w_header:
   card-mod-theme: Bubble Monokai
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#f94b89"
@@ -23324,8 +23297,7 @@ Dubble Monokai:
 # ------------------------------------------------------------------------------
 Dubble Monokai _w_header:
   card-mod-theme: Dubble Monokai
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fa2672"
@@ -23593,8 +23565,7 @@ Bubble Minimal:
 # ------------------------------------------------------------------------------
 Bubble Minimal _w_header:
   card-mod-theme: Bubble Minimal
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e9677d"
@@ -23862,8 +23833,7 @@ Dubble Minimal:
 # ------------------------------------------------------------------------------
 Dubble Minimal _w_header:
   card-mod-theme: Dubble Minimal
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ed4661"
@@ -24131,8 +24101,7 @@ Bubble Peacock:
 # ------------------------------------------------------------------------------
 Bubble Peacock _w_header:
   card-mod-theme: Bubble Peacock
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#66b5f5"
@@ -24400,8 +24369,7 @@ Dubble Peacock:
 # ------------------------------------------------------------------------------
 Dubble Peacock _w_header:
   card-mod-theme: Dubble Peacock
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#42a6f7"
@@ -24669,8 +24637,7 @@ Bubble Palenight Italic:
 # ------------------------------------------------------------------------------
 Bubble Palenight Italic _w_header:
   card-mod-theme: Bubble Palenight Italic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d4b5ea"
@@ -24938,8 +24905,7 @@ Dubble Palenight Italic:
 # ------------------------------------------------------------------------------
 Dubble Palenight Italic _w_header:
   card-mod-theme: Dubble Palenight Italic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ca94ee"
@@ -25207,8 +25173,7 @@ Bubble OceaNext:
 # ------------------------------------------------------------------------------
 Bubble OceaNext _w_header:
   card-mod-theme: Bubble OceaNext
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84a8cc"
@@ -25476,8 +25441,7 @@ Dubble OceaNext:
 # ------------------------------------------------------------------------------
 Dubble OceaNext _w_header:
   card-mod-theme: Dubble OceaNext
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6ba0d6"
@@ -25745,8 +25709,7 @@ Bubble Darker:
 # ------------------------------------------------------------------------------
 Bubble Darker _w_header:
   card-mod-theme: Bubble Darker
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9ecbc6"
@@ -26014,8 +25977,7 @@ Dubble Darker:
 # ------------------------------------------------------------------------------
 Dubble Darker _w_header:
   card-mod-theme: Dubble Darker
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#86d5ce"
@@ -26283,8 +26245,7 @@ Bubble Twilight:
 # ------------------------------------------------------------------------------
 Bubble Twilight _w_header:
   card-mod-theme: Bubble Twilight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8d96a6"
@@ -26552,8 +26513,7 @@ Dubble Twilight:
 # ------------------------------------------------------------------------------
 Dubble Twilight _w_header:
   card-mod-theme: Dubble Twilight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8195b7"
@@ -26821,8 +26781,7 @@ Bubble Quiet Light:
 # ------------------------------------------------------------------------------
 Bubble Quiet Light _w_header:
   card-mod-theme: Bubble Quiet Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1e86cc"
@@ -27090,8 +27049,7 @@ Dubble Quiet Light:
 # ------------------------------------------------------------------------------
 Dubble Quiet Light _w_header:
   card-mod-theme: Dubble Quiet Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#0080d6"
@@ -27359,8 +27317,7 @@ Bubble Abyss:
 # ------------------------------------------------------------------------------
 Bubble Abyss _w_header:
   card-mod-theme: Bubble Abyss
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#76aad6"
@@ -27628,8 +27585,7 @@ Dubble Abyss:
 # ------------------------------------------------------------------------------
 Dubble Abyss _w_header:
   card-mod-theme: Dubble Abyss
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59a1de"
@@ -27897,8 +27853,7 @@ Bubble Kimbie Dark:
 # ------------------------------------------------------------------------------
 Bubble Kimbie Dark _w_header:
   card-mod-theme: Bubble Kimbie Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8d9b61"
@@ -28166,8 +28121,7 @@ Dubble Kimbie Dark:
 # ------------------------------------------------------------------------------
 Dubble Kimbie Dark _w_header:
   card-mod-theme: Dubble Kimbie Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#99af53"
@@ -28435,8 +28389,7 @@ Bubble Red:
 # ------------------------------------------------------------------------------
 Bubble Red _w_header:
   card-mod-theme: Bubble Red
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff88a8"
@@ -28704,8 +28657,7 @@ Dubble Red:
 # ------------------------------------------------------------------------------
 Dubble Red _w_header:
   card-mod-theme: Dubble Red
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff618c"
@@ -28973,8 +28925,7 @@ Bubble High Contrast:
 # ------------------------------------------------------------------------------
 Bubble High Contrast _w_header:
   card-mod-theme: Bubble High Contrast
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#5da8ff"
@@ -29242,8 +29193,7 @@ Dubble High Contrast:
 # ------------------------------------------------------------------------------
 Dubble High Contrast _w_header:
   card-mod-theme: Dubble High Contrast
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#3793ff"
@@ -29511,8 +29461,7 @@ Bubble Default Dark+:
 # ------------------------------------------------------------------------------
 Bubble Default Dark+ _w_header:
   card-mod-theme: Bubble Default Dark+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#76aad6"
@@ -29780,8 +29729,7 @@ Dubble Default Dark+:
 # ------------------------------------------------------------------------------
 Dubble Default Dark+ _w_header:
   card-mod-theme: Dubble Default Dark+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59a1de"
@@ -30049,8 +29997,7 @@ Bubble Default Light+:
 # ------------------------------------------------------------------------------
 Bubble Default Light+ _w_header:
   card-mod-theme: Bubble Default Light+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1e86cc"
@@ -30318,8 +30265,7 @@ Dubble Default Light+:
 # ------------------------------------------------------------------------------
 Dubble Default Light+ _w_header:
   card-mod-theme: Dubble Default Light+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#0080d6"
@@ -30587,8 +30533,7 @@ Bubble Tomorrow Night:
 # ------------------------------------------------------------------------------
 Bubble Tomorrow Night _w_header:
   card-mod-theme: Bubble Tomorrow Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9dafbe"
@@ -30856,8 +30801,7 @@ Dubble Tomorrow Night:
 # ------------------------------------------------------------------------------
 Dubble Tomorrow Night _w_header:
   card-mod-theme: Dubble Tomorrow Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#89adcb"
@@ -31125,8 +31069,7 @@ Bubble Tomorrow Night Blue:
 # ------------------------------------------------------------------------------
 Bubble Tomorrow Night Blue _w_header:
   card-mod-theme: Bubble Tomorrow Night Blue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fff5d3"
@@ -31394,8 +31337,7 @@ Dubble Tomorrow Night Blue:
 # ------------------------------------------------------------------------------
 Dubble Tomorrow Night Blue _w_header:
   card-mod-theme: Dubble Tomorrow Night Blue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffeead"
@@ -31663,8 +31605,7 @@ Bubble Tomorrow Night Bright:
 # ------------------------------------------------------------------------------
 Bubble Tomorrow Night Bright _w_header:
   card-mod-theme: Bubble Tomorrow Night Bright
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#eaeaea"
@@ -31932,8 +31873,7 @@ Dubble Tomorrow Night Bright:
 # ------------------------------------------------------------------------------
 Dubble Tomorrow Night Bright _w_header:
   card-mod-theme: Dubble Tomorrow Night Bright
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#eeeeee"
@@ -32201,8 +32141,7 @@ Bubble Oceanic Next:
 # ------------------------------------------------------------------------------
 Bubble Oceanic Next _w_header:
   card-mod-theme: Bubble Oceanic Next
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84a8cc"
@@ -32470,8 +32409,7 @@ Dubble Oceanic Next:
 # ------------------------------------------------------------------------------
 Dubble Oceanic Next _w_header:
   card-mod-theme: Dubble Oceanic Next
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6ba0d6"
@@ -32739,8 +32677,7 @@ Bubble Fairy Floss:
 # ------------------------------------------------------------------------------
 Bubble Fairy Floss _w_header:
   card-mod-theme: Bubble Fairy Floss
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e8fff3"
@@ -33008,8 +32945,7 @@ Dubble Fairy Floss:
 # ------------------------------------------------------------------------------
 Dubble Fairy Floss _w_header:
   card-mod-theme: Dubble Fairy Floss
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c2ffdf"
@@ -33277,8 +33213,7 @@ Bubble City Lights:
 # ------------------------------------------------------------------------------
 Bubble City Lights _w_header:
   card-mod-theme: Bubble City Lights
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c4ff"
@@ -33546,8 +33481,7 @@ Dubble City Lights:
 # ------------------------------------------------------------------------------
 Dubble City Lights _w_header:
   card-mod-theme: Dubble City Lights
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82aaff"
@@ -33815,8 +33749,7 @@ Bubble Lucario:
 # ------------------------------------------------------------------------------
 Bubble Lucario _w_header:
   card-mod-theme: Bubble Lucario
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#f8c65e"
@@ -34084,8 +34017,7 @@ Dubble Lucario:
 # ------------------------------------------------------------------------------
 Dubble Lucario _w_header:
   card-mod-theme: Dubble Lucario
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#f9bc39"
@@ -34353,8 +34285,7 @@ Bubble Material Ocean:
 # ------------------------------------------------------------------------------
 Bubble Material Ocean _w_header:
   card-mod-theme: Bubble Material Ocean
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c4ff"
@@ -34622,8 +34553,7 @@ Dubble Material Ocean:
 # ------------------------------------------------------------------------------
 Dubble Material Ocean _w_header:
   card-mod-theme: Dubble Material Ocean
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82aaff"
@@ -34891,8 +34821,7 @@ Bubble Snazzy:
 # ------------------------------------------------------------------------------
 Bubble Snazzy _w_header:
   card-mod-theme: Bubble Snazzy
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff82a9"
@@ -35160,8 +35089,7 @@ Dubble Snazzy:
 # ------------------------------------------------------------------------------
 Dubble Snazzy _w_header:
   card-mod-theme: Dubble Snazzy
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff5c8f"
@@ -35429,8 +35357,7 @@ Bubble Level Up:
 # ------------------------------------------------------------------------------
 Bubble Level Up _w_header:
   card-mod-theme: Bubble Level Up
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9fbbf7"
@@ -35698,8 +35625,7 @@ Dubble Level Up:
 # ------------------------------------------------------------------------------
 Dubble Level Up _w_header:
   card-mod-theme: Dubble Level Up
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7aa3f8"
@@ -35967,8 +35893,7 @@ Bubble Aura:
 # ------------------------------------------------------------------------------
 Bubble Aura _w_header:
   card-mod-theme: Bubble Aura
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffa4e5"
@@ -36236,8 +36161,7 @@ Dubble Aura:
 # ------------------------------------------------------------------------------
 Dubble Aura _w_header:
   card-mod-theme: Dubble Aura
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff7eda"
@@ -36505,8 +36429,7 @@ Bubble Nordic:
 # ------------------------------------------------------------------------------
 Bubble Nordic _w_header:
   card-mod-theme: Bubble Nordic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a7c6d0"
@@ -36774,8 +36697,7 @@ Dubble Nordic:
 # ------------------------------------------------------------------------------
 Dubble Nordic _w_header:
   card-mod-theme: Dubble Nordic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8ec8d9"
@@ -37043,8 +36965,7 @@ Bubble Blue:
 # ------------------------------------------------------------------------------
 Bubble Blue _w_header:
   card-mod-theme: Bubble Blue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#51a3cc"
@@ -37312,8 +37233,7 @@ Dubble Blue:
 # ------------------------------------------------------------------------------
 Dubble Blue _w_header:
   card-mod-theme: Dubble Blue
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#35a0d6"
@@ -37581,8 +37501,7 @@ Bubble Kimbie Light:
 # ------------------------------------------------------------------------------
 Bubble Kimbie Light _w_header:
   card-mod-theme: Bubble Kimbie Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#748055"
@@ -37850,8 +37769,7 @@ Dubble Kimbie Light:
 # ------------------------------------------------------------------------------
 Dubble Kimbie Light _w_header:
   card-mod-theme: Dubble Kimbie Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#85994f"
@@ -38119,8 +38037,7 @@ Bubble Espresso:
 # ------------------------------------------------------------------------------
 Bubble Espresso _w_header:
   card-mod-theme: Bubble Espresso
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9c7755"
@@ -38388,8 +38305,7 @@ Dubble Espresso:
 # ------------------------------------------------------------------------------
 Dubble Espresso _w_header:
   card-mod-theme: Dubble Espresso
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#af7845"
@@ -38657,8 +38573,7 @@ Bubble Flatland:
 # ------------------------------------------------------------------------------
 Bubble Flatland _w_header:
   card-mod-theme: Bubble Flatland
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b7bd84"
@@ -38926,8 +38841,7 @@ Dubble Flatland:
 # ------------------------------------------------------------------------------
 Dubble Flatland _w_header:
   card-mod-theme: Dubble Flatland
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c1ca6f"
@@ -39195,8 +39109,7 @@ Bubble 3024 Night:
 # ------------------------------------------------------------------------------
 Bubble 3024 Night _w_header:
   card-mod-theme: Bubble 3024 Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#23aae4"
@@ -39464,8 +39377,7 @@ Dubble 3024 Night:
 # ------------------------------------------------------------------------------
 Dubble 3024 Night _w_header:
   card-mod-theme: Dubble 3024 Night
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#01a3e9"
@@ -39733,8 +39645,7 @@ Bubble Adventure Time:
 # ------------------------------------------------------------------------------
 Bubble Adventure Time _w_header:
   card-mod-theme: Bubble Adventure Time
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffad8f"
@@ -40002,8 +39913,7 @@ Dubble Adventure Time:
 # ------------------------------------------------------------------------------
 Dubble Adventure Time _w_header:
   card-mod-theme: Dubble Adventure Time
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9269"
@@ -40271,8 +40181,7 @@ Bubble Afterglow:
 # ------------------------------------------------------------------------------
 Bubble Afterglow _w_header:
   card-mod-theme: Bubble Afterglow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e7cc69"
@@ -40540,8 +40449,7 @@ Dubble Afterglow:
 # ------------------------------------------------------------------------------
 Dubble Afterglow _w_header:
   card-mod-theme: Dubble Afterglow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ebc948"
@@ -40809,8 +40717,7 @@ Bubble Alien Blood:
 # ------------------------------------------------------------------------------
 Bubble Alien Blood _w_header:
   card-mod-theme: Bubble Alien Blood
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#26ff26"
@@ -41078,8 +40985,7 @@ Dubble Alien Blood:
 # ------------------------------------------------------------------------------
 Dubble Alien Blood _w_header:
   card-mod-theme: Dubble Alien Blood
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00ff00"
@@ -41347,8 +41253,7 @@ Bubble Ayu Dark:
 # ------------------------------------------------------------------------------
 Bubble Ayu Dark _w_header:
   card-mod-theme: Bubble Ayu Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffad66"
@@ -41616,8 +41521,7 @@ Dubble Ayu Dark:
 # ------------------------------------------------------------------------------
 Dubble Ayu Dark _w_header:
   card-mod-theme: Dubble Ayu Dark
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9940"
@@ -41885,8 +41789,7 @@ Bubble Ayu Light:
 # ------------------------------------------------------------------------------
 Bubble Ayu Light _w_header:
   card-mod-theme: Bubble Ayu Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffad66"
@@ -42154,8 +42057,7 @@ Dubble Ayu Light:
 # ------------------------------------------------------------------------------
 Dubble Ayu Light _w_header:
   card-mod-theme: Dubble Ayu Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9940"
@@ -42423,8 +42325,7 @@ Bubble B3:
 # ------------------------------------------------------------------------------
 Bubble B3 _w_header:
   card-mod-theme: Bubble B3
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c9c9c9"
@@ -42692,8 +42593,7 @@ Dubble B3:
 # ------------------------------------------------------------------------------
 Dubble B3 _w_header:
   card-mod-theme: Dubble B3
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d3d3d3"
@@ -42961,8 +42861,7 @@ Bubble Base16:
 # ------------------------------------------------------------------------------
 Bubble Base16 _w_header:
   card-mod-theme: Bubble Base16
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#85a6b5"
@@ -43230,8 +43129,7 @@ Dubble Base16:
 # ------------------------------------------------------------------------------
 Dubble Base16 _w_header:
   card-mod-theme: Dubble Base16
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#72acc3"
@@ -43499,8 +43397,7 @@ Bubble Birds of Paradise:
 # ------------------------------------------------------------------------------
 Bubble Birds of Paradise _w_header:
   card-mod-theme: Bubble Birds of Paradise
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#97a972"
@@ -43768,8 +43665,7 @@ Dubble Birds of Paradise:
 # ------------------------------------------------------------------------------
 Dubble Birds of Paradise _w_header:
   card-mod-theme: Dubble Birds of Paradise
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9eba62"
@@ -44037,8 +43933,7 @@ Bubble Blackboard:
 # ------------------------------------------------------------------------------
 Bubble Blackboard _w_header:
   card-mod-theme: Bubble Blackboard
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fbe352"
@@ -44306,8 +44201,7 @@ Dubble Blackboard:
 # ------------------------------------------------------------------------------
 Dubble Blackboard _w_header:
   card-mod-theme: Dubble Blackboard
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fbde2d"
@@ -44575,8 +44469,7 @@ Bubble Blueberry:
 # ------------------------------------------------------------------------------
 Bubble Blueberry _w_header:
   card-mod-theme: Bubble Blueberry
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c4ff"
@@ -44844,8 +44737,7 @@ Dubble Blueberry:
 # ------------------------------------------------------------------------------
 Dubble Blueberry _w_header:
   card-mod-theme: Dubble Blueberry
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82aaff"
@@ -45113,8 +45005,7 @@ Bubble Brackets Light:
 # ------------------------------------------------------------------------------
 Bubble Brackets Light _w_header:
   card-mod-theme: Bubble Brackets Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1e86cc"
@@ -45382,8 +45273,7 @@ Dubble Brackets Light:
 # ------------------------------------------------------------------------------
 Dubble Brackets Light _w_header:
   card-mod-theme: Dubble Brackets Light
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#0080d6"
@@ -45651,8 +45541,7 @@ Bubble Brogrammer:
 # ------------------------------------------------------------------------------
 Bubble Brogrammer _w_header:
   card-mod-theme: Bubble Brogrammer
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e5e5e5"
@@ -45920,8 +45809,7 @@ Dubble Brogrammer:
 # ------------------------------------------------------------------------------
 Dubble Brogrammer _w_header:
   card-mod-theme: Dubble Brogrammer
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#dadfea"
@@ -46189,8 +46077,7 @@ Bubble Chalk:
 # ------------------------------------------------------------------------------
 Bubble Chalk _w_header:
   card-mod-theme: Bubble Chalk
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b7ccb7"
@@ -46458,8 +46345,7 @@ Dubble Chalk:
 # ------------------------------------------------------------------------------
 Dubble Chalk _w_header:
   card-mod-theme: Dubble Chalk
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a0d6a0"
@@ -46727,8 +46613,7 @@ Bubble Chester:
 # ------------------------------------------------------------------------------
 Bubble Chester _w_header:
   card-mod-theme: Bubble Chester
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d9e7f5"
@@ -46996,8 +46881,7 @@ Dubble Chester:
 # ------------------------------------------------------------------------------
 Dubble Chester _w_header:
   card-mod-theme: Dubble Chester
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b6d6f7"
@@ -47265,8 +47149,7 @@ Bubble Cobalt:
 # ------------------------------------------------------------------------------
 Bubble Cobalt _w_header:
   card-mod-theme: Bubble Cobalt
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffab26"
@@ -47534,8 +47417,7 @@ Dubble Cobalt:
 # ------------------------------------------------------------------------------
 Dubble Cobalt _w_header:
   card-mod-theme: Dubble Cobalt
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9d00"
@@ -47803,8 +47685,7 @@ Bubble Cool Glow:
 # ------------------------------------------------------------------------------
 Bubble Cool Glow _w_header:
   card-mod-theme: Bubble Cool Glow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#aecbfa"
@@ -48072,8 +47953,7 @@ Dubble Cool Glow:
 # ------------------------------------------------------------------------------
 Dubble Cool Glow _w_header:
   card-mod-theme: Dubble Cool Glow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#89b4fb"
@@ -48341,8 +48221,7 @@ Bubble Cream:
 # ------------------------------------------------------------------------------
 Bubble Cream _w_header:
   card-mod-theme: Bubble Cream
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ab9f8b"
@@ -48610,8 +48489,7 @@ Dubble Cream:
 # ------------------------------------------------------------------------------
 Dubble Cream _w_header:
   card-mod-theme: Dubble Cream
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#bba47d"
@@ -48879,8 +48757,7 @@ Bubble Cybertron:
 # ------------------------------------------------------------------------------
 Bubble Cybertron _w_header:
   card-mod-theme: Bubble Cybertron
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ebaff"
@@ -49148,8 +49025,7 @@ Dubble Cybertron:
 # ------------------------------------------------------------------------------
 Dubble Cybertron _w_header:
   card-mod-theme: Dubble Cybertron
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#58a6ff"
@@ -49417,8 +49293,7 @@ Bubble Cyberpunk Edge:
 # ------------------------------------------------------------------------------
 Bubble Cyberpunk Edge _w_header:
   card-mod-theme: Bubble Cyberpunk Edge
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff5087"
@@ -49686,8 +49561,7 @@ Dubble Cyberpunk Edge:
 # ------------------------------------------------------------------------------
 Dubble Cyberpunk Edge _w_header:
   card-mod-theme: Dubble Cyberpunk Edge
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff296c"
@@ -49955,8 +49829,7 @@ Bubble Dark Modern:
 # ------------------------------------------------------------------------------
 Bubble Dark Modern _w_header:
   card-mod-theme: Bubble Dark Modern
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#76aad6"
@@ -50224,8 +50097,7 @@ Dubble Dark Modern:
 # ------------------------------------------------------------------------------
 Dubble Dark Modern _w_header:
   card-mod-theme: Dubble Dark Modern
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59a1de"
@@ -50493,8 +50365,7 @@ Bubble Dark+:
 # ------------------------------------------------------------------------------
 Bubble Dark+ _w_header:
   card-mod-theme: Bubble Dark+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#76aad6"
@@ -50762,8 +50633,7 @@ Dubble Dark+:
 # ------------------------------------------------------------------------------
 Dubble Dark+ _w_header:
   card-mod-theme: Dubble Dark+
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59a1de"
@@ -51031,8 +50901,7 @@ Bubble Doki:
 # ------------------------------------------------------------------------------
 Bubble Doki _w_header:
   card-mod-theme: Bubble Doki
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9fd6"
@@ -51300,8 +51169,7 @@ Dubble Doki:
 # ------------------------------------------------------------------------------
 Dubble Doki _w_header:
   card-mod-theme: Dubble Doki
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff79c6"
@@ -51569,8 +51437,7 @@ Bubble DotGov:
 # ------------------------------------------------------------------------------
 Bubble DotGov _w_header:
   card-mod-theme: Bubble DotGov
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ebaff"
@@ -51838,8 +51705,7 @@ Dubble DotGov:
 # ------------------------------------------------------------------------------
 Dubble DotGov _w_header:
   card-mod-theme: Dubble DotGov
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#58a6ff"
@@ -52107,8 +51973,7 @@ Bubble Earthsong:
 # ------------------------------------------------------------------------------
 Bubble Earthsong _w_header:
   card-mod-theme: Bubble Earthsong
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#959ba3"
@@ -52376,8 +52241,7 @@ Dubble Earthsong:
 # ------------------------------------------------------------------------------
 Dubble Earthsong _w_header:
   card-mod-theme: Dubble Earthsong
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8b9fb5"
@@ -52645,8 +52509,7 @@ Bubble Eiffel:
 # ------------------------------------------------------------------------------
 Bubble Eiffel _w_header:
   card-mod-theme: Bubble Eiffel
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff8259"
@@ -52914,8 +52777,7 @@ Dubble Eiffel:
 # ------------------------------------------------------------------------------
 Dubble Eiffel _w_header:
   card-mod-theme: Dubble Eiffel
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff6632"
@@ -53183,8 +53045,7 @@ Bubble Espresso Soda:
 # ------------------------------------------------------------------------------
 Bubble Espresso Soda _w_header:
   card-mod-theme: Bubble Espresso Soda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9c7755"
@@ -53452,8 +53313,7 @@ Dubble Espresso Soda:
 # ------------------------------------------------------------------------------
 Dubble Espresso Soda _w_header:
   card-mod-theme: Dubble Espresso Soda
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#af7845"
@@ -53721,8 +53581,7 @@ Bubble Free:
 # ------------------------------------------------------------------------------
 Bubble Free _w_header:
   card-mod-theme: Bubble Free
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6cc9b6"
@@ -53990,8 +53849,7 @@ Dubble Free:
 # ------------------------------------------------------------------------------
 Dubble Free _w_header:
   card-mod-theme: Dubble Free
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#52d3b9"
@@ -54259,8 +54117,7 @@ Bubble GitHub Plus:
 # ------------------------------------------------------------------------------
 Bubble GitHub Plus _w_header:
   card-mod-theme: Bubble GitHub Plus
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ebaff"
@@ -54528,8 +54385,7 @@ Dubble GitHub Plus:
 # ------------------------------------------------------------------------------
 Dubble GitHub Plus _w_header:
   card-mod-theme: Dubble GitHub Plus
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#58a6ff"
@@ -54797,8 +54653,7 @@ Bubble Glitter:
 # ------------------------------------------------------------------------------
 Bubble Glitter _w_header:
   card-mod-theme: Bubble Glitter
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#26deff"
@@ -55066,8 +54921,7 @@ Dubble Glitter:
 # ------------------------------------------------------------------------------
 Dubble Glitter _w_header:
   card-mod-theme: Dubble Glitter
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00d8ff"
@@ -55335,8 +55189,7 @@ Bubble Gloom:
 # ------------------------------------------------------------------------------
 Bubble Gloom _w_header:
   card-mod-theme: Bubble Gloom
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d2b8f9"
@@ -55604,8 +55457,7 @@ Dubble Gloom:
 # ------------------------------------------------------------------------------
 Dubble Gloom _w_header:
   card-mod-theme: Dubble Gloom
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#bd93fa"
@@ -55873,8 +55725,7 @@ Bubble Gradient:
 # ------------------------------------------------------------------------------
 Bubble Gradient _w_header:
   card-mod-theme: Bubble Gradient
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a3edfa"
@@ -56142,8 +55993,7 @@ Dubble Gradient:
 # ------------------------------------------------------------------------------
 Dubble Gradient _w_header:
   card-mod-theme: Dubble Gradient
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#7ee8fb"
@@ -56411,8 +56261,7 @@ Bubble Gray Matter:
 # ------------------------------------------------------------------------------
 Bubble Gray Matter _w_header:
   card-mod-theme: Bubble Gray Matter
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9fc2ff"
@@ -56680,8 +56529,7 @@ Dubble Gray Matter:
 # ------------------------------------------------------------------------------
 Dubble Gray Matter _w_header:
   card-mod-theme: Dubble Gray Matter
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#79aaff"
@@ -56949,8 +56797,7 @@ Bubble Green:
 # ------------------------------------------------------------------------------
 Bubble Green _w_header:
   card-mod-theme: Bubble Green
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#59ff59"
@@ -57218,8 +57065,7 @@ Dubble Green:
 # ------------------------------------------------------------------------------
 Dubble Green _w_header:
   card-mod-theme: Dubble Green
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#32ff32"
@@ -57487,8 +57333,7 @@ Bubble Gruvbox Dark Hard:
 # ------------------------------------------------------------------------------
 Bubble Gruvbox Dark Hard _w_header:
   card-mod-theme: Bubble Gruvbox Dark Hard
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fac854"
@@ -57756,8 +57601,7 @@ Dubble Gruvbox Dark Hard:
 # ------------------------------------------------------------------------------
 Dubble Gruvbox Dark Hard _w_header:
   card-mod-theme: Dubble Gruvbox Dark Hard
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fbbd2f"
@@ -58025,8 +57869,7 @@ Bubble Gruvbox Dark Soft:
 # ------------------------------------------------------------------------------
 Bubble Gruvbox Dark Soft _w_header:
   card-mod-theme: Bubble Gruvbox Dark Soft
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fac854"
@@ -58294,8 +58137,7 @@ Dubble Gruvbox Dark Soft:
 # ------------------------------------------------------------------------------
 Dubble Gruvbox Dark Soft _w_header:
   card-mod-theme: Dubble Gruvbox Dark Soft
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#fbbd2f"
@@ -58563,8 +58405,7 @@ Bubble Iceberg:
 # ------------------------------------------------------------------------------
 Bubble Iceberg _w_header:
   card-mod-theme: Bubble Iceberg
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a1b1c6"
@@ -58832,8 +58673,7 @@ Dubble Iceberg:
 # ------------------------------------------------------------------------------
 Dubble Iceberg _w_header:
   card-mod-theme: Dubble Iceberg
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8ba9d1"
@@ -59101,8 +58941,7 @@ Bubble JetBrains Darcula:
 # ------------------------------------------------------------------------------
 Bubble JetBrains Darcula _w_header:
   card-mod-theme: Bubble JetBrains Darcula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84a3bb"
@@ -59370,8 +59209,7 @@ Dubble JetBrains Darcula:
 # ------------------------------------------------------------------------------
 Dubble JetBrains Darcula _w_header:
   card-mod-theme: Dubble JetBrains Darcula
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6fa1c8"
@@ -59639,8 +59477,7 @@ Bubble LaserWave:
 # ------------------------------------------------------------------------------
 Bubble LaserWave _w_header:
   card-mod-theme: Bubble LaserWave
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#eb87c6"
@@ -59908,8 +59745,7 @@ Dubble LaserWave:
 # ------------------------------------------------------------------------------
 Dubble LaserWave _w_header:
   card-mod-theme: Dubble LaserWave
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ef65bc"
@@ -60177,8 +60013,7 @@ Bubble Light Modern:
 # ------------------------------------------------------------------------------
 Bubble Light Modern _w_header:
   card-mod-theme: Bubble Light Modern
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1e86cc"
@@ -60446,8 +60281,7 @@ Dubble Light Modern:
 # ------------------------------------------------------------------------------
 Dubble Light Modern _w_header:
   card-mod-theme: Dubble Light Modern
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#0080d6"
@@ -60715,8 +60549,7 @@ Bubble Luna:
 # ------------------------------------------------------------------------------
 Bubble Luna _w_header:
   card-mod-theme: Bubble Luna
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffc47a"
@@ -60984,8 +60817,7 @@ Dubble Luna:
 # ------------------------------------------------------------------------------
 Dubble Luna _w_header:
   card-mod-theme: Dubble Luna
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffb453"
@@ -61253,8 +61085,7 @@ Bubble Material Theme:
 # ------------------------------------------------------------------------------
 Bubble Material Theme _w_header:
   card-mod-theme: Bubble Material Theme
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9ecbc6"
@@ -61522,8 +61353,7 @@ Dubble Material Theme:
 # ------------------------------------------------------------------------------
 Dubble Material Theme _w_header:
   card-mod-theme: Dubble Material Theme
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#86d5ce"
@@ -61791,8 +61621,7 @@ Bubble Mellow:
 # ------------------------------------------------------------------------------
 Bubble Mellow _w_header:
   card-mod-theme: Bubble Mellow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c2e9fe"
@@ -62060,8 +61889,7 @@ Dubble Mellow:
 # ------------------------------------------------------------------------------
 Dubble Mellow _w_header:
   card-mod-theme: Dubble Mellow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9cdcfe"
@@ -62329,8 +62157,7 @@ Bubble Mint:
 # ------------------------------------------------------------------------------
 Bubble Mint _w_header:
   card-mod-theme: Bubble Mint
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#b8d8c1"
@@ -62598,8 +62425,7 @@ Dubble Mint:
 # ------------------------------------------------------------------------------
 Dubble Mint _w_header:
   card-mod-theme: Dubble Mint
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9ddfb0"
@@ -62867,8 +62693,7 @@ Bubble Moonlight:
 # ------------------------------------------------------------------------------
 Bubble Moonlight _w_header:
   card-mod-theme: Bubble Moonlight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c4ff"
@@ -63136,8 +62961,7 @@ Dubble Moonlight:
 # ------------------------------------------------------------------------------
 Dubble Moonlight _w_header:
   card-mod-theme: Dubble Moonlight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#82aaff"
@@ -63405,8 +63229,7 @@ Bubble Night Rider:
 # ------------------------------------------------------------------------------
 Bubble Night Rider _w_header:
   card-mod-theme: Bubble Night Rider
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff875b"
@@ -63674,8 +63497,7 @@ Dubble Night Rider:
 # ------------------------------------------------------------------------------
 Dubble Night Rider _w_header:
   card-mod-theme: Dubble Night Rider
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff6b35"
@@ -63943,8 +63765,7 @@ Bubble Nostromo:
 # ------------------------------------------------------------------------------
 Bubble Nostromo _w_header:
   card-mod-theme: Bubble Nostromo
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9cc6c0"
@@ -64212,8 +64033,7 @@ Dubble Nostromo:
 # ------------------------------------------------------------------------------
 Dubble Nostromo _w_header:
   card-mod-theme: Dubble Nostromo
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#86d1c6"
@@ -64481,8 +64301,7 @@ Bubble Obsidian:
 # ------------------------------------------------------------------------------
 Bubble Obsidian _w_header:
   card-mod-theme: Bubble Obsidian
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a2c780"
@@ -64750,8 +64569,7 @@ Dubble Obsidian:
 # ------------------------------------------------------------------------------
 Dubble Obsidian _w_header:
   card-mod-theme: Dubble Obsidian
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9bd268"
@@ -65019,8 +64837,7 @@ Bubble Oceanic:
 # ------------------------------------------------------------------------------
 Bubble Oceanic _w_header:
   card-mod-theme: Bubble Oceanic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#84a8cc"
@@ -65288,8 +65105,7 @@ Dubble Oceanic:
 # ------------------------------------------------------------------------------
 Dubble Oceanic _w_header:
   card-mod-theme: Dubble Oceanic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#6ba0d6"
@@ -65557,8 +65373,7 @@ Bubble Pastel:
 # ------------------------------------------------------------------------------
 Bubble Pastel _w_header:
   card-mod-theme: Bubble Pastel
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffca92"
@@ -65826,8 +65641,7 @@ Dubble Pastel:
 # ------------------------------------------------------------------------------
 Dubble Pastel _w_header:
   card-mod-theme: Dubble Pastel
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffb86c"
@@ -66095,8 +65909,7 @@ Bubble Plastic:
 # ------------------------------------------------------------------------------
 Bubble Plastic _w_header:
   card-mod-theme: Bubble Plastic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1fd4b0"
@@ -66364,8 +66177,7 @@ Dubble Plastic:
 # ------------------------------------------------------------------------------
 Dubble Plastic _w_header:
   card-mod-theme: Dubble Plastic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00dcb0"
@@ -66633,8 +66445,7 @@ Bubble Plastic (Inverted):
 # ------------------------------------------------------------------------------
 Bubble Plastic (Inverted) _w_header:
   card-mod-theme: Bubble Plastic (Inverted)
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#1bb899"
@@ -66902,8 +66713,7 @@ Dubble Plastic (Inverted):
 # ------------------------------------------------------------------------------
 Dubble Plastic (Inverted) _w_header:
   card-mod-theme: Dubble Plastic (Inverted)
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00c69f"
@@ -67171,8 +66981,7 @@ Bubble Polar:
 # ------------------------------------------------------------------------------
 Bubble Polar _w_header:
   card-mod-theme: Bubble Polar
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9dafc1"
@@ -67440,8 +67249,7 @@ Dubble Polar:
 # ------------------------------------------------------------------------------
 Dubble Polar _w_header:
   card-mod-theme: Dubble Polar
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#89abcd"
@@ -67709,8 +67517,7 @@ Bubble Red Sands:
 # ------------------------------------------------------------------------------
 Bubble Red Sands _w_header:
   card-mod-theme: Bubble Red Sands
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff887b"
@@ -67978,8 +67785,7 @@ Dubble Red Sands:
 # ------------------------------------------------------------------------------
 Dubble Red Sands _w_header:
   card-mod-theme: Dubble Red Sands
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff6654"
@@ -68247,8 +68053,7 @@ Bubble Retro:
 # ------------------------------------------------------------------------------
 Bubble Retro _w_header:
   card-mod-theme: Bubble Retro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9bc6ab"
@@ -68516,8 +68321,7 @@ Dubble Retro:
 # ------------------------------------------------------------------------------
 Dubble Retro _w_header:
   card-mod-theme: Dubble Retro
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#85d1a1"
@@ -68785,8 +68589,7 @@ Bubble Rouge:
 # ------------------------------------------------------------------------------
 Bubble Rouge _w_header:
   card-mod-theme: Bubble Rouge
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e08d93"
@@ -69054,8 +68857,7 @@ Dubble Rouge:
 # ------------------------------------------------------------------------------
 Dubble Rouge _w_header:
   card-mod-theme: Dubble Rouge
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#e66e78"
@@ -69323,8 +69125,7 @@ Bubble Selenitic:
 # ------------------------------------------------------------------------------
 Bubble Selenitic _w_header:
   card-mod-theme: Bubble Selenitic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#af7979"
@@ -69592,8 +69393,7 @@ Dubble Selenitic:
 # ------------------------------------------------------------------------------
 Dubble Selenitic _w_header:
   card-mod-theme: Dubble Selenitic
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#bf6767"
@@ -69861,8 +69661,7 @@ Bubble Slime:
 # ------------------------------------------------------------------------------
 Bubble Slime _w_header:
   card-mod-theme: Bubble Slime
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c396"
@@ -70130,8 +69929,7 @@ Dubble Slime:
 # ------------------------------------------------------------------------------
 Dubble Slime _w_header:
   card-mod-theme: Dubble Slime
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a1cf80"
@@ -70399,8 +70197,7 @@ Bubble Soft:
 # ------------------------------------------------------------------------------
 Bubble Soft _w_header:
   card-mod-theme: Bubble Soft
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#c2e9fe"
@@ -70668,8 +70465,7 @@ Dubble Soft:
 # ------------------------------------------------------------------------------
 Dubble Soft _w_header:
   card-mod-theme: Dubble Soft
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9cdcfe"
@@ -70937,8 +70733,7 @@ Bubble Sublime:
 # ------------------------------------------------------------------------------
 Bubble Sublime _w_header:
   card-mod-theme: Bubble Sublime
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffd326"
@@ -71206,8 +71001,7 @@ Dubble Sublime:
 # ------------------------------------------------------------------------------
 Dubble Sublime _w_header:
   card-mod-theme: Dubble Sublime
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffcc00"
@@ -71475,8 +71269,7 @@ Bubble Sundial:
 # ------------------------------------------------------------------------------
 Bubble Sundial _w_header:
   card-mod-theme: Bubble Sundial
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffca92"
@@ -71744,8 +71537,7 @@ Dubble Sundial:
 # ------------------------------------------------------------------------------
 Dubble Sundial _w_header:
   card-mod-theme: Dubble Sundial
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffb86c"
@@ -72013,8 +71805,7 @@ Bubble Terra:
 # ------------------------------------------------------------------------------
 Bubble Terra _w_header:
   card-mod-theme: Bubble Terra
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a8c396"
@@ -72282,8 +72073,7 @@ Dubble Terra:
 # ------------------------------------------------------------------------------
 Dubble Terra _w_header:
   card-mod-theme: Dubble Terra
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#a1cf80"
@@ -72551,8 +72341,7 @@ Bubble Tin:
 # ------------------------------------------------------------------------------
 Bubble Tin _w_header:
   card-mod-theme: Bubble Tin
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9ecbc6"
@@ -72820,8 +72609,7 @@ Dubble Tin:
 # ------------------------------------------------------------------------------
 Dubble Tin _w_header:
   card-mod-theme: Dubble Tin
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#86d5ce"
@@ -73089,8 +72877,7 @@ Bubble Tron:
 # ------------------------------------------------------------------------------
 Bubble Tron _w_header:
   card-mod-theme: Bubble Tron
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#26ffff"
@@ -73358,8 +73145,7 @@ Dubble Tron:
 # ------------------------------------------------------------------------------
 Dubble Tron _w_header:
   card-mod-theme: Dubble Tron
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#00ffff"
@@ -73627,8 +73413,7 @@ Bubble Twilight:
 # ------------------------------------------------------------------------------
 Bubble Twilight _w_header:
   card-mod-theme: Bubble Twilight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8d96a6"
@@ -73896,8 +73681,7 @@ Dubble Twilight:
 # ------------------------------------------------------------------------------
 Dubble Twilight _w_header:
   card-mod-theme: Dubble Twilight
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#8195b7"
@@ -74165,8 +73949,7 @@ Bubble Universe:
 # ------------------------------------------------------------------------------
 Bubble Universe _w_header:
   card-mod-theme: Bubble Universe
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#9fd1ff"
@@ -74434,8 +74217,7 @@ Dubble Universe:
 # ------------------------------------------------------------------------------
 Dubble Universe _w_header:
   card-mod-theme: Dubble Universe
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#79bfff"
@@ -74703,8 +74485,7 @@ Bubble Vapor:
 # ------------------------------------------------------------------------------
 Bubble Vapor _w_header:
   card-mod-theme: Bubble Vapor
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9fd6"
@@ -74972,8 +74753,7 @@ Dubble Vapor:
 # ------------------------------------------------------------------------------
 Dubble Vapor _w_header:
   card-mod-theme: Dubble Vapor
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff79c6"
@@ -75241,8 +75021,7 @@ Bubble Warm:
 # ------------------------------------------------------------------------------
 Bubble Warm _w_header:
   card-mod-theme: Bubble Warm
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d7c49d"
@@ -75510,8 +75289,7 @@ Dubble Warm:
 # ------------------------------------------------------------------------------
 Dubble Warm _w_header:
   card-mod-theme: Dubble Warm
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#dfc081"
@@ -75779,8 +75557,7 @@ Bubble Wombat:
 # ------------------------------------------------------------------------------
 Bubble Wombat _w_header:
   card-mod-theme: Bubble Wombat
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#cacaca"
@@ -76048,8 +75825,7 @@ Dubble Wombat:
 # ------------------------------------------------------------------------------
 Dubble Wombat _w_header:
   card-mod-theme: Dubble Wombat
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#d4d4d4"
@@ -76317,8 +76093,7 @@ Bubble Xcode:
 # ------------------------------------------------------------------------------
 Bubble Xcode _w_header:
   card-mod-theme: Bubble Xcode
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff9fd6"
@@ -76586,8 +76361,7 @@ Dubble Xcode:
 # ------------------------------------------------------------------------------
 Dubble Xcode _w_header:
   card-mod-theme: Dubble Xcode
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ff79c6"
@@ -76855,8 +76629,7 @@ Bubble Yellow:
 # ------------------------------------------------------------------------------
 Bubble Yellow _w_header:
   card-mod-theme: Bubble Yellow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffff26"
@@ -77124,8 +76897,7 @@ Dubble Yellow:
 # ------------------------------------------------------------------------------
 Dubble Yellow _w_header:
   card-mod-theme: Dubble Yellow
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#ffff00"
@@ -77393,8 +77165,7 @@ Bubble Zenburn:
 # ------------------------------------------------------------------------------
 Bubble Zenburn _w_header:
   card-mod-theme: Bubble Zenburn
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#abd1d3"
@@ -77656,10 +77427,9 @@ Dubble Zenburn:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light
-      Dubble Zenburn _w_header:
+Dubble Zenburn _w_header:
   card-mod-theme: Dubble Zenburn
-  <<: *bubble_shared
-  <<: *bubble_w_header_mod
+  <<: *bubble_shared_header
   modes:
     dark:
       token-accent: "#91d8db"
@@ -77742,7 +77512,7 @@ Dubble Zenburn:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light
-      Dubble Zenburn _w_viewbar:
+Dubble Zenburn _w_viewbar:
   card-mod-theme: Dubble Zenburn
   <<: *bubble_shared
   <<: *bubble_w_viewbar_mod
@@ -77828,4 +77598,3 @@ Dubble Zenburn:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light
-      
