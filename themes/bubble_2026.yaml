@@ -103,6 +103,7 @@ x-bubble-w-header-mod: &bubble_w_header_mod
   card-mod-root-yaml: |
     .: |
       @media only screen and (max-width: 768px) {
+          .header { display: block !important; opacity: 1 !important; }
           #view { padding-top: 0 !important; margin-top: 0 !important; height: calc(100vh - env(safe-area-inset-top)) !important; }
       }
 
@@ -187,6 +188,8 @@ x-bubble-w-viewbar-mod: &bubble_w_viewbar_mod
         padding-top: 0px !important;
       }
       .header {
+        display: block !important;
+        opacity: 1 !important;
         top: auto !important;
         bottom: 0;
         transform: translate3d(0px, 0px, 0px) !important;
