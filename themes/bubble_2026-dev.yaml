@@ -319,11 +319,16 @@ x-bubble-colors-dark: &bubble_colors_dark
   mush-rgb-black: var(--rgb-black-color)
   mush-rgb-disabled: var(--rgb-disabled-color)
 
+# Light mode base (no token-rgb palette – for themes with custom palette)
+x-bubble-colors-light-base: &bubble_colors_light_base
+  <<: *bubble_colors_dark
+  bubble-border: "1.8px solid var(--divider-color, rgba(31, 31, 31, 1))"
+  dummy_entry: "none"
+
 # Light mode anchor (inherits structure, overrides border + light-appropriate RGB palette)
 # HA default light-mode RGB (color.globals.ts) – named palette for light backgrounds
 x-bubble-colors-light: &bubble_colors_light
-  <<: *bubble_colors_dark
-  bubble-border: "1.8px solid var(--divider-color, rgba(31, 31, 31, 1))"
+  <<: *bubble_colors_light_base
   # Light-appropriate token-rgb-* (HA defaults for light mode; semantic green/yellow/red/blue per theme)
   token-rgb-purple: 146, 107, 199
   token-rgb-pink: 233, 30, 99
@@ -343,7 +348,6 @@ x-bubble-colors-light: &bubble_colors_light
   token-rgb-deep-orange: 255, 111, 34
   token-rgb-brown: 121, 85, 72
   token-rgb-grey: 158, 158, 158
-  dummy_entry: "none"
 
 # ==============================================================================
 # THEME: BUBBLE 2026
@@ -627,7 +631,7 @@ Bubble IDKFA Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 
 # --- Bubble Dubble Header mod ---
@@ -2029,7 +2033,7 @@ Dubble Dracula Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Nord
@@ -2112,7 +2116,7 @@ Dubble Nord Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble One Dark Pro
@@ -2195,7 +2199,7 @@ Dubble One Dark Pro Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble GitHub Dimmed
@@ -2278,7 +2282,7 @@ Dubble GitHub Dimmed Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tokyo Night Storm
@@ -2361,7 +2365,7 @@ Dubble Tokyo Night Storm Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Macchiato
@@ -2444,7 +2448,7 @@ Dubble Catppuccin Macchiato Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Ayu Mirage
@@ -2527,7 +2531,7 @@ Dubble Ayu Mirage Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Palenight
@@ -2610,7 +2614,7 @@ Dubble Palenight Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Solarized Dark
@@ -2693,7 +2697,7 @@ Dubble Solarized Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox
@@ -2776,7 +2780,7 @@ Bubble Gruvbox Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox
@@ -2859,7 +2863,7 @@ Dubble Gruvbox Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Kanagawa
@@ -2942,7 +2946,7 @@ Dubble Kanagawa Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Everforest
@@ -3025,7 +3029,7 @@ Dubble Everforest Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Rose Pine
@@ -3108,7 +3112,7 @@ Dubble Rose Pine Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Night Owl
@@ -3191,7 +3195,7 @@ Dubble Night Owl Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Monokai Pro
@@ -3274,7 +3278,7 @@ Dubble Monokai Pro Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Horizon
@@ -3357,7 +3361,7 @@ Dubble Horizon Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cyberpunk
@@ -3440,7 +3444,7 @@ Dubble Cyberpunk Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Latte
@@ -3523,7 +3527,7 @@ Dubble Latte Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Matrix
@@ -3606,7 +3610,7 @@ Dubble Matrix Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Shades of Purple
@@ -3689,7 +3693,7 @@ Bubble Shades of Purple Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Shades of Purple
@@ -3772,7 +3776,7 @@ Dubble Shades of Purple Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cobalt2
@@ -3855,7 +3859,7 @@ Bubble Cobalt2 Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cobalt2
@@ -3938,7 +3942,7 @@ Dubble Cobalt2 Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble SynthWave
@@ -4021,7 +4025,7 @@ Bubble SynthWave Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble SynthWave
@@ -4104,7 +4108,7 @@ Dubble SynthWave Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Winter is Coming
@@ -4187,7 +4191,7 @@ Bubble Winter is Coming Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Winter is Coming
@@ -4270,7 +4274,7 @@ Dubble Winter is Coming Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Andromeda
@@ -4353,7 +4357,7 @@ Bubble Andromeda Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Andromeda
@@ -4436,7 +4440,7 @@ Dubble Andromeda Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Panda
@@ -4519,7 +4523,7 @@ Bubble Panda Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Panda
@@ -4602,7 +4606,7 @@ Dubble Panda Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Noctis
@@ -4685,7 +4689,7 @@ Bubble Noctis Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Noctis
@@ -4768,7 +4772,7 @@ Dubble Noctis Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Omni
@@ -4851,7 +4855,7 @@ Bubble Omni Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Omni
@@ -4934,7 +4938,7 @@ Dubble Omni Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Eva Dark
@@ -5017,7 +5021,7 @@ Bubble Eva Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Eva Dark
@@ -5100,7 +5104,7 @@ Dubble Eva Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Atom One Dark
@@ -5183,7 +5187,7 @@ Bubble Atom One Dark Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Atom One Dark
@@ -5266,7 +5270,7 @@ Dubble Atom One Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble JellyFish
@@ -5349,7 +5353,7 @@ Bubble JellyFish Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble JellyFish
@@ -5432,7 +5436,7 @@ Dubble JellyFish Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Darcula
@@ -5515,7 +5519,7 @@ Bubble Darcula Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Darcula
@@ -5598,7 +5602,7 @@ Dubble Darcula Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Vue
@@ -5681,7 +5685,7 @@ Bubble Vue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Vue
@@ -5764,7 +5768,7 @@ Dubble Vue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Min Dark
@@ -5847,7 +5851,7 @@ Bubble Min Dark Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Min Dark
@@ -5930,7 +5934,7 @@ Dubble Min Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Bearded
@@ -6013,7 +6017,7 @@ Bubble Bearded Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Bearded
@@ -6096,7 +6100,7 @@ Dubble Bearded Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Poimandres
@@ -6179,7 +6183,7 @@ Bubble Poimandres Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Poimandres
@@ -6262,7 +6266,7 @@ Dubble Poimandres Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tokyo Night
@@ -6345,7 +6349,7 @@ Bubble Tokyo Night Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tokyo Night
@@ -6428,7 +6432,7 @@ Dubble Tokyo Night Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Catppuccin Mocha
@@ -6511,7 +6515,7 @@ Bubble Catppuccin Mocha Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Mocha
@@ -6594,7 +6598,7 @@ Dubble Catppuccin Mocha Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Catppuccin Latte
@@ -6677,7 +6681,7 @@ Bubble Catppuccin Latte Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Latte
@@ -6760,7 +6764,7 @@ Dubble Catppuccin Latte Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Atom One Light
@@ -6843,7 +6847,7 @@ Bubble Atom One Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Atom One Light
@@ -6926,7 +6930,7 @@ Dubble Atom One Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble GitHub Light
@@ -7009,7 +7013,7 @@ Bubble GitHub Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble GitHub Light
@@ -7092,7 +7096,7 @@ Dubble GitHub Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble GitHub Dark
@@ -7175,7 +7179,7 @@ Bubble GitHub Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble GitHub Dark
@@ -7258,7 +7262,7 @@ Dubble GitHub Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Solarized Light
@@ -7341,7 +7345,7 @@ Bubble Solarized Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Solarized Light
@@ -7424,7 +7428,7 @@ Dubble Solarized Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Monokai
@@ -7507,7 +7511,7 @@ Bubble Monokai Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Monokai
@@ -7590,7 +7594,7 @@ Dubble Monokai Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Minimal
@@ -7673,7 +7677,7 @@ Bubble Minimal Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Minimal
@@ -7756,7 +7760,7 @@ Dubble Minimal Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Peacock
@@ -7839,7 +7843,7 @@ Bubble Peacock Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Peacock
@@ -7922,7 +7926,7 @@ Dubble Peacock Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Palenight Italic
@@ -8005,7 +8009,7 @@ Bubble Palenight Italic Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Palenight Italic
@@ -8088,7 +8092,7 @@ Dubble Palenight Italic Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble OceaNext
@@ -8171,7 +8175,7 @@ Bubble OceaNext Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble OceaNext
@@ -8254,7 +8258,7 @@ Dubble OceaNext Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Darker
@@ -8337,7 +8341,7 @@ Bubble Darker Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Darker
@@ -8420,7 +8424,7 @@ Dubble Darker Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Twilight
@@ -8503,7 +8507,7 @@ Bubble Twilight Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Twilight
@@ -8586,7 +8590,7 @@ Dubble Twilight Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Quiet Light
@@ -8669,7 +8673,7 @@ Bubble Quiet Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Quiet Light
@@ -8752,7 +8756,7 @@ Dubble Quiet Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Abyss
@@ -8835,7 +8839,7 @@ Bubble Abyss Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Abyss
@@ -8918,7 +8922,7 @@ Dubble Abyss Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Kimbie Dark
@@ -9001,7 +9005,7 @@ Bubble Kimbie Dark Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Kimbie Dark
@@ -9084,7 +9088,7 @@ Dubble Kimbie Dark Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Red
@@ -9167,7 +9171,7 @@ Bubble Red Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Red
@@ -9250,7 +9254,7 @@ Dubble Red Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble High Contrast
@@ -9333,7 +9337,7 @@ Bubble High Contrast Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble High Contrast
@@ -9416,7 +9420,7 @@ Dubble High Contrast Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Default Dark+
@@ -9499,7 +9503,7 @@ Bubble Default Dark+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Default Dark+
@@ -9582,7 +9586,7 @@ Dubble Default Dark+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Default Light+
@@ -9665,7 +9669,7 @@ Bubble Default Light+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Default Light+
@@ -9748,7 +9752,7 @@ Dubble Default Light+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tomorrow Night
@@ -9831,7 +9835,7 @@ Bubble Tomorrow Night Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tomorrow Night
@@ -9914,7 +9918,7 @@ Dubble Tomorrow Night Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tomorrow Night Blue
@@ -9997,7 +10001,7 @@ Bubble Tomorrow Night Blue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tomorrow Night Blue
@@ -10080,7 +10084,7 @@ Dubble Tomorrow Night Blue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tomorrow Night Bright
@@ -10163,7 +10167,7 @@ Bubble Tomorrow Night Bright Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tomorrow Night Bright
@@ -10246,7 +10250,7 @@ Dubble Tomorrow Night Bright Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Oceanic Next
@@ -10329,7 +10333,7 @@ Bubble Oceanic Next Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Oceanic Next
@@ -10412,7 +10416,7 @@ Dubble Oceanic Next Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Fairy Floss
@@ -10495,7 +10499,7 @@ Bubble Fairy Floss Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Fairy Floss
@@ -10578,7 +10582,7 @@ Dubble Fairy Floss Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble City Lights
@@ -10661,7 +10665,7 @@ Bubble City Lights Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble City Lights
@@ -10744,7 +10748,7 @@ Dubble City Lights Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Lucario
@@ -10827,7 +10831,7 @@ Bubble Lucario Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Lucario
@@ -10910,7 +10914,7 @@ Dubble Lucario Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Material Ocean
@@ -10993,7 +10997,7 @@ Bubble Material Ocean Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Material Ocean
@@ -11076,7 +11080,7 @@ Dubble Material Ocean Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Snazzy
@@ -11159,7 +11163,7 @@ Bubble Snazzy Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Snazzy
@@ -11242,7 +11246,7 @@ Dubble Snazzy Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Level Up
@@ -11325,7 +11329,7 @@ Bubble Level Up Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Level Up
@@ -11408,7 +11412,7 @@ Dubble Level Up Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Aura
@@ -11491,7 +11495,7 @@ Bubble Aura Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Aura
@@ -11574,7 +11578,7 @@ Dubble Aura Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Nordic
@@ -11657,7 +11661,7 @@ Bubble Nordic Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Nordic
@@ -11740,7 +11744,7 @@ Dubble Nordic Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Blue
@@ -11823,7 +11827,7 @@ Bubble Blue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Blue
@@ -11906,7 +11910,7 @@ Dubble Blue Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Kimbie Light
@@ -11989,7 +11993,7 @@ Bubble Kimbie Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Kimbie Light
@@ -12072,7 +12076,7 @@ Dubble Kimbie Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Espresso
@@ -12155,7 +12159,7 @@ Bubble Espresso Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Espresso
@@ -12238,7 +12242,7 @@ Dubble Espresso Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Flatland
@@ -12321,7 +12325,7 @@ Bubble Flatland Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Flatland
@@ -12404,7 +12408,7 @@ Dubble Flatland Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble 3024 Night
@@ -12487,7 +12491,7 @@ Bubble 3024 Night Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble 3024 Night
@@ -12570,7 +12574,7 @@ Dubble 3024 Night Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Adventure Time
@@ -12653,7 +12657,7 @@ Bubble Adventure Time Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Adventure Time
@@ -12736,7 +12740,7 @@ Dubble Adventure Time Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Afterglow
@@ -12819,7 +12823,7 @@ Bubble Afterglow Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Afterglow
@@ -12902,7 +12906,7 @@ Dubble Afterglow Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Alien Blood
@@ -12985,7 +12989,7 @@ Bubble Alien Blood Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Alien Blood
@@ -13068,7 +13072,7 @@ Dubble Alien Blood Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Ayu Dark
@@ -13151,7 +13155,7 @@ Bubble Ayu Dark Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Ayu Dark
@@ -13234,7 +13238,7 @@ Dubble Ayu Dark Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Ayu Light
@@ -13317,7 +13321,7 @@ Bubble Ayu Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Ayu Light
@@ -13400,7 +13404,7 @@ Dubble Ayu Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble B3
@@ -13483,7 +13487,7 @@ Bubble B3 Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble B3
@@ -13566,7 +13570,7 @@ Dubble B3 Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Base16
@@ -13649,7 +13653,7 @@ Bubble Base16 Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Base16
@@ -13732,7 +13736,7 @@ Dubble Base16 Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Birds of Paradise
@@ -13815,7 +13819,7 @@ Bubble Birds of Paradise Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Birds of Paradise
@@ -13898,7 +13902,7 @@ Dubble Birds of Paradise Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Blackboard
@@ -13981,7 +13985,7 @@ Bubble Blackboard Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Blackboard
@@ -14064,7 +14068,7 @@ Dubble Blackboard Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Blueberry
@@ -14147,7 +14151,7 @@ Bubble Blueberry Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Blueberry
@@ -14230,7 +14234,7 @@ Dubble Blueberry Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Brackets Light
@@ -14313,7 +14317,7 @@ Bubble Brackets Light Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Brackets Light
@@ -14396,7 +14400,7 @@ Dubble Brackets Light Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Brogrammer
@@ -14479,7 +14483,7 @@ Bubble Brogrammer Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Brogrammer
@@ -14562,7 +14566,7 @@ Dubble Brogrammer Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Chalk
@@ -14645,7 +14649,7 @@ Bubble Chalk Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Chalk
@@ -14728,7 +14732,7 @@ Dubble Chalk Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Chester
@@ -14811,7 +14815,7 @@ Bubble Chester Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Chester
@@ -14894,7 +14898,7 @@ Dubble Chester Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cobalt
@@ -14977,7 +14981,7 @@ Bubble Cobalt Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cobalt
@@ -15060,7 +15064,7 @@ Dubble Cobalt Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cool Glow
@@ -15143,7 +15147,7 @@ Bubble Cool Glow Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cool Glow
@@ -15226,7 +15230,7 @@ Dubble Cool Glow Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cream
@@ -15309,7 +15313,7 @@ Bubble Cream Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cream
@@ -15392,7 +15396,7 @@ Dubble Cream Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cybertron
@@ -15475,7 +15479,7 @@ Bubble Cybertron Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cybertron
@@ -15558,7 +15562,7 @@ Dubble Cybertron Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Cyberpunk Edge
@@ -15641,7 +15645,7 @@ Bubble Cyberpunk Edge Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Cyberpunk Edge
@@ -15724,7 +15728,7 @@ Dubble Cyberpunk Edge Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Dark Modern
@@ -15807,7 +15811,7 @@ Bubble Dark Modern Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Dark Modern
@@ -15890,7 +15894,7 @@ Dubble Dark Modern Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Dark+
@@ -15973,7 +15977,7 @@ Bubble Dark+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Dark+
@@ -16056,7 +16060,7 @@ Dubble Dark+ Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Doki
@@ -16139,7 +16143,7 @@ Bubble Doki Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Doki
@@ -16222,7 +16226,7 @@ Dubble Doki Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble DotGov
@@ -16305,7 +16309,7 @@ Bubble DotGov Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble DotGov
@@ -16388,7 +16392,7 @@ Dubble DotGov Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Earthsong
@@ -16471,7 +16475,7 @@ Bubble Earthsong Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Earthsong
@@ -16554,7 +16558,7 @@ Dubble Earthsong Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Eiffel
@@ -16637,7 +16641,7 @@ Bubble Eiffel Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Eiffel
@@ -16720,7 +16724,7 @@ Dubble Eiffel Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Espresso Soda
@@ -16803,7 +16807,7 @@ Bubble Espresso Soda Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Espresso Soda
@@ -16886,7 +16890,7 @@ Dubble Espresso Soda Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Free
@@ -16969,7 +16973,7 @@ Bubble Free Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Free
@@ -17052,7 +17056,7 @@ Dubble Free Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble GitHub Plus
@@ -17135,7 +17139,7 @@ Bubble GitHub Plus Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble GitHub Plus
@@ -17218,7 +17222,7 @@ Dubble GitHub Plus Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Glitter
@@ -17301,7 +17305,7 @@ Bubble Glitter Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Glitter
@@ -17384,7 +17388,7 @@ Dubble Glitter Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gloom
@@ -17467,7 +17471,7 @@ Bubble Gloom Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gloom
@@ -17550,7 +17554,7 @@ Dubble Gloom Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gradient
@@ -17633,7 +17637,7 @@ Bubble Gradient Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gradient
@@ -17716,7 +17720,7 @@ Dubble Gradient Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gray Matter
@@ -17799,7 +17803,7 @@ Bubble Gray Matter Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gray Matter
@@ -17882,7 +17886,7 @@ Dubble Gray Matter Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Green
@@ -17965,7 +17969,7 @@ Bubble Green Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Green
@@ -18048,7 +18052,7 @@ Dubble Green Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox Dark Hard
@@ -18131,7 +18135,7 @@ Bubble Gruvbox Dark Hard Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox Dark Hard
@@ -18214,7 +18218,7 @@ Dubble Gruvbox Dark Hard Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox Dark Soft
@@ -18297,7 +18301,7 @@ Bubble Gruvbox Dark Soft Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox Dark Soft
@@ -18380,7 +18384,7 @@ Dubble Gruvbox Dark Soft Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Iceberg
@@ -18463,7 +18467,7 @@ Bubble Iceberg Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Iceberg
@@ -18546,7 +18550,7 @@ Dubble Iceberg Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble JetBrains Darcula
@@ -18629,7 +18633,7 @@ Bubble JetBrains Darcula Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble JetBrains Darcula
@@ -18712,7 +18716,7 @@ Dubble JetBrains Darcula Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble LaserWave
@@ -18795,7 +18799,7 @@ Bubble LaserWave Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble LaserWave
@@ -18878,7 +18882,7 @@ Dubble LaserWave Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Light Modern
@@ -18961,7 +18965,7 @@ Bubble Light Modern Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Light Modern
@@ -19044,7 +19048,7 @@ Dubble Light Modern Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Luna
@@ -19127,7 +19131,7 @@ Bubble Luna Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Luna
@@ -19210,7 +19214,7 @@ Dubble Luna Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Material Theme
@@ -19293,7 +19297,7 @@ Bubble Material Theme Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Material Theme
@@ -19376,7 +19380,7 @@ Dubble Material Theme Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Mellow
@@ -19459,7 +19463,7 @@ Bubble Mellow Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Mellow
@@ -19542,7 +19546,7 @@ Dubble Mellow Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Mint
@@ -19625,7 +19629,7 @@ Bubble Mint Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Mint
@@ -19708,7 +19712,7 @@ Dubble Mint Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Moonlight
@@ -19791,7 +19795,7 @@ Bubble Moonlight Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Moonlight
@@ -19874,7 +19878,7 @@ Dubble Moonlight Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Night Rider
@@ -19957,7 +19961,7 @@ Bubble Night Rider Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Night Rider
@@ -20040,7 +20044,7 @@ Dubble Night Rider Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Nostromo
@@ -20123,7 +20127,7 @@ Bubble Nostromo Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Nostromo
@@ -20206,7 +20210,7 @@ Dubble Nostromo Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Obsidian
@@ -20289,7 +20293,7 @@ Bubble Obsidian Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Obsidian
@@ -20372,7 +20376,7 @@ Dubble Obsidian Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Oceanic
@@ -20455,7 +20459,7 @@ Bubble Oceanic Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Oceanic
@@ -20538,7 +20542,7 @@ Dubble Oceanic Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Pastel
@@ -20621,7 +20625,7 @@ Bubble Pastel Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Pastel
@@ -20704,7 +20708,7 @@ Dubble Pastel Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Plastic
@@ -20787,7 +20791,7 @@ Bubble Plastic Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Plastic
@@ -20870,7 +20874,7 @@ Dubble Plastic Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Plastic (Inverted)
@@ -20953,7 +20957,7 @@ Bubble Plastic (Inverted) Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Plastic (Inverted)
@@ -21036,7 +21040,7 @@ Dubble Plastic (Inverted) Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Polar
@@ -21119,7 +21123,7 @@ Bubble Polar Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Polar
@@ -21202,7 +21206,7 @@ Dubble Polar Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Red Sands
@@ -21285,7 +21289,7 @@ Bubble Red Sands Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Red Sands
@@ -21368,7 +21372,7 @@ Dubble Red Sands Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Retro
@@ -21451,7 +21455,7 @@ Bubble Retro Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Retro
@@ -21534,7 +21538,7 @@ Dubble Retro Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l + 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l + 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Rouge
@@ -21617,7 +21621,7 @@ Bubble Rouge Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Rouge
@@ -21700,7 +21704,7 @@ Dubble Rouge Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Selenitic
@@ -21783,7 +21787,7 @@ Bubble Selenitic Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Selenitic
@@ -21866,7 +21870,7 @@ Dubble Selenitic Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Slime
@@ -21949,7 +21953,7 @@ Bubble Slime Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Slime
@@ -22032,7 +22036,7 @@ Dubble Slime Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Soft
@@ -22115,7 +22119,7 @@ Bubble Soft Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Soft
@@ -22198,7 +22202,7 @@ Dubble Soft Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Sublime
@@ -22281,7 +22285,7 @@ Bubble Sublime Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Sublime
@@ -22364,7 +22368,7 @@ Dubble Sublime Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Sundial
@@ -22447,7 +22451,7 @@ Bubble Sundial Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Sundial
@@ -22530,7 +22534,7 @@ Dubble Sundial Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Terra
@@ -22613,7 +22617,7 @@ Bubble Terra Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Terra
@@ -22696,7 +22700,7 @@ Dubble Terra Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tin
@@ -22779,7 +22783,7 @@ Bubble Tin Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tin
@@ -22862,7 +22866,7 @@ Dubble Tin Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Tron
@@ -22945,7 +22949,7 @@ Bubble Tron Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Tron
@@ -23028,7 +23032,7 @@ Dubble Tron Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Twilight
@@ -23111,7 +23115,7 @@ Bubble Twilight Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Twilight
@@ -23194,7 +23198,7 @@ Dubble Twilight Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Universe
@@ -23277,7 +23281,7 @@ Bubble Universe Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Universe
@@ -23360,7 +23364,7 @@ Dubble Universe Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Vapor
@@ -23443,7 +23447,7 @@ Bubble Vapor Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Vapor
@@ -23526,7 +23530,7 @@ Dubble Vapor Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Warm
@@ -23609,7 +23613,7 @@ Bubble Warm Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Warm
@@ -23692,7 +23696,7 @@ Dubble Warm Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Wombat
@@ -23775,7 +23779,7 @@ Bubble Wombat Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Wombat
@@ -23858,7 +23862,7 @@ Dubble Wombat Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Xcode
@@ -23941,7 +23945,7 @@ Bubble Xcode Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Xcode
@@ -24024,7 +24028,7 @@ Dubble Xcode Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Yellow
@@ -24107,7 +24111,7 @@ Bubble Yellow Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Yellow
@@ -24190,7 +24194,7 @@ Dubble Yellow Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Bubble Zenburn
@@ -24273,7 +24277,7 @@ Bubble Zenburn Header mod:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
 
 # ------------------------------------------------------------------------------
 # Dubble Zenburn
@@ -24356,4 +24360,4 @@ Dubble Zenburn Header mod:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_light
+      <<: *bubble_colors_light_base
