@@ -186,7 +186,8 @@ x-bubble-shared: &bubble_shared
 # ==============================================================================
 # (SHARED ANCHORS)
 # ==============================================================================
-x-bubble-colors-dark: &bubble_colors_dark 
+# Base anchor – all shared styling except bubble-border and token-rgb-* palette
+x-bubble-colors-base-no-rgb: &bubble_colors_base_no_rgb
   # Fonts
   primary-font-family: "Inter, Lato, Roboto, Figtree, sans-serif"
   ha-font-family-body: "var(--primary-font-family)"
@@ -309,7 +310,6 @@ x-bubble-colors-dark: &bubble_colors_dark
   paper-slider-pin-color: var(--token-accent)
 
   # Border
-  bubble-border: "1.8px solid var(--divider-color, #e0e0e0)"
 
   # Shapes
   ha-card-border-radius: "28px"
@@ -329,33 +329,6 @@ x-bubble-colors-dark: &bubble_colors_dark
   blue-color: var(--info-color)
   
   # ----------------------------------------------------------------------------
-  # FULL COMPLEMENTARY RGB SET
-  # ----------------------------------------------------------------------------
-  # Standard RGB Definitions (Bubble Default Palette)
-  token-rgb-white: 255, 255, 255
-  token-rgb-black: 0, 0, 0
-  token-rgb-purple: 181, 108, 255
-  token-rgb-pink: 255, 120, 190
-  token-rgb-red: 255, 92, 122
-  token-rgb-deep-purple: 124, 77, 255
-  token-rgb-indigo: 83, 109, 254
-  token-rgb-blue: 70, 164, 255
-  token-rgb-light-blue: 3, 169, 244
-  token-rgb-cyan: 0, 188, 212
-  token-rgb-teal: 64, 200, 186
-  token-rgb-green: 173, 255, 92
-  token-rgb-light-green: 156, 255, 166
-  token-rgb-lime: 205, 220, 57
-  token-rgb-yellow: 255, 177, 92
-  token-rgb-amber: 255, 211, 99
-  token-rgb-orange: 255, 152, 0
-  token-rgb-deep-orange: 255, 87, 34
-  token-rgb-brown: 121, 85, 72
-  token-rgb-grey: 158, 158, 158
-  token-rgb-blue-grey: 96, 125, 139
-  token-rgb-disabled: 158, 158, 158
-  token-rgb-state-inactive: 123, 126, 139
-
   # HA Mappings
   rgb-primary-color: var(--token-rgb-primary)
   rgb-accent-color: var(--token-rgb-primary)
@@ -408,41 +381,72 @@ x-bubble-colors-dark: &bubble_colors_dark
   mush-rgb-disabled: var(--rgb-disabled-color)
 
 # Light mode base (no token-rgb palette – for themes with custom palette)
+
+x-bubble-colors-dark: &bubble_colors_dark
+  <<: *bubble_colors_base_no_rgb
+  bubble-border: "1.8px solid var(--divider-color, #e0e0e0)"
+  # ----------------------------------------------------------------------------
+  # COMPLEMENTARY RGB PALETTE – non-semantic (green/yellow/red/blue are per theme)
+  # ----------------------------------------------------------------------------
+  token-rgb-white: 255, 255, 255
+  token-rgb-black: 0, 0, 0
+  token-rgb-purple: 181, 108, 255
+  token-rgb-pink: 255, 120, 190
+  token-rgb-deep-purple: 124, 77, 255
+  token-rgb-indigo: 83, 109, 254
+  token-rgb-light-blue: 3, 169, 244
+  token-rgb-cyan: 0, 188, 212
+  token-rgb-teal: 64, 200, 186
+  token-rgb-light-green: 156, 255, 166
+  token-rgb-lime: 205, 220, 57
+  token-rgb-amber: 255, 211, 99
+  token-rgb-orange: 255, 152, 0
+  token-rgb-deep-orange: 255, 87, 34
+  token-rgb-brown: 121, 85, 72
+  token-rgb-grey: 158, 158, 158
+  token-rgb-blue-grey: 96, 125, 139
+  token-rgb-disabled: 158, 158, 158
+  token-rgb-state-inactive: 123, 126, 139
+
+# Dark anchor without RGB palette – for themes with a fully custom token-rgb-* set
+x-bubble-colors-dark-no-rgb: &bubble_colors_dark_no_rgb
+  <<: *bubble_colors_base_no_rgb
+  bubble-border: "1.8px solid var(--divider-color, #e0e0e0)"
+
+# Light mode base (no token-rgb palette – for themes with custom palette)
 x-bubble-colors-light-base: &bubble_colors_light_base
-  <<: *bubble_colors_dark
+  <<: *bubble_colors_base_no_rgb
   bubble-border: "1.8px solid var(--divider-color, rgba(31, 31, 31, 1))"
   dummy_entry: "none"
+
+# Light mode anchor (inherits structure, overrides border + light-appropriate RGB palette)
+# HA default light-mode RGB (color.globals.ts) – named palette for light backgrounds
 
 # Light mode anchor (inherits structure, overrides border + light-appropriate RGB palette)
 # HA default light-mode RGB (color.globals.ts) – named palette for light backgrounds
 x-bubble-colors-light: &bubble_colors_light
   <<: *bubble_colors_light_base
   # Light-appropriate token-rgb-* (HA defaults for light mode; semantic green/yellow/red/blue per theme)
+  token-rgb-white: 255, 255, 255
+  token-rgb-black: 0, 0, 0
   token-rgb-purple: 146, 107, 199
   token-rgb-pink: 233, 30, 99
-  token-rgb-red: 244, 67, 54
   token-rgb-deep-purple: 110, 65, 171
   token-rgb-indigo: 63, 81, 181
-  token-rgb-blue: 33, 150, 243
   token-rgb-light-blue: 3, 169, 244
   token-rgb-cyan: 0, 188, 212
   token-rgb-teal: 0, 150, 136
-  token-rgb-green: 76, 175, 80
   token-rgb-light-green: 139, 195, 74
   token-rgb-lime: 205, 220, 57
-  token-rgb-yellow: 255, 235, 59
   token-rgb-amber: 255, 193, 7
   token-rgb-orange: 255, 152, 0
   token-rgb-deep-orange: 255, 111, 34
   token-rgb-brown: 121, 85, 72
   token-rgb-grey: 158, 158, 158
+  token-rgb-blue-grey: 96, 125, 139
+  token-rgb-disabled: 158, 158, 158
+  token-rgb-state-inactive: 123, 126, 139
 
-# ==============================================================================
-# THEME: BUBBLE 2026
-# ==============================================================================
-
-
-# --- Bubble 2026 Menubar ---
 Bubble 2026 Menubar:
   card-mod-theme: Bubble 2026 Menubar
   <<: *bubble_shared
@@ -674,7 +678,7 @@ Bubble IDKFA Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#505050"
@@ -873,7 +877,7 @@ Bubble GRUVBOX Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#af3a03"
@@ -937,7 +941,7 @@ Bubble Nord Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5E81AC"
@@ -998,7 +1002,7 @@ Bubble One Dark Pro Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0184bc"
@@ -1118,7 +1122,7 @@ Bubble Ayu Mirage Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff9940"
@@ -1180,7 +1184,7 @@ Bubble Catppuccin Macchiato Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8839ef"
@@ -1241,7 +1245,7 @@ Bubble Tokyo Night Storm Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#34548a"
@@ -1363,7 +1367,7 @@ Bubble Solarized Dark Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#268bd2"
@@ -1722,7 +1726,7 @@ Bubble Monokai Pro Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ab9df2"
@@ -1842,7 +1846,7 @@ Bubble Dracula Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9580ff"
@@ -1900,7 +1904,7 @@ Bubble Cyberpunk Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff0055"
@@ -1957,7 +1961,7 @@ Bubble Latte Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a98467"
@@ -2084,7 +2088,7 @@ Dubble Dracula Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6859b2"
@@ -2167,7 +2171,7 @@ Dubble Nord Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#415a78"
@@ -2250,7 +2254,7 @@ Dubble One Dark Pro Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005c83"
@@ -2333,7 +2337,7 @@ Dubble GitHub Dimmed Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#064998"
@@ -2416,7 +2420,7 @@ Dubble Tokyo Night Storm Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#243a60"
@@ -2499,7 +2503,7 @@ Dubble Catppuccin Macchiato Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f27a7"
@@ -2582,7 +2586,7 @@ Dubble Ayu Mirage Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26b2c"
@@ -2665,7 +2669,7 @@ Dubble Palenight Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5635b2"
@@ -2748,7 +2752,7 @@ Dubble Solarized Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1a6193"
@@ -2831,7 +2835,7 @@ Bubble Gruvbox Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#af4514"
@@ -2914,7 +2918,7 @@ Dubble Gruvbox Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7a2802"
@@ -2997,7 +3001,7 @@ Dubble Kanagawa Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#353b4a"
@@ -3080,7 +3084,7 @@ Dubble Everforest Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#627000"
@@ -3163,7 +3167,7 @@ Dubble Rose Pine Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#965b58"
@@ -3246,7 +3250,7 @@ Dubble Night Owl Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#2c2c3a"
@@ -3329,7 +3333,7 @@ Dubble Monokai Pro Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#776da9"
@@ -3412,7 +3416,7 @@ Dubble Horizon Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#802b41"
@@ -3495,7 +3499,7 @@ Dubble Cyberpunk Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b2003b"
@@ -3578,7 +3582,7 @@ Dubble Latte Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#765c48"
@@ -3661,7 +3665,7 @@ Dubble Matrix Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00640b"
@@ -3744,7 +3748,7 @@ Bubble Shades of Purple Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8a51ed"
@@ -3827,7 +3831,7 @@ Dubble Shades of Purple Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5628a5"
@@ -3910,7 +3914,7 @@ Bubble Cobalt2 Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#203849"
@@ -3993,7 +3997,7 @@ Dubble Cobalt2 Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#112533"
@@ -4076,7 +4080,7 @@ Bubble SynthWave Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b14fad"
@@ -4159,7 +4163,7 @@ Dubble SynthWave Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7b2b79"
@@ -4242,7 +4246,7 @@ Bubble Winter is Coming Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3a7d75"
@@ -4325,7 +4329,7 @@ Dubble Winter is Coming Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#205751"
@@ -4408,7 +4412,7 @@ Bubble Andromeda Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a664dd"
@@ -4491,7 +4495,7 @@ Dubble Andromeda Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6d369a"
@@ -4574,7 +4578,7 @@ Bubble Panda Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff437e"
@@ -4657,7 +4661,7 @@ Dubble Panda Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b21d4c"
@@ -4740,7 +4744,7 @@ Bubble Noctis Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#149ecc"
@@ -4823,7 +4827,7 @@ Dubble Noctis Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#006b8e"
@@ -4906,7 +4910,7 @@ Bubble Omni Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7f6cc1"
@@ -4989,7 +4993,7 @@ Dubble Omni Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#4f3e87"
@@ -5072,7 +5076,7 @@ Bubble Eva Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6946b1"
@@ -5155,7 +5159,7 @@ Dubble Eva Dark Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#41257b"
@@ -5238,7 +5242,7 @@ Bubble Atom One Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1389bc"
@@ -5321,7 +5325,7 @@ Dubble Atom One Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005c83"
@@ -5404,7 +5408,7 @@ Bubble JellyFish Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#14abcc"
@@ -5487,7 +5491,7 @@ Dubble JellyFish Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00758e"
@@ -5570,7 +5574,7 @@ Bubble Darcula Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f9bd9"
@@ -5653,7 +5657,7 @@ Dubble Darcula Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#336497"
@@ -5736,7 +5740,7 @@ Bubble Vue Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3e4d5e"
@@ -5819,7 +5823,7 @@ Dubble Vue Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#253341"
@@ -5902,7 +5906,7 @@ Bubble Min Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -5985,7 +5989,7 @@ Dubble Min Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -6068,7 +6072,7 @@ Bubble Bearded Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6e9ea0"
@@ -6151,7 +6155,7 @@ Dubble Bearded Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#426e6f"
@@ -6234,7 +6238,7 @@ Bubble Poimandres Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1cb8c7"
@@ -6317,7 +6321,7 @@ Dubble Poimandres Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#06808b"
@@ -6400,7 +6404,7 @@ Bubble Tokyo Night Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#415c8a"
@@ -6483,7 +6487,7 @@ Dubble Tokyo Night Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#243a60"
@@ -6566,7 +6570,7 @@ Bubble Catppuccin Mocha Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9550ef"
@@ -6649,7 +6653,7 @@ Dubble Catppuccin Mocha Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f27a7"
@@ -6732,7 +6736,7 @@ Bubble Catppuccin Latte Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9550ef"
@@ -6815,7 +6819,7 @@ Dubble Catppuccin Latte Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f27a7"
@@ -6898,7 +6902,7 @@ Bubble Atom One Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1389bc"
@@ -6981,7 +6985,7 @@ Dubble Atom One Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005c83"
@@ -7064,7 +7068,7 @@ Bubble GitHub Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1e74da"
@@ -7147,7 +7151,7 @@ Dubble GitHub Light Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#064998"
@@ -7230,7 +7234,7 @@ Bubble GitHub Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1e74da"
@@ -7313,7 +7317,7 @@ Dubble GitHub Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#064998"
@@ -7396,7 +7400,7 @@ Bubble Solarized Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3a93d2"
@@ -7479,7 +7483,7 @@ Dubble Solarized Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 8))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1a6193"
@@ -7562,7 +7566,7 @@ Bubble Monokai Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ade244"
@@ -7645,7 +7649,7 @@ Dubble Monokai Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#749e20"
@@ -7728,7 +7732,7 @@ Bubble Minimal Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#e95c73"
@@ -7811,7 +7815,7 @@ Dubble Minimal Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a33043"
@@ -7894,7 +7898,7 @@ Bubble Peacock Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#2e80d2"
@@ -7977,7 +7981,7 @@ Dubble Peacock Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#115293"
@@ -8060,7 +8064,7 @@ Bubble Palenight Italic Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8e66ff"
@@ -8143,7 +8147,7 @@ Dubble Palenight Italic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5635b2"
@@ -8226,7 +8230,7 @@ Bubble OceaNext Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6e9ea0"
@@ -8309,7 +8313,7 @@ Dubble OceaNext Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#426e6f"
@@ -8392,7 +8396,7 @@ Bubble Darker Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0d897c"
@@ -8475,7 +8479,7 @@ Dubble Darker Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005f56"
@@ -8513,178 +8517,6 @@ Dubble Darker Menubar:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light_base
-
-# ------------------------------------------------------------------------------
-# Bubble Twilight
-# ------------------------------------------------------------------------------
-
-# --- Bubble Twilight Menubar ---
-Bubble Twilight Menubar:
-  card-mod-theme: Bubble Twilight Menubar
-  <<: *bubble_shared
-  modes:
-    dark:
-      token-accent: "#8d96a6"
-      token-rgb-primary: 141, 150, 166
-      token-text-on-accent: "#ffffff"
-      token-bg: "#1e1e1e"
-      token-bg-secondary: "#292929"
-      token-card: "#303030"
-      token-text: "#c0c0c0"
-      token-text-secondary: "#adadad"
-      token-sidebar-icon: "#c0c0c0"
-      token-success: "#a6e3a1"
-      token-rgb-green: 166, 227, 161
-      token-warning: "#f9e2af"
-      token-rgb-yellow: 249, 226, 175
-      token-error: "#f38ba8"
-      token-rgb-red: 243, 139, 168
-      token-info: "#89b4fa"
-      token-rgb-blue: 137, 180, 250
-      token-rgb-purple: 180, 112, 219
-      token-rgb-pink: 219, 112, 204
-      token-rgb-deep-purple: 127, 112, 219
-      token-rgb-indigo: 112, 115, 219
-      token-rgb-cyan: 219, 180, 112
-      token-rgb-teal: 219, 127, 112
-      token-rgb-lime: 219, 112, 150
-      token-rgb-light-green: 219, 112, 186
-      token-rgb-amber: 153, 112, 219
-      token-rgb-orange: 127, 112, 219
-      token-rgb-deep-orange: 112, 123, 219
-      token-rgb-light-blue: 219, 216, 112
-      token-rgb-brown: 121, 85, 72
-      token-rgb-grey: 158, 158, 158
-      bubble-accent-color: var(--token-accent)
-      bubble-button-accent-color: var(--token-accent)
-
-      <<: *bubble_colors_dark
-
-    light:
-      token-accent: "#8591a6"
-      token-rgb-primary: 133, 145, 166
-      token-text-on-accent: "#ffffff"
-      token-bg: "#ffffff"
-      token-bg-secondary: "#f7f7f7"
-      token-card: "#ffffff"
-      token-text: "#1e1e1e"
-      token-text-secondary: "#151515"
-      token-sidebar-icon: "#151515"
-      token-success: "#40a02b"
-      token-rgb-green: 64, 160, 43
-      token-warning: "#df8e1d"
-      token-rgb-yellow: 223, 142, 29
-      token-error: "#d20f39"
-      token-rgb-red: 210, 15, 57
-      token-info: "#1e66f5"
-      token-rgb-blue: 30, 102, 245
-      token-rgb-purple: 144, 63, 191
-      token-rgb-pink: 191, 63, 173
-      token-rgb-deep-purple: 81, 63, 191
-      token-rgb-indigo: 63, 67, 191
-      token-rgb-cyan: 191, 144, 63
-      token-rgb-teal: 191, 81, 63
-      token-rgb-lime: 191, 63, 110
-      token-rgb-light-green: 191, 63, 152
-      token-rgb-amber: 113, 63, 191
-      token-rgb-orange: 81, 63, 191
-      token-rgb-deep-orange: 63, 78, 191
-      token-rgb-light-blue: 191, 187, 63
-      token-rgb-brown: 121, 85, 72
-      token-rgb-grey: 158, 158, 158
-      bubble-accent-color: var(--token-accent)
-      bubble-button-accent-color: var(--token-accent)
-
-      <<: *bubble_colors_light_base
-
-# ------------------------------------------------------------------------------
-# Dubble Twilight
-# ------------------------------------------------------------------------------
-
-# --- Dubble Twilight Menubar ---
-Dubble Twilight Menubar:
-  card-mod-theme: Dubble Twilight Menubar
-  <<: *bubble_shared
-  modes:
-    dark:
-      token-accent: "#8195b7"
-      token-rgb-primary: 129, 149, 183
-      token-text-on-accent: "#ffffff"
-      token-bg: "#1e1e1e"
-      token-bg-secondary: "#2b2b2b"
-      token-card: "#383838"
-      token-text: "#c0c0c0"
-      token-text-secondary: "#b6b6b6"
-      token-sidebar-icon: "#c0c0c0"
-      token-success: "#50fa7b"
-      token-rgb-green: 80, 250, 123
-      token-warning: "#ffb86c"
-      token-rgb-yellow: 255, 184, 108
-      token-error: "#ff5555"
-      token-rgb-red: 255, 85, 85
-      token-info: "#8be9fd"
-      token-rgb-blue: 139, 233, 253
-      token-rgb-purple: 179, 112, 219
-      token-rgb-pink: 219, 112, 205
-      token-rgb-deep-purple: 126, 112, 219
-      token-rgb-indigo: 112, 116, 219
-      token-rgb-cyan: 219, 179, 112
-      token-rgb-teal: 219, 126, 112
-      token-rgb-lime: 219, 112, 151
-      token-rgb-light-green: 219, 112, 187
-      token-rgb-amber: 152, 112, 219
-      token-rgb-orange: 126, 112, 219
-      token-rgb-deep-orange: 112, 125, 219
-      token-rgb-light-blue: 219, 215, 112
-      token-rgb-brown: 121, 85, 72
-      token-rgb-grey: 158, 158, 158
-      bubble-accent-color: var(--token-accent)
-      bubble-button-accent-color: var(--token-accent)
-
-      <<: *bubble_colors_dark
-
-    light:
-      token-accent: "#515e74"
-      token-rgb-primary: 81, 94, 116
-      token-text-on-accent: "#ffffff"
-      token-bg: "#ffffff"
-      token-bg-secondary: "#efefef"
-      token-card: "#ffffff"
-      token-text: "#1e1e1e"
-      token-text-secondary: "#0f0f0f"
-      token-sidebar-icon: "#0f0f0f"
-      token-success: "#22c55e"
-      token-rgb-green: 34, 197, 94
-      token-warning: "#eab308"
-      token-rgb-yellow: 234, 179, 8
-      token-error: "#ef4444"
-      token-rgb-red: 239, 68, 68
-      token-info: "#3b82f6"
-      token-rgb-blue: 59, 130, 246
-      token-rgb-purple: 143, 63, 191
-      token-rgb-pink: 191, 63, 174
-      token-rgb-deep-purple: 80, 63, 191
-      token-rgb-indigo: 63, 68, 191
-      token-rgb-cyan: 191, 143, 63
-      token-rgb-teal: 191, 80, 63
-      token-rgb-lime: 191, 63, 111
-      token-rgb-light-green: 191, 63, 153
-      token-rgb-amber: 112, 63, 191
-      token-rgb-orange: 80, 63, 191
-      token-rgb-deep-orange: 63, 79, 191
-      token-rgb-light-blue: 191, 186, 63
-      token-rgb-brown: 121, 85, 72
-      token-rgb-grey: 158, 158, 158
-      bubble-accent-color: var(--token-accent)
-      bubble-button-accent-color: var(--token-accent)
-
-      <<: *bubble_colors_light_base
-
-# ------------------------------------------------------------------------------
-# Bubble Quiet Light
-# ------------------------------------------------------------------------------
-
-# --- Bubble Quiet Light Menubar ---
 Bubble Quiet Light Menubar:
   card-mod-theme: Bubble Quiet Light Menubar
   <<: *bubble_shared
@@ -8724,7 +8556,7 @@ Bubble Quiet Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -8807,7 +8639,7 @@ Dubble Quiet Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -8890,7 +8722,7 @@ Bubble Abyss Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -8973,7 +8805,7 @@ Dubble Abyss Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -9056,7 +8888,7 @@ Bubble Kimbie Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8b9b59"
@@ -9139,7 +8971,7 @@ Dubble Kimbie Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f6c33"
@@ -9222,7 +9054,7 @@ Bubble Red Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#c42d29"
@@ -9305,7 +9137,7 @@ Dubble Red Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#89120f"
@@ -9388,7 +9220,7 @@ Bubble High Contrast Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#000000"
@@ -9471,7 +9303,7 @@ Dubble High Contrast Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#000000"
@@ -9554,7 +9386,7 @@ Bubble Default Dark+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -9637,7 +9469,7 @@ Dubble Default Dark+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -9720,7 +9552,7 @@ Bubble Default Light+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -9803,7 +9635,7 @@ Dubble Default Light+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -9886,7 +9718,7 @@ Bubble Tomorrow Night Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#537aae"
@@ -9969,7 +9801,7 @@ Dubble Tomorrow Night Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#2e4f79"
@@ -10052,7 +9884,7 @@ Bubble Tomorrow Night Blue Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0a396e"
@@ -10135,7 +9967,7 @@ Dubble Tomorrow Night Blue Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00244d"
@@ -10218,7 +10050,7 @@ Bubble Tomorrow Night Bright Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#d56367"
@@ -10301,7 +10133,7 @@ Dubble Tomorrow Night Bright Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#95363a"
@@ -10384,7 +10216,7 @@ Bubble Oceanic Next Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6e9ea0"
@@ -10467,7 +10299,7 @@ Dubble Oceanic Next Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#426e6f"
@@ -10550,7 +10382,7 @@ Bubble Fairy Floss Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#635f75"
@@ -10633,7 +10465,7 @@ Dubble Fairy Floss Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3e3a51"
@@ -10716,7 +10548,7 @@ Bubble City Lights Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6b849a"
@@ -10799,7 +10631,7 @@ Dubble City Lights Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#40586b"
@@ -10882,7 +10714,7 @@ Bubble Lucario Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#e6be62"
@@ -10965,7 +10797,7 @@ Dubble Lucario Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a18035"
@@ -11048,7 +10880,7 @@ Bubble Material Ocean Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5d99ff"
@@ -11131,7 +10963,7 @@ Dubble Material Ocean Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#2f60b2"
@@ -11214,7 +11046,7 @@ Bubble Snazzy Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff75a0"
@@ -11297,7 +11129,7 @@ Dubble Snazzy Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b24064"
@@ -11380,7 +11212,7 @@ Bubble Level Up Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#92b2f7"
@@ -11463,7 +11295,7 @@ Dubble Level Up Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5571ac"
@@ -11546,7 +11378,7 @@ Bubble Aura Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b390ff"
@@ -11629,7 +11461,7 @@ Dubble Aura Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7153b2"
@@ -11712,7 +11544,7 @@ Bubble Nordic Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6f8aac"
@@ -11795,7 +11627,7 @@ Dubble Nordic Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#415a78"
@@ -11878,7 +11710,7 @@ Bubble Blue Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0a3866"
@@ -11961,7 +11793,7 @@ Dubble Blue Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#002347"
@@ -12044,7 +11876,7 @@ Bubble Kimbie Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#72804e"
@@ -12127,7 +11959,7 @@ Dubble Kimbie Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 10))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#4d592e"
@@ -12210,7 +12042,7 @@ Bubble Espresso Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8b4d20"
@@ -12293,7 +12125,7 @@ Dubble Espresso Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#61300d"
@@ -12376,7 +12208,7 @@ Bubble Flatland Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#94aabe"
@@ -12459,7 +12291,7 @@ Dubble Flatland Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5a7185"
@@ -12542,7 +12374,7 @@ Bubble 3024 Night Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#17a6e4"
@@ -12625,7 +12457,7 @@ Dubble 3024 Night Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00709f"
@@ -12708,7 +12540,7 @@ Bubble Adventure Time Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffa482"
@@ -12791,7 +12623,7 @@ Dubble Adventure Time Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26649"
@@ -12874,7 +12706,7 @@ Bubble Afterglow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#d4a641"
@@ -12957,7 +12789,7 @@ Dubble Afterglow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#946f1e"
@@ -13040,7 +12872,7 @@ Bubble Alien Blood Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 32))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#10aa10"
@@ -13123,7 +12955,7 @@ Dubble Alien Blood Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#007600"
@@ -13206,7 +13038,7 @@ Bubble Ayu Dark Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffa659"
@@ -13289,7 +13121,7 @@ Dubble Ayu Dark Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26b2c"
@@ -13372,7 +13204,7 @@ Bubble Ayu Light Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffa659"
@@ -13455,7 +13287,7 @@ Dubble Ayu Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26b2c"
@@ -13538,7 +13370,7 @@ Bubble B3 Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0a0a0a"
@@ -13621,7 +13453,7 @@ Dubble B3 Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#060606"
@@ -13704,7 +13536,7 @@ Bubble Base16 Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7ca4b5"
@@ -13787,7 +13619,7 @@ Dubble Base16 Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#4a6f7e"
@@ -13870,7 +13702,7 @@ Bubble Birds of Paradise Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#95a969"
@@ -13953,7 +13785,7 @@ Dubble Birds of Paradise Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#64763e"
@@ -14036,7 +13868,7 @@ Bubble Blackboard Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b0c29f"
@@ -14119,7 +13951,7 @@ Dubble Blackboard Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#748762"
@@ -14202,7 +14034,7 @@ Bubble Blueberry Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9bbbff"
@@ -14285,7 +14117,7 @@ Dubble Blueberry Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5a77b2"
@@ -14368,7 +14200,7 @@ Bubble Brackets Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -14451,7 +14283,7 @@ Dubble Brackets Light Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -14534,7 +14366,7 @@ Bubble Brogrammer Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#344150"
@@ -14617,7 +14449,7 @@ Dubble Brogrammer Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1e2b37"
@@ -14700,7 +14532,7 @@ Bubble Chalk Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#adccad"
@@ -14783,7 +14615,7 @@ Dubble Chalk Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6b8e6b"
@@ -14866,7 +14698,7 @@ Bubble Chester Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -14949,7 +14781,7 @@ Dubble Chester Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -15032,7 +14864,7 @@ Bubble Cobalt Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffa619"
@@ -15115,7 +14947,7 @@ Dubble Cobalt Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26d00"
@@ -15198,7 +15030,7 @@ Bubble Cool Glow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a2c3fa"
@@ -15281,7 +15113,7 @@ Dubble Cool Glow Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5f7eae"
@@ -15364,7 +15196,7 @@ Bubble Cream Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6b594e"
@@ -15447,7 +15279,7 @@ Dubble Cream Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#4a3a2f"
@@ -15530,7 +15362,7 @@ Bubble Cybertron Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#71b3ff"
@@ -15613,7 +15445,7 @@ Dubble Cybertron Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3d74b2"
@@ -15696,7 +15528,7 @@ Bubble Cyberpunk Edge Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff437e"
@@ -15779,7 +15611,7 @@ Dubble Cyberpunk Edge Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b21d4c"
@@ -15862,7 +15694,7 @@ Bubble Dark Modern Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -15945,7 +15777,7 @@ Dubble Dark Modern Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -16028,7 +15860,7 @@ Bubble Dark+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -16111,7 +15943,7 @@ Dubble Dark+ Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -16194,7 +16026,7 @@ Bubble Doki Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cbabf9"
@@ -16277,7 +16109,7 @@ Dubble Doki Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8466ae"
@@ -16360,7 +16192,7 @@ Bubble DotGov Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#367deb"
@@ -16443,7 +16275,7 @@ Dubble DotGov Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#154da4"
@@ -16526,7 +16358,7 @@ Bubble Earthsong Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#68717a"
@@ -16609,7 +16441,7 @@ Dubble Earthsong Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#404a55"
@@ -16692,7 +16524,7 @@ Bubble Eiffel Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cc5e14"
@@ -16775,7 +16607,7 @@ Dubble Eiffel Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8e3900"
@@ -16858,7 +16690,7 @@ Bubble Espresso Soda Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8b4d20"
@@ -16941,7 +16773,7 @@ Dubble Espresso Soda Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#61300d"
@@ -17024,7 +16856,7 @@ Bubble Free Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#62c9b4"
@@ -17107,7 +16939,7 @@ Dubble Free Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#368c7b"
@@ -17190,7 +17022,7 @@ Bubble GitHub Plus Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1e74da"
@@ -17273,7 +17105,7 @@ Dubble GitHub Plus Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#064998"
@@ -17356,7 +17188,7 @@ Bubble Glitter Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#14abcc"
@@ -17439,7 +17271,7 @@ Dubble Glitter Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00758e"
@@ -17522,7 +17354,7 @@ Bubble Gloom Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cbabf9"
@@ -17605,7 +17437,7 @@ Dubble Gloom Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8466ae"
@@ -17688,7 +17520,7 @@ Bubble Gradient Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#97ebfa"
@@ -17771,7 +17603,7 @@ Dubble Gradient Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#58a2ae"
@@ -17854,7 +17686,7 @@ Bubble Gray Matter Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#92baff"
@@ -17937,7 +17769,7 @@ Dubble Gray Matter Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5477b2"
@@ -18020,7 +17852,7 @@ Bubble Green Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0d880d"
@@ -18103,7 +17935,7 @@ Dubble Green Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 34))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005f00"
@@ -18186,7 +18018,7 @@ Bubble Gruvbox Dark Hard Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#af4514"
@@ -18269,7 +18101,7 @@ Dubble Gruvbox Dark Hard Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7a2802"
@@ -18352,7 +18184,7 @@ Bubble Gruvbox Dark Soft Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#af4514"
@@ -18435,7 +18267,7 @@ Dubble Gruvbox Dark Soft Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7a2802"
@@ -18518,7 +18350,7 @@ Bubble Iceberg Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#97abc6"
@@ -18601,7 +18433,7 @@ Dubble Iceberg Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5c6f8a"
@@ -18684,7 +18516,7 @@ Bubble JetBrains Darcula Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7a9fbb"
@@ -18767,7 +18599,7 @@ Dubble JetBrains Darcula Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#486982"
@@ -18850,7 +18682,7 @@ Bubble LaserWave Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 24))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#eb7bc1"
@@ -18933,7 +18765,7 @@ Dubble LaserWave Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a44681"
@@ -19016,7 +18848,7 @@ Bubble Light Modern Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -19099,7 +18931,7 @@ Dubble Light Modern Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 2))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -19182,7 +19014,7 @@ Bubble Luna Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff9719"
@@ -19265,7 +19097,7 @@ Dubble Luna Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26200"
@@ -19348,7 +19180,7 @@ Bubble Material Theme Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#0d897c"
@@ -19431,7 +19263,7 @@ Dubble Material Theme Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#005f56"
@@ -19514,7 +19346,7 @@ Bubble Mellow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -19597,7 +19429,7 @@ Dubble Mellow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -19680,7 +19512,7 @@ Bubble Mint Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#62cdc5"
@@ -19763,7 +19595,7 @@ Dubble Mint Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#368f89"
@@ -19846,7 +19678,7 @@ Bubble Moonlight Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9bbbff"
@@ -19929,7 +19761,7 @@ Dubble Moonlight Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5a77b2"
@@ -20012,7 +19844,7 @@ Bubble Night Rider Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ff7d4e"
@@ -20095,7 +19927,7 @@ Dubble Night Rider Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b24a25"
@@ -20178,7 +20010,7 @@ Bubble Nostromo Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6ea0a0"
@@ -20261,7 +20093,7 @@ Dubble Nostromo Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#426f6f"
@@ -20344,7 +20176,7 @@ Bubble Obsidian Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7894b1"
@@ -20427,7 +20259,7 @@ Dubble Obsidian Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#48617b"
@@ -20510,7 +20342,7 @@ Bubble Oceanic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6e9ea0"
@@ -20593,7 +20425,7 @@ Dubble Oceanic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 16))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#426e6f"
@@ -20676,7 +20508,7 @@ Bubble Pastel Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffc485"
@@ -20759,7 +20591,7 @@ Dubble Pastel Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b2804b"
@@ -20842,7 +20674,7 @@ Bubble Plastic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#12b897"
@@ -20925,7 +20757,7 @@ Dubble Plastic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#008067"
@@ -21008,7 +20840,7 @@ Bubble Plastic (Inverted) Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#15d4ae"
@@ -21091,7 +20923,7 @@ Dubble Plastic (Inverted) Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#009476"
@@ -21174,7 +21006,7 @@ Bubble Polar Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6f8aac"
@@ -21257,7 +21089,7 @@ Dubble Polar Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#415a78"
@@ -21340,7 +21172,7 @@ Bubble Red Sands Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 28))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cc4747"
@@ -21423,7 +21255,7 @@ Dubble Red Sands Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 22))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8e2323"
@@ -21506,7 +21338,7 @@ Bubble Retro Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#699a75"
@@ -21589,7 +21421,7 @@ Dubble Retro Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l - 20))
       bubble-button-accent-color: hsl(from var(--token-accent) h calc(s - 15) calc(l - 20))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3e6b4a"
@@ -21672,7 +21504,7 @@ Bubble Rouge Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 18))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#e08289"
@@ -21755,7 +21587,7 @@ Dubble Rouge Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 14))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#9c4b51"
@@ -21838,7 +21670,7 @@ Bubble Selenitic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 6))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#af7070"
@@ -21921,7 +21753,7 @@ Dubble Selenitic Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 4))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#7a4242"
@@ -22004,7 +21836,7 @@ Bubble Slime Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#a3c38c"
@@ -22087,7 +21919,7 @@ Dubble Slime Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#6a8854"
@@ -22170,7 +22002,7 @@ Bubble Soft Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#1482cc"
@@ -22253,7 +22085,7 @@ Dubble Soft Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#00558e"
@@ -22336,7 +22168,7 @@ Bubble Sublime Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffa319"
@@ -22419,7 +22251,7 @@ Dubble Sublime Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26b00"
@@ -22502,7 +22334,7 @@ Bubble Sundial Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ffac5c"
@@ -22585,7 +22417,7 @@ Dubble Sundial Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#b26f2e"
@@ -22668,7 +22500,7 @@ Bubble Terra Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#84b353"
@@ -22751,7 +22583,7 @@ Dubble Terra Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#567d2e"
@@ -22834,7 +22666,7 @@ Bubble Tin Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#5fb6ad"
@@ -22917,7 +22749,7 @@ Dubble Tin Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#357f78"
@@ -23000,7 +22832,7 @@ Bubble Tron Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#149ecc"
@@ -23083,7 +22915,7 @@ Dubble Tron Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 26))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#006b8e"
@@ -23166,7 +22998,7 @@ Bubble Twilight Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8591a6"
@@ -23249,7 +23081,7 @@ Dubble Twilight Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 12))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#515e74"
@@ -23332,7 +23164,7 @@ Bubble Universe Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#71b3ff"
@@ -23415,7 +23247,7 @@ Dubble Universe Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#3d74b2"
@@ -23498,7 +23330,7 @@ Bubble Vapor Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cbabf9"
@@ -23581,7 +23413,7 @@ Dubble Vapor Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8466ae"
@@ -23664,7 +23496,7 @@ Bubble Warm Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#ce9f8c"
@@ -23747,7 +23579,7 @@ Dubble Warm Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#906553"
@@ -23830,7 +23662,7 @@ Bubble Wombat Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8f8f8f"
@@ -23913,7 +23745,7 @@ Dubble Wombat Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#646464"
@@ -23996,7 +23828,7 @@ Bubble Xcode Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cb8edd"
@@ -24079,7 +23911,7 @@ Dubble Xcode Menubar:
       bubble-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
       bubble-button-accent-color: hsl(from var(--token-accent) h s calc(l - 30))
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8a549a"
@@ -24162,7 +23994,7 @@ Bubble Yellow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#cc9e14"
@@ -24245,7 +24077,7 @@ Dubble Yellow Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8e6b00"
@@ -24328,7 +24160,7 @@ Bubble Zenburn Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#8e9f8e"
@@ -24411,7 +24243,7 @@ Dubble Zenburn Menubar:
       bubble-accent-color: var(--token-accent)
       bubble-button-accent-color: var(--token-accent)
 
-      <<: *bubble_colors_dark
+      <<: *bubble_colors_dark_no_rgb
 
     light:
       token-accent: "#586f58"

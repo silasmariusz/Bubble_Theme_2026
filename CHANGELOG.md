@@ -1,5 +1,19 @@
 ## Changelog
 
+### v0.666-ble1 · 2026-04-03
+
+- Pełna eliminacja ostrzeżeń o duplikatach kluczy YAML we wszystkich plikach motywów
+- Restrukturyzacja kotwic YAML: nowy anchor `&bubble_colors_base_no_rgb` (bez `bubble-border` i `token-rgb-*`)
+- `&bubble_colors_dark` dziedzicy z bazy i zawiera border + 19 niesemazycznych `token-rgb-*` (bez green/yellow/red/blue)
+- Nowy anchor `&bubble_colors_dark_no_rgb` dla motywów z w pełni własną paletą RGB
+- `&bubble_colors_light_base` dziedziczy z bazy (nie z dark) – eliminacja duplikatu `bubble-border`
+- `&bubble_colors_light` zawiera 19 niesemazycznych `token-rgb-*` dla trybu jasnego
+- Wszystkie motywy z niestandardową paletą (IDKFA, Dracula, Nord itp.) korzystają z `bubble_colors_dark_no_rgb`
+- Usunięto zduplikowane wpisy Bubble Twilight Menubar / Dubble Twilight Menubar (menubar)
+- Usunięto zduplikowane wpisy Bubble Twilight Header mod / Dubble Twilight Header mod (dev)
+- Naprawiono duplikaty `dark:` / `light:` wewnątrz motywu Dubble Tron (bubble_2026.yaml)
+- Wynik: 0 duplikatów w 294/294/293 motywach we wszystkich trzech plikach
+
 ### v0.666-ave7 · 2026-03-01
 
 - Naprawa duplikatów YAML (ostrzeżenia HA)
