@@ -32,6 +32,7 @@ x-bubble-shared: &bubble_shared
       .: |
         hui-view { transform: translate3d(0px, -60px, 0px); }
         "#view>hui-view>hui-sidebar-view$#main>hui-card-options:nth-child(7)>vertical-stack-in-card$ha-card>div>hui-horizontal-stack-card$#root>hui-grid-card$#root>hui-entities-card$#states>div:nth-child(4)>slider-entity-row$div>ha-slider$#sliderBar$#progressContainer" { border-radius: 14px !important; }
+
   card-mod-card: |
     ha-card {
       transition: none;
@@ -48,52 +49,69 @@ x-bubble-shared: &bubble_shared
       --primary-text-color: var(--token-text);
       color: var(--token-text) !important;
     }
-    /* Tekst na tle accent – przycisk, sub-button, slider (background-on = tło accent) */
+    /* Tekst na tle accent – główna karta i sub-buttony */
     .bubble-button-card-container[style*="background-color"],
     .bubble-button-card-container.background-on,
     .bubble-sub-button[style*="background-color"],
     .bubble-sub-button[style*="bubble-accent-color"],
     .bubble-sub-button[style*="bubble-sub-button-light-background-color"],
     .bubble-sub-button.background-on {
-      --primary-text-color: var(--token-text-on-accent) !important;
-      --bubble-icon-color: var(--token-text-on-accent) !important;
-      --bubble-name-color: var(--token-text-on-accent) !important;
-      --bubble-state-color: var(--token-text-on-accent) !important;
-      color: var(--token-text-on-accent) !important;
+      --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      --bubble-icon-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      --bubble-name-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      --bubble-state-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
     }
+    
+    /* Wymuszenie bezpośrednio na elementach tekstowych i ikonach */
+    .bubble-button-card-container.background-on .bubble-name,
+    .bubble-button-card-container.background-on .bubble-state,
+    .bubble-button-card-container.background-on ha-icon,
     .bubble-sub-button.background-on .bubble-sub-button-name-container,
     .bubble-sub-button.background-on .bubble-sub-button-icon,
     .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
     .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-icon {
-      color: var(--token-text-on-accent) !important;
+      color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
     }
     ha-icon {
       color: inherit !important;
     }
   card-mod-card-yaml: |
     "ha-card$": |
+      /* Zmienne dla głównych i podrzędnych */
+      .bubble-button-card-container.background-on,
+      .bubble-button-card-container[style*="background-color"],
       .bubble-sub-button.background-on,
       .bubble-sub-button[style*="bubble-accent-color"],
       .bubble-sub-button[style*="bubble-sub-button-light-background-color"] {
-        --primary-text-color: var(--token-text-on-accent) !important;
-        --bubble-icon-color: var(--token-text-on-accent) !important;
-        --bubble-name-color: var(--token-text-on-accent) !important;
-        --bubble-state-color: var(--token-text-on-accent) !important;
-        color: var(--token-text-on-accent) !important;
+        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        --bubble-icon-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        --bubble-name-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        --bubble-state-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
       }
 
+      /* Twarde nadpisanie elementów tekstowych dla obu typów przycisków */
+      .bubble-button-card-container.background-on .bubble-name,
+      .bubble-button-card-container.background-on .bubble-state,
+      .bubble-button-card-container.background-on ha-icon,
+      .bubble-button-card-container[style*="background-color"] .bubble-name,
+      .bubble-button-card-container[style*="background-color"] .bubble-state,
+      .bubble-button-card-container[style*="background-color"] ha-icon,
       .bubble-sub-button.background-on .bubble-sub-button-name-container,
       .bubble-sub-button.background-on ha-icon,
       .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
       .bubble-sub-button[style*="bubble-accent-color"] ha-icon {
-        color: var(--token-text-on-accent) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
       }
 
     "hui-element$ha-card$": |
+      .bubble-button-card-container.background-on,
+      .bubble-button-card-container[style*="background-color"],
       .bubble-sub-button.background-on,
       .bubble-sub-button[style*="bubble-accent-color"] {
-        --primary-text-color: var(--token-text-on-accent) !important;
-        color: var(--token-text-on-accent) !important;
+        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
       }
 
 # ==============================================================================
