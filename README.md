@@ -29,21 +29,19 @@ With card-mod installed you got this features:
 - A mobile view on desktop (like on the screenshot and you need to set your view in subview mode)
 - No header on mobile
 
-### Pliki motywów
+### Plik motywu
 
 | Plik | Opis |
 |------|------|
-| `bubble_2026.yaml` | Główny pack – header ukryty na mobile |
-| `bubble_2026-dev.yaml` | **Header mod** – header widoczny na mobile (296 motywów) |
-| `bubble_2026-menubar.yaml` | **Menubar** – header na dole, toolbar (296 motywów) |
+| `bubble_2026.yaml` | Główny pack – 293 warianty, header ukryty na mobile |
 
-HACS instaluje wszystkie trzy pliki. Wybierz motyw w ustawieniach profilu (np. „Bubble 2026 Header mod” lub „Bubble 2026 Menubar”).
+HACS instaluje plik automatycznie. Wybierz motyw w ustawieniach profilu.
 
 ## Installation
 
 ### Without HACS (not recommended)
 
-1. Download the theme file(s): [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml) (required). Optional: [bubble_2026-dev.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026-dev.yaml) (Header mod), [bubble_2026-menubar.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026-menubar.yaml) (Menubar).
+1. Download the theme file: [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml)
 2. Add the file(s) into a new folder named `bubble_themes_2026` in the `<config>/themes/` folder
 3. In your configuration.yaml add this: 
 ```yaml
@@ -107,9 +105,8 @@ IMO Those steps should be done each time by user always when modyfing any settin
 
 HOPE THIS HELPS
 
-## Text white colour on vibe Lime accents is not visible
-thats correct behavior. you have to redifine in such case conditionaly text styling
+## Text white colour on vibe Lime / bright accents is not visible
 
-![themes_60](https://github.com/user-attachments/assets/3113ecf8-68d5-4345-aea2-3950e95f4e5e)
+Fixed in the current release. The theme now pre-darkens the accent background used by Bubble Card button cards via `color-mix()`, ensuring white text remains readable on bright accent colors (cyan, lime, yellow).
 
-
+If you experience contrast issues with a specific theme variant, open an issue.
