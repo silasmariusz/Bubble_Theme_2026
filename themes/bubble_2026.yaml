@@ -38,21 +38,16 @@ x-bubble-shared: &bubble_shared
       transition: none;
       border-style: none !important;
       --bubble-text-on-accent: var(--token-text-on-accent);
-      /* [ACCENT FIX - OPTION A]
+      /* [ACCENT FIX - OPTION B]
          Root cause: Bubble Card reads --primary-text-color luminance and darkens the
          accent background by only 8-16%. For bright accents (cyan, lime, yellow) this
          is insufficient for white text readability.
-         Fix: pre-darken bubble-button-accent-color by 25% at the card scope. Bubble Card
-         then applies its own additional darkening, giving ~30-35% total darkening.
-         This variable is scoped to ha-card so it overrides the document-root theme value.
-         REMOVE THIS BLOCK (the 3 lines below) if it causes visual issues with accent colors. */
-      --bubble-button-accent-color: color-mix(in srgb, var(--token-accent) 75%, black 25%);
-      --bubble-accent-color: color-mix(in srgb, var(--token-accent) 75%, black 25%);
-      /* TODO (Option B - future): per-theme accent mix control
-         Each theme could expose: token-accent-button-mix: "75%"
-         And use: --bubble-button-accent-color: color-mix(in srgb, var(--token-accent) var(--token-accent-button-mix, 75%), black);
-         This allows per-theme fine-tuning (60% for bright themes, 90% for dark themes)
-         without touching the global shared block. */
+         Fix: pre-darken via color-mix using per-theme token-accent-button-mix (default 75%).
+         Bubble Card then applies its own additional darkening, giving ~30-35% total.
+         Override token-accent-button-mix per theme: lower % = darker button background.
+         Example: "60%" for very bright themes; "90%" for dark themes with vivid accent. */
+      --bubble-button-accent-color: color-mix(in srgb, var(--token-accent) var(--token-accent-button-mix, 75%), black);
+      --bubble-accent-color: color-mix(in srgb, var(--token-accent) var(--token-accent-button-mix, 75%), black);
     }
     .is-light .bubble-range-fill,
     .is-light .slider-use-light-color {
@@ -134,6 +129,10 @@ x-bubble-shared: &bubble_shared
 # ==============================================================================
 # Base anchor – all shared styling except bubble-border and token-rgb-* palette
 x-bubble-colors-base-no-rgb: &bubble_colors_base_no_rgb
+  # Accent button mix — controls how much the button accent is pre-darkened.
+  # 75% keeps 75% of the original accent, mixing in 25% black.
+  # Override per theme: lower = darker button (e.g. "60%" for very bright accents).
+  token-accent-button-mix: "75%"
   # Fonts
   primary-font-family: "Inter, Lato, Roboto, Figtree, sans-serif"
   ha-font-family-body: "var(--primary-font-family)"
@@ -393,7 +392,7 @@ x-bubble-colors-light: &bubble_colors_light
   token-rgb-disabled: 158, 158, 158
   token-rgb-state-inactive: 123, 126, 139
 
-Bubble 2026:
+Bubble 2026 B:
   card-mod-theme: Bubble 2026
   <<: *bubble_shared
   modes:
@@ -451,7 +450,7 @@ Bubble 2026:
 
       <<: *bubble_colors_light
 
-Bubble 2026 BFG:
+Bubble 2026 BFG B:
   card-mod-theme: Bubble 2026 BFG
   <<: *bubble_shared
   modes:
@@ -513,7 +512,7 @@ Bubble 2026 BFG:
 
       <<: *bubble_colors_light
 
-Bubble Silas PEBKAC:
+Bubble Silas PEBKAC B:
   card-mod-theme: Bubble Silas PEBKAC
   <<: *bubble_shared
   modes:
@@ -571,7 +570,7 @@ Bubble Silas PEBKAC:
 
       <<: *bubble_colors_light
 
-Bubble IDKFA:
+Bubble IDKFA B:
   card-mod-theme: Bubble IDKFA
   <<: *bubble_shared
   modes:
@@ -665,7 +664,7 @@ Bubble IDKFA:
 
       <<: *bubble_colors_light_base
 
-Bubble Dubble:
+Bubble Dubble B:
   card-mod-theme: Bubble Dubble
   <<: *bubble_shared
   modes:
@@ -723,7 +722,7 @@ Bubble Dubble:
 
       <<: *bubble_colors_light
 
-Bubble IDDQD:
+Bubble IDDQD B:
   card-mod-theme: Bubble IDDQD
   <<: *bubble_shared
   modes:
@@ -781,7 +780,7 @@ Bubble IDDQD:
 
       <<: *bubble_colors_light
 
-Bubble GRUVBOX:
+Bubble GRUVBOX B:
   card-mod-theme: Bubble GRUVBOX
   <<: *bubble_shared
   modes:
@@ -843,7 +842,7 @@ Bubble GRUVBOX:
 # ------------------------------------------------------------------------------
 # 6. BUBBLE NORD (Arctic, bluish-grey, very muted)
 # ------------------------------------------------------------------------------
-Bubble Nord:
+Bubble Nord B:
   card-mod-theme: Bubble Nord
   <<: *bubble_shared
   modes:
@@ -902,7 +901,7 @@ Bubble Nord:
 # ------------------------------------------------------------------------------
 # 7. BUBBLE ONE DARK PRO (Atom standard, balanced grey)
 # ------------------------------------------------------------------------------
-Bubble One Dark Pro:
+Bubble One Dark Pro B:
   card-mod-theme: Bubble One Dark Pro
   <<: *bubble_shared
   modes:
@@ -961,7 +960,7 @@ Bubble One Dark Pro:
 # ------------------------------------------------------------------------------
 # 8. BUBBLE GITHUB DIMMED (Professional, low contrast)
 # ------------------------------------------------------------------------------
-Bubble GitHub Dimmed:
+Bubble GitHub Dimmed B:
   card-mod-theme: Bubble GitHub Dimmed
   <<: *bubble_shared
   modes:
@@ -1019,7 +1018,7 @@ Bubble GitHub Dimmed:
 # ------------------------------------------------------------------------------
 # 9. BUBBLE AYU MIRAGE (Warm dark grey/blue, elegant)
 # ------------------------------------------------------------------------------
-Bubble Ayu Mirage:
+Bubble Ayu Mirage B:
   card-mod-theme: Bubble Ayu Mirage
   <<: *bubble_shared
   modes:
@@ -1077,7 +1076,7 @@ Bubble Ayu Mirage:
 # ------------------------------------------------------------------------------
 # 10. BUBBLE CATPPUCCIN MACCHIATO (Soft pastel, middle contrast)
 # ------------------------------------------------------------------------------
-Bubble Catppuccin Macchiato:
+Bubble Catppuccin Macchiato B:
   card-mod-theme: Bubble Catppuccin Macchiato
   <<: *bubble_shared
   modes:
@@ -1137,7 +1136,7 @@ Bubble Catppuccin Macchiato:
 # ------------------------------------------------------------------------------
 # 11. BUBBLE TOKYO NIGHT STORM (Deep blue-grey, soothing)
 # ------------------------------------------------------------------------------
-Bubble Tokyo Night Storm:
+Bubble Tokyo Night Storm B:
   card-mod-theme: Bubble Tokyo Night Storm
   <<: *bubble_shared
   modes:
@@ -1196,7 +1195,7 @@ Bubble Tokyo Night Storm:
 # ------------------------------------------------------------------------------
 # 12. BUBBLE PALENIGHT (Material Theme, Muted Purple)
 # ------------------------------------------------------------------------------
-Bubble Palenight:
+Bubble Palenight B:
   card-mod-theme: Bubble Palenight
   <<: *bubble_shared
   modes:
@@ -1254,7 +1253,7 @@ Bubble Palenight:
 # ------------------------------------------------------------------------------
 # 13. BUBBLE SOLARIZED DARK (Classic, teal-based, very low eye strain)
 # ------------------------------------------------------------------------------
-Bubble Solarized Dark:
+Bubble Solarized Dark B:
   card-mod-theme: Bubble Solarized Dark
   <<: *bubble_shared
   modes:
@@ -1314,7 +1313,7 @@ Bubble Solarized Dark:
 # ------------------------------------------------------------------------------
 # 14. BUBBLE GRUVBOX MATERIAL (Retro, warm, "hard" variant)
 # ------------------------------------------------------------------------------
-Bubble Gruvbox Material:
+Bubble Gruvbox Material B:
   card-mod-theme: Bubble Gruvbox Material
   <<: *bubble_shared
   modes:
@@ -1372,7 +1371,7 @@ Bubble Gruvbox Material:
 # ------------------------------------------------------------------------------
 # 15. BUBBLE KANAGAWA (Desaturated, inspired by Hokusai paintings)
 # ------------------------------------------------------------------------------
-Bubble Kanagawa:
+Bubble Kanagawa B:
   card-mod-theme: Bubble Kanagawa
   <<: *bubble_shared
   modes:
@@ -1430,7 +1429,7 @@ Bubble Kanagawa:
 # ------------------------------------------------------------------------------
 # 16. BUBBLE EVERFOREST (Natural, green-grey, very muted)
 # ------------------------------------------------------------------------------
-Bubble Everforest:
+Bubble Everforest B:
   card-mod-theme: Bubble Everforest
   <<: *bubble_shared
   modes:
@@ -1488,7 +1487,7 @@ Bubble Everforest:
 # ------------------------------------------------------------------------------
 # 17. BUBBLE ROSÉ PINE (Warm, vintage, muted)
 # ------------------------------------------------------------------------------
-Bubble Rose Pine:
+Bubble Rose Pine B:
   card-mod-theme: Bubble Rose Pine
   <<: *bubble_shared
   modes:
@@ -1546,7 +1545,7 @@ Bubble Rose Pine:
 # ------------------------------------------------------------------------------
 # 18. BUBBLE NIGHT OWL (Deep blue, focused, popular)
 # ------------------------------------------------------------------------------
-Bubble Night Owl:
+Bubble Night Owl B:
   card-mod-theme: Bubble Night Owl
   <<: *bubble_shared
   modes:
@@ -1604,7 +1603,7 @@ Bubble Night Owl:
 # ------------------------------------------------------------------------------
 # 19. BUBBLE MONOKAI PRO (Spectrum - Modern Classic)
 # ------------------------------------------------------------------------------
-Bubble Monokai Pro:
+Bubble Monokai Pro B:
   card-mod-theme: Bubble Monokai Pro
   <<: *bubble_shared
   modes:
@@ -1661,7 +1660,7 @@ Bubble Monokai Pro:
 # ------------------------------------------------------------------------------
 # 20. BUBBLE HORIZON (Warm accent, deep purple/blue bg)
 # ------------------------------------------------------------------------------
-Bubble Horizon:
+Bubble Horizon B:
   card-mod-theme: Bubble Horizon
   <<: *bubble_shared
   modes:
@@ -1716,7 +1715,7 @@ Bubble Horizon:
 
       <<: *bubble_colors_light
 
-Bubble Dracula:
+Bubble Dracula B:
   card-mod-theme: Bubble Dracula
   <<: *bubble_shared
   modes:
@@ -1774,7 +1773,7 @@ Bubble Dracula:
 
       <<: *bubble_colors_light
 
-Bubble Cyberpunk:
+Bubble Cyberpunk B:
   card-mod-theme: Bubble Cyberpunk
   <<: *bubble_shared
   modes:
@@ -1830,7 +1829,7 @@ Bubble Cyberpunk:
 
       <<: *bubble_colors_light
 
-Bubble Latte:
+Bubble Latte B:
   card-mod-theme: Bubble Latte
   <<: *bubble_shared
   modes:
@@ -1885,7 +1884,7 @@ Bubble Latte:
 
       <<: *bubble_colors_light
 
-Bubble Matrix:
+Bubble Matrix B:
   card-mod-theme: Bubble Matrix
   <<: *bubble_shared
   modes:
@@ -1943,7 +1942,7 @@ Bubble Matrix:
 # ------------------------------------------------------------------------------
 # Dubble Dracula
 # ------------------------------------------------------------------------------
-Dubble Dracula:
+Dubble Dracula B:
   card-mod-theme: Dubble Dracula
   <<: *bubble_shared
   modes:
@@ -2024,7 +2023,7 @@ Dubble Dracula:
 # ------------------------------------------------------------------------------
 # Dubble Nord
 # ------------------------------------------------------------------------------
-Dubble Nord:
+Dubble Nord B:
   card-mod-theme: Dubble Nord
   <<: *bubble_shared
   modes:
@@ -2105,7 +2104,7 @@ Dubble Nord:
 # ------------------------------------------------------------------------------
 # Dubble One Dark Pro
 # ------------------------------------------------------------------------------
-Dubble One Dark Pro:
+Dubble One Dark Pro B:
   card-mod-theme: Dubble One Dark Pro
   <<: *bubble_shared
   modes:
@@ -2186,7 +2185,7 @@ Dubble One Dark Pro:
 # ------------------------------------------------------------------------------
 # Dubble GitHub Dimmed
 # ------------------------------------------------------------------------------
-Dubble GitHub Dimmed:
+Dubble GitHub Dimmed B:
   card-mod-theme: Dubble GitHub Dimmed
   <<: *bubble_shared
   modes:
@@ -2267,7 +2266,7 @@ Dubble GitHub Dimmed:
 # ------------------------------------------------------------------------------
 # Dubble Tokyo Night Storm
 # ------------------------------------------------------------------------------
-Dubble Tokyo Night Storm:
+Dubble Tokyo Night Storm B:
   card-mod-theme: Dubble Tokyo Night Storm
   <<: *bubble_shared
   modes:
@@ -2348,7 +2347,7 @@ Dubble Tokyo Night Storm:
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Macchiato
 # ------------------------------------------------------------------------------
-Dubble Catppuccin Macchiato:
+Dubble Catppuccin Macchiato B:
   card-mod-theme: Dubble Catppuccin Macchiato
   <<: *bubble_shared
   modes:
@@ -2429,7 +2428,7 @@ Dubble Catppuccin Macchiato:
 # ------------------------------------------------------------------------------
 # Dubble Ayu Mirage
 # ------------------------------------------------------------------------------
-Dubble Ayu Mirage:
+Dubble Ayu Mirage B:
   card-mod-theme: Dubble Ayu Mirage
   <<: *bubble_shared
   modes:
@@ -2510,7 +2509,7 @@ Dubble Ayu Mirage:
 # ------------------------------------------------------------------------------
 # Dubble Palenight
 # ------------------------------------------------------------------------------
-Dubble Palenight:
+Dubble Palenight B:
   card-mod-theme: Dubble Palenight
   <<: *bubble_shared
   modes:
@@ -2591,7 +2590,7 @@ Dubble Palenight:
 # ------------------------------------------------------------------------------
 # Dubble Solarized Dark
 # ------------------------------------------------------------------------------
-Dubble Solarized Dark:
+Dubble Solarized Dark B:
   card-mod-theme: Dubble Solarized Dark
   <<: *bubble_shared
   modes:
@@ -2672,7 +2671,7 @@ Dubble Solarized Dark:
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox
 # ------------------------------------------------------------------------------
-Bubble Gruvbox:
+Bubble Gruvbox B:
   card-mod-theme: Bubble Gruvbox
   <<: *bubble_shared
   modes:
@@ -2753,7 +2752,7 @@ Bubble Gruvbox:
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox
 # ------------------------------------------------------------------------------
-Dubble Gruvbox:
+Dubble Gruvbox B:
   card-mod-theme: Dubble Gruvbox
   <<: *bubble_shared
   modes:
@@ -2834,7 +2833,7 @@ Dubble Gruvbox:
 # ------------------------------------------------------------------------------
 # Dubble Kanagawa
 # ------------------------------------------------------------------------------
-Dubble Kanagawa:
+Dubble Kanagawa B:
   card-mod-theme: Dubble Kanagawa
   <<: *bubble_shared
   modes:
@@ -2915,7 +2914,7 @@ Dubble Kanagawa:
 # ------------------------------------------------------------------------------
 # Dubble Everforest
 # ------------------------------------------------------------------------------
-Dubble Everforest:
+Dubble Everforest B:
   card-mod-theme: Dubble Everforest
   <<: *bubble_shared
   modes:
@@ -2996,7 +2995,7 @@ Dubble Everforest:
 # ------------------------------------------------------------------------------
 # Dubble Rose Pine
 # ------------------------------------------------------------------------------
-Dubble Rose Pine:
+Dubble Rose Pine B:
   card-mod-theme: Dubble Rose Pine
   <<: *bubble_shared
   modes:
@@ -3077,7 +3076,7 @@ Dubble Rose Pine:
 # ------------------------------------------------------------------------------
 # Dubble Night Owl
 # ------------------------------------------------------------------------------
-Dubble Night Owl:
+Dubble Night Owl B:
   card-mod-theme: Dubble Night Owl
   <<: *bubble_shared
   modes:
@@ -3158,7 +3157,7 @@ Dubble Night Owl:
 # ------------------------------------------------------------------------------
 # Dubble Monokai Pro
 # ------------------------------------------------------------------------------
-Dubble Monokai Pro:
+Dubble Monokai Pro B:
   card-mod-theme: Dubble Monokai Pro
   <<: *bubble_shared
   modes:
@@ -3239,7 +3238,7 @@ Dubble Monokai Pro:
 # ------------------------------------------------------------------------------
 # Dubble Horizon
 # ------------------------------------------------------------------------------
-Dubble Horizon:
+Dubble Horizon B:
   card-mod-theme: Dubble Horizon
   <<: *bubble_shared
   modes:
@@ -3320,7 +3319,7 @@ Dubble Horizon:
 # ------------------------------------------------------------------------------
 # Dubble Cyberpunk
 # ------------------------------------------------------------------------------
-Dubble Cyberpunk:
+Dubble Cyberpunk B:
   card-mod-theme: Dubble Cyberpunk
   <<: *bubble_shared
   modes:
@@ -3401,7 +3400,7 @@ Dubble Cyberpunk:
 # ------------------------------------------------------------------------------
 # Dubble Latte
 # ------------------------------------------------------------------------------
-Dubble Latte:
+Dubble Latte B:
   card-mod-theme: Dubble Latte
   <<: *bubble_shared
   modes:
@@ -3482,7 +3481,7 @@ Dubble Latte:
 # ------------------------------------------------------------------------------
 # Dubble Matrix
 # ------------------------------------------------------------------------------
-Dubble Matrix:
+Dubble Matrix B:
   card-mod-theme: Dubble Matrix
   <<: *bubble_shared
   modes:
@@ -3563,7 +3562,7 @@ Dubble Matrix:
 # ------------------------------------------------------------------------------
 # Bubble Shades of Purple
 # ------------------------------------------------------------------------------
-Bubble Shades of Purple:
+Bubble Shades of Purple B:
   card-mod-theme: Bubble Shades of Purple
   <<: *bubble_shared
   modes:
@@ -3644,7 +3643,7 @@ Bubble Shades of Purple:
 # ------------------------------------------------------------------------------
 # Dubble Shades of Purple
 # ------------------------------------------------------------------------------
-Dubble Shades of Purple:
+Dubble Shades of Purple B:
   card-mod-theme: Dubble Shades of Purple
   <<: *bubble_shared
   modes:
@@ -3725,7 +3724,7 @@ Dubble Shades of Purple:
 # ------------------------------------------------------------------------------
 # Bubble Cobalt2
 # ------------------------------------------------------------------------------
-Bubble Cobalt2:
+Bubble Cobalt2 B:
   card-mod-theme: Bubble Cobalt2
   <<: *bubble_shared
   modes:
@@ -3806,7 +3805,7 @@ Bubble Cobalt2:
 # ------------------------------------------------------------------------------
 # Dubble Cobalt2
 # ------------------------------------------------------------------------------
-Dubble Cobalt2:
+Dubble Cobalt2 B:
   card-mod-theme: Dubble Cobalt2
   <<: *bubble_shared
   modes:
@@ -3887,7 +3886,7 @@ Dubble Cobalt2:
 # ------------------------------------------------------------------------------
 # Bubble SynthWave
 # ------------------------------------------------------------------------------
-Bubble SynthWave:
+Bubble SynthWave B:
   card-mod-theme: Bubble SynthWave
   <<: *bubble_shared
   modes:
@@ -3968,7 +3967,7 @@ Bubble SynthWave:
 # ------------------------------------------------------------------------------
 # Dubble SynthWave
 # ------------------------------------------------------------------------------
-Dubble SynthWave:
+Dubble SynthWave B:
   card-mod-theme: Dubble SynthWave
   <<: *bubble_shared
   modes:
@@ -4049,7 +4048,7 @@ Dubble SynthWave:
 # ------------------------------------------------------------------------------
 # Bubble Winter is Coming
 # ------------------------------------------------------------------------------
-Bubble Winter is Coming:
+Bubble Winter is Coming B:
   card-mod-theme: Bubble Winter is Coming
   <<: *bubble_shared
   modes:
@@ -4130,7 +4129,7 @@ Bubble Winter is Coming:
 # ------------------------------------------------------------------------------
 # Dubble Winter is Coming
 # ------------------------------------------------------------------------------
-Dubble Winter is Coming:
+Dubble Winter is Coming B:
   card-mod-theme: Dubble Winter is Coming
   <<: *bubble_shared
   modes:
@@ -4211,7 +4210,7 @@ Dubble Winter is Coming:
 # ------------------------------------------------------------------------------
 # Bubble Andromeda
 # ------------------------------------------------------------------------------
-Bubble Andromeda:
+Bubble Andromeda B:
   card-mod-theme: Bubble Andromeda
   <<: *bubble_shared
   modes:
@@ -4292,7 +4291,7 @@ Bubble Andromeda:
 # ------------------------------------------------------------------------------
 # Dubble Andromeda
 # ------------------------------------------------------------------------------
-Dubble Andromeda:
+Dubble Andromeda B:
   card-mod-theme: Dubble Andromeda
   <<: *bubble_shared
   modes:
@@ -4373,7 +4372,7 @@ Dubble Andromeda:
 # ------------------------------------------------------------------------------
 # Bubble Panda
 # ------------------------------------------------------------------------------
-Bubble Panda:
+Bubble Panda B:
   card-mod-theme: Bubble Panda
   <<: *bubble_shared
   modes:
@@ -4454,7 +4453,7 @@ Bubble Panda:
 # ------------------------------------------------------------------------------
 # Dubble Panda
 # ------------------------------------------------------------------------------
-Dubble Panda:
+Dubble Panda B:
   card-mod-theme: Dubble Panda
   <<: *bubble_shared
   modes:
@@ -4535,7 +4534,7 @@ Dubble Panda:
 # ------------------------------------------------------------------------------
 # Bubble Noctis
 # ------------------------------------------------------------------------------
-Bubble Noctis:
+Bubble Noctis B:
   card-mod-theme: Bubble Noctis
   <<: *bubble_shared
   modes:
@@ -4616,7 +4615,7 @@ Bubble Noctis:
 # ------------------------------------------------------------------------------
 # Dubble Noctis
 # ------------------------------------------------------------------------------
-Dubble Noctis:
+Dubble Noctis B:
   card-mod-theme: Dubble Noctis
   <<: *bubble_shared
   modes:
@@ -4697,7 +4696,7 @@ Dubble Noctis:
 # ------------------------------------------------------------------------------
 # Bubble Omni
 # ------------------------------------------------------------------------------
-Bubble Omni:
+Bubble Omni B:
   card-mod-theme: Bubble Omni
   <<: *bubble_shared
   modes:
@@ -4778,7 +4777,7 @@ Bubble Omni:
 # ------------------------------------------------------------------------------
 # Dubble Omni
 # ------------------------------------------------------------------------------
-Dubble Omni:
+Dubble Omni B:
   card-mod-theme: Dubble Omni
   <<: *bubble_shared
   modes:
@@ -4859,7 +4858,7 @@ Dubble Omni:
 # ------------------------------------------------------------------------------
 # Bubble Eva Dark
 # ------------------------------------------------------------------------------
-Bubble Eva Dark:
+Bubble Eva Dark B:
   card-mod-theme: Bubble Eva Dark
   <<: *bubble_shared
   modes:
@@ -4940,7 +4939,7 @@ Bubble Eva Dark:
 # ------------------------------------------------------------------------------
 # Dubble Eva Dark
 # ------------------------------------------------------------------------------
-Dubble Eva Dark:
+Dubble Eva Dark B:
   card-mod-theme: Dubble Eva Dark
   <<: *bubble_shared
   modes:
@@ -5021,7 +5020,7 @@ Dubble Eva Dark:
 # ------------------------------------------------------------------------------
 # Bubble Atom One Dark
 # ------------------------------------------------------------------------------
-Bubble Atom One Dark:
+Bubble Atom One Dark B:
   card-mod-theme: Bubble Atom One Dark
   <<: *bubble_shared
   modes:
@@ -5102,7 +5101,7 @@ Bubble Atom One Dark:
 # ------------------------------------------------------------------------------
 # Dubble Atom One Dark
 # ------------------------------------------------------------------------------
-Dubble Atom One Dark:
+Dubble Atom One Dark B:
   card-mod-theme: Dubble Atom One Dark
   <<: *bubble_shared
   modes:
@@ -5183,7 +5182,7 @@ Dubble Atom One Dark:
 # ------------------------------------------------------------------------------
 # Bubble JellyFish
 # ------------------------------------------------------------------------------
-Bubble JellyFish:
+Bubble JellyFish B:
   card-mod-theme: Bubble JellyFish
   <<: *bubble_shared
   modes:
@@ -5264,7 +5263,7 @@ Bubble JellyFish:
 # ------------------------------------------------------------------------------
 # Dubble JellyFish
 # ------------------------------------------------------------------------------
-Dubble JellyFish:
+Dubble JellyFish B:
   card-mod-theme: Dubble JellyFish
   <<: *bubble_shared
   modes:
@@ -5345,7 +5344,7 @@ Dubble JellyFish:
 # ------------------------------------------------------------------------------
 # Bubble Darcula
 # ------------------------------------------------------------------------------
-Bubble Darcula:
+Bubble Darcula B:
   card-mod-theme: Bubble Darcula
   <<: *bubble_shared
   modes:
@@ -5426,7 +5425,7 @@ Bubble Darcula:
 # ------------------------------------------------------------------------------
 # Dubble Darcula
 # ------------------------------------------------------------------------------
-Dubble Darcula:
+Dubble Darcula B:
   card-mod-theme: Dubble Darcula
   <<: *bubble_shared
   modes:
@@ -5507,7 +5506,7 @@ Dubble Darcula:
 # ------------------------------------------------------------------------------
 # Bubble Vue
 # ------------------------------------------------------------------------------
-Bubble Vue:
+Bubble Vue B:
   card-mod-theme: Bubble Vue
   <<: *bubble_shared
   modes:
@@ -5588,7 +5587,7 @@ Bubble Vue:
 # ------------------------------------------------------------------------------
 # Dubble Vue
 # ------------------------------------------------------------------------------
-Dubble Vue:
+Dubble Vue B:
   card-mod-theme: Dubble Vue
   <<: *bubble_shared
   modes:
@@ -5669,7 +5668,7 @@ Dubble Vue:
 # ------------------------------------------------------------------------------
 # Bubble Min Dark
 # ------------------------------------------------------------------------------
-Bubble Min Dark:
+Bubble Min Dark B:
   card-mod-theme: Bubble Min Dark
   <<: *bubble_shared
   modes:
@@ -5750,7 +5749,7 @@ Bubble Min Dark:
 # ------------------------------------------------------------------------------
 # Dubble Min Dark
 # ------------------------------------------------------------------------------
-Dubble Min Dark:
+Dubble Min Dark B:
   card-mod-theme: Dubble Min Dark
   <<: *bubble_shared
   modes:
@@ -5831,7 +5830,7 @@ Dubble Min Dark:
 # ------------------------------------------------------------------------------
 # Bubble Bearded
 # ------------------------------------------------------------------------------
-Bubble Bearded:
+Bubble Bearded B:
   card-mod-theme: Bubble Bearded
   <<: *bubble_shared
   modes:
@@ -5912,7 +5911,7 @@ Bubble Bearded:
 # ------------------------------------------------------------------------------
 # Dubble Bearded
 # ------------------------------------------------------------------------------
-Dubble Bearded:
+Dubble Bearded B:
   card-mod-theme: Dubble Bearded
   <<: *bubble_shared
   modes:
@@ -5993,7 +5992,7 @@ Dubble Bearded:
 # ------------------------------------------------------------------------------
 # Bubble Poimandres
 # ------------------------------------------------------------------------------
-Bubble Poimandres:
+Bubble Poimandres B:
   card-mod-theme: Bubble Poimandres
   <<: *bubble_shared
   modes:
@@ -6074,7 +6073,7 @@ Bubble Poimandres:
 # ------------------------------------------------------------------------------
 # Dubble Poimandres
 # ------------------------------------------------------------------------------
-Dubble Poimandres:
+Dubble Poimandres B:
   card-mod-theme: Dubble Poimandres
   <<: *bubble_shared
   modes:
@@ -6155,7 +6154,7 @@ Dubble Poimandres:
 # ------------------------------------------------------------------------------
 # Bubble Tokyo Night
 # ------------------------------------------------------------------------------
-Bubble Tokyo Night:
+Bubble Tokyo Night B:
   card-mod-theme: Bubble Tokyo Night
   <<: *bubble_shared
   modes:
@@ -6236,7 +6235,7 @@ Bubble Tokyo Night:
 # ------------------------------------------------------------------------------
 # Dubble Tokyo Night
 # ------------------------------------------------------------------------------
-Dubble Tokyo Night:
+Dubble Tokyo Night B:
   card-mod-theme: Dubble Tokyo Night
   <<: *bubble_shared
   modes:
@@ -6317,7 +6316,7 @@ Dubble Tokyo Night:
 # ------------------------------------------------------------------------------
 # Bubble Catppuccin Mocha
 # ------------------------------------------------------------------------------
-Bubble Catppuccin Mocha:
+Bubble Catppuccin Mocha B:
   card-mod-theme: Bubble Catppuccin Mocha
   <<: *bubble_shared
   modes:
@@ -6398,7 +6397,7 @@ Bubble Catppuccin Mocha:
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Mocha
 # ------------------------------------------------------------------------------
-Dubble Catppuccin Mocha:
+Dubble Catppuccin Mocha B:
   card-mod-theme: Dubble Catppuccin Mocha
   <<: *bubble_shared
   modes:
@@ -6479,7 +6478,7 @@ Dubble Catppuccin Mocha:
 # ------------------------------------------------------------------------------
 # Bubble Catppuccin Latte
 # ------------------------------------------------------------------------------
-Bubble Catppuccin Latte:
+Bubble Catppuccin Latte B:
   card-mod-theme: Bubble Catppuccin Latte
   <<: *bubble_shared
   modes:
@@ -6560,7 +6559,7 @@ Bubble Catppuccin Latte:
 # ------------------------------------------------------------------------------
 # Dubble Catppuccin Latte
 # ------------------------------------------------------------------------------
-Dubble Catppuccin Latte:
+Dubble Catppuccin Latte B:
   card-mod-theme: Dubble Catppuccin Latte
   <<: *bubble_shared
   modes:
@@ -6641,7 +6640,7 @@ Dubble Catppuccin Latte:
 # ------------------------------------------------------------------------------
 # Bubble Atom One Light
 # ------------------------------------------------------------------------------
-Bubble Atom One Light:
+Bubble Atom One Light B:
   card-mod-theme: Bubble Atom One Light
   <<: *bubble_shared
   modes:
@@ -6722,7 +6721,7 @@ Bubble Atom One Light:
 # ------------------------------------------------------------------------------
 # Dubble Atom One Light
 # ------------------------------------------------------------------------------
-Dubble Atom One Light:
+Dubble Atom One Light B:
   card-mod-theme: Dubble Atom One Light
   <<: *bubble_shared
   modes:
@@ -6803,7 +6802,7 @@ Dubble Atom One Light:
 # ------------------------------------------------------------------------------
 # Bubble GitHub Light
 # ------------------------------------------------------------------------------
-Bubble GitHub Light:
+Bubble GitHub Light B:
   card-mod-theme: Bubble GitHub Light
   <<: *bubble_shared
   modes:
@@ -6884,7 +6883,7 @@ Bubble GitHub Light:
 # ------------------------------------------------------------------------------
 # Dubble GitHub Light
 # ------------------------------------------------------------------------------
-Dubble GitHub Light:
+Dubble GitHub Light B:
   card-mod-theme: Dubble GitHub Light
   <<: *bubble_shared
   modes:
@@ -6965,7 +6964,7 @@ Dubble GitHub Light:
 # ------------------------------------------------------------------------------
 # Bubble GitHub Dark
 # ------------------------------------------------------------------------------
-Bubble GitHub Dark:
+Bubble GitHub Dark B:
   card-mod-theme: Bubble GitHub Dark
   <<: *bubble_shared
   modes:
@@ -7046,7 +7045,7 @@ Bubble GitHub Dark:
 # ------------------------------------------------------------------------------
 # Dubble GitHub Dark
 # ------------------------------------------------------------------------------
-Dubble GitHub Dark:
+Dubble GitHub Dark B:
   card-mod-theme: Dubble GitHub Dark
   <<: *bubble_shared
   modes:
@@ -7127,7 +7126,7 @@ Dubble GitHub Dark:
 # ------------------------------------------------------------------------------
 # Bubble Solarized Light
 # ------------------------------------------------------------------------------
-Bubble Solarized Light:
+Bubble Solarized Light B:
   card-mod-theme: Bubble Solarized Light
   <<: *bubble_shared
   modes:
@@ -7208,7 +7207,7 @@ Bubble Solarized Light:
 # ------------------------------------------------------------------------------
 # Dubble Solarized Light
 # ------------------------------------------------------------------------------
-Dubble Solarized Light:
+Dubble Solarized Light B:
   card-mod-theme: Dubble Solarized Light
   <<: *bubble_shared
   modes:
@@ -7289,7 +7288,7 @@ Dubble Solarized Light:
 # ------------------------------------------------------------------------------
 # Bubble Monokai
 # ------------------------------------------------------------------------------
-Bubble Monokai:
+Bubble Monokai B:
   card-mod-theme: Bubble Monokai
   <<: *bubble_shared
   modes:
@@ -7370,7 +7369,7 @@ Bubble Monokai:
 # ------------------------------------------------------------------------------
 # Dubble Monokai
 # ------------------------------------------------------------------------------
-Dubble Monokai:
+Dubble Monokai B:
   card-mod-theme: Dubble Monokai
   <<: *bubble_shared
   modes:
@@ -7451,7 +7450,7 @@ Dubble Monokai:
 # ------------------------------------------------------------------------------
 # Bubble Minimal
 # ------------------------------------------------------------------------------
-Bubble Minimal:
+Bubble Minimal B:
   card-mod-theme: Bubble Minimal
   <<: *bubble_shared
   modes:
@@ -7532,7 +7531,7 @@ Bubble Minimal:
 # ------------------------------------------------------------------------------
 # Dubble Minimal
 # ------------------------------------------------------------------------------
-Dubble Minimal:
+Dubble Minimal B:
   card-mod-theme: Dubble Minimal
   <<: *bubble_shared
   modes:
@@ -7613,7 +7612,7 @@ Dubble Minimal:
 # ------------------------------------------------------------------------------
 # Bubble Peacock
 # ------------------------------------------------------------------------------
-Bubble Peacock:
+Bubble Peacock B:
   card-mod-theme: Bubble Peacock
   <<: *bubble_shared
   modes:
@@ -7694,7 +7693,7 @@ Bubble Peacock:
 # ------------------------------------------------------------------------------
 # Dubble Peacock
 # ------------------------------------------------------------------------------
-Dubble Peacock:
+Dubble Peacock B:
   card-mod-theme: Dubble Peacock
   <<: *bubble_shared
   modes:
@@ -7775,7 +7774,7 @@ Dubble Peacock:
 # ------------------------------------------------------------------------------
 # Bubble Palenight Italic
 # ------------------------------------------------------------------------------
-Bubble Palenight Italic:
+Bubble Palenight Italic B:
   card-mod-theme: Bubble Palenight Italic
   <<: *bubble_shared
   modes:
@@ -7856,7 +7855,7 @@ Bubble Palenight Italic:
 # ------------------------------------------------------------------------------
 # Dubble Palenight Italic
 # ------------------------------------------------------------------------------
-Dubble Palenight Italic:
+Dubble Palenight Italic B:
   card-mod-theme: Dubble Palenight Italic
   <<: *bubble_shared
   modes:
@@ -7937,7 +7936,7 @@ Dubble Palenight Italic:
 # ------------------------------------------------------------------------------
 # Bubble OceaNext
 # ------------------------------------------------------------------------------
-Bubble OceaNext:
+Bubble OceaNext B:
   card-mod-theme: Bubble OceaNext
   <<: *bubble_shared
   modes:
@@ -8018,7 +8017,7 @@ Bubble OceaNext:
 # ------------------------------------------------------------------------------
 # Dubble OceaNext
 # ------------------------------------------------------------------------------
-Dubble OceaNext:
+Dubble OceaNext B:
   card-mod-theme: Dubble OceaNext
   <<: *bubble_shared
   modes:
@@ -8099,7 +8098,7 @@ Dubble OceaNext:
 # ------------------------------------------------------------------------------
 # Bubble Darker
 # ------------------------------------------------------------------------------
-Bubble Darker:
+Bubble Darker B:
   card-mod-theme: Bubble Darker
   <<: *bubble_shared
   modes:
@@ -8180,7 +8179,7 @@ Bubble Darker:
 # ------------------------------------------------------------------------------
 # Dubble Darker
 # ------------------------------------------------------------------------------
-Dubble Darker:
+Dubble Darker B:
   card-mod-theme: Dubble Darker
   <<: *bubble_shared
   modes:
@@ -8261,7 +8260,7 @@ Dubble Darker:
 # ------------------------------------------------------------------------------
 # Bubble Twilight
 # ------------------------------------------------------------------------------
-Bubble Twilight:
+Bubble Twilight B:
   card-mod-theme: Bubble Twilight
   <<: *bubble_shared
   modes:
@@ -8342,7 +8341,7 @@ Bubble Twilight:
 # ------------------------------------------------------------------------------
 # Dubble Twilight
 # ------------------------------------------------------------------------------
-Dubble Twilight:
+Dubble Twilight B:
   card-mod-theme: Dubble Twilight
   <<: *bubble_shared
   modes:
@@ -8423,7 +8422,7 @@ Dubble Twilight:
 # ------------------------------------------------------------------------------
 # Bubble Quiet Light
 # ------------------------------------------------------------------------------
-Bubble Quiet Light:
+Bubble Quiet Light B:
   card-mod-theme: Bubble Quiet Light
   <<: *bubble_shared
   modes:
@@ -8504,7 +8503,7 @@ Bubble Quiet Light:
 # ------------------------------------------------------------------------------
 # Dubble Quiet Light
 # ------------------------------------------------------------------------------
-Dubble Quiet Light:
+Dubble Quiet Light B:
   card-mod-theme: Dubble Quiet Light
   <<: *bubble_shared
   modes:
@@ -8585,7 +8584,7 @@ Dubble Quiet Light:
 # ------------------------------------------------------------------------------
 # Bubble Abyss
 # ------------------------------------------------------------------------------
-Bubble Abyss:
+Bubble Abyss B:
   card-mod-theme: Bubble Abyss
   <<: *bubble_shared
   modes:
@@ -8666,7 +8665,7 @@ Bubble Abyss:
 # ------------------------------------------------------------------------------
 # Dubble Abyss
 # ------------------------------------------------------------------------------
-Dubble Abyss:
+Dubble Abyss B:
   card-mod-theme: Dubble Abyss
   <<: *bubble_shared
   modes:
@@ -8747,7 +8746,7 @@ Dubble Abyss:
 # ------------------------------------------------------------------------------
 # Bubble Kimbie Dark
 # ------------------------------------------------------------------------------
-Bubble Kimbie Dark:
+Bubble Kimbie Dark B:
   card-mod-theme: Bubble Kimbie Dark
   <<: *bubble_shared
   modes:
@@ -8828,7 +8827,7 @@ Bubble Kimbie Dark:
 # ------------------------------------------------------------------------------
 # Dubble Kimbie Dark
 # ------------------------------------------------------------------------------
-Dubble Kimbie Dark:
+Dubble Kimbie Dark B:
   card-mod-theme: Dubble Kimbie Dark
   <<: *bubble_shared
   modes:
@@ -8909,7 +8908,7 @@ Dubble Kimbie Dark:
 # ------------------------------------------------------------------------------
 # Bubble Red
 # ------------------------------------------------------------------------------
-Bubble Red:
+Bubble Red B:
   card-mod-theme: Bubble Red
   <<: *bubble_shared
   modes:
@@ -8990,7 +8989,7 @@ Bubble Red:
 # ------------------------------------------------------------------------------
 # Dubble Red
 # ------------------------------------------------------------------------------
-Dubble Red:
+Dubble Red B:
   card-mod-theme: Dubble Red
   <<: *bubble_shared
   modes:
@@ -9071,7 +9070,7 @@ Dubble Red:
 # ------------------------------------------------------------------------------
 # Bubble High Contrast
 # ------------------------------------------------------------------------------
-Bubble High Contrast:
+Bubble High Contrast B:
   card-mod-theme: Bubble High Contrast
   <<: *bubble_shared
   modes:
@@ -9152,7 +9151,7 @@ Bubble High Contrast:
 # ------------------------------------------------------------------------------
 # Dubble High Contrast
 # ------------------------------------------------------------------------------
-Dubble High Contrast:
+Dubble High Contrast B:
   card-mod-theme: Dubble High Contrast
   <<: *bubble_shared
   modes:
@@ -9233,7 +9232,7 @@ Dubble High Contrast:
 # ------------------------------------------------------------------------------
 # Bubble Default Dark+
 # ------------------------------------------------------------------------------
-Bubble Default Dark+:
+Bubble Default Dark+ B:
   card-mod-theme: Bubble Default Dark+
   <<: *bubble_shared
   modes:
@@ -9314,7 +9313,7 @@ Bubble Default Dark+:
 # ------------------------------------------------------------------------------
 # Dubble Default Dark+
 # ------------------------------------------------------------------------------
-Dubble Default Dark+:
+Dubble Default Dark+ B:
   card-mod-theme: Dubble Default Dark+
   <<: *bubble_shared
   modes:
@@ -9395,7 +9394,7 @@ Dubble Default Dark+:
 # ------------------------------------------------------------------------------
 # Bubble Default Light+
 # ------------------------------------------------------------------------------
-Bubble Default Light+:
+Bubble Default Light+ B:
   card-mod-theme: Bubble Default Light+
   <<: *bubble_shared
   modes:
@@ -9476,7 +9475,7 @@ Bubble Default Light+:
 # ------------------------------------------------------------------------------
 # Dubble Default Light+
 # ------------------------------------------------------------------------------
-Dubble Default Light+:
+Dubble Default Light+ B:
   card-mod-theme: Dubble Default Light+
   <<: *bubble_shared
   modes:
@@ -9557,7 +9556,7 @@ Dubble Default Light+:
 # ------------------------------------------------------------------------------
 # Bubble Tomorrow Night
 # ------------------------------------------------------------------------------
-Bubble Tomorrow Night:
+Bubble Tomorrow Night B:
   card-mod-theme: Bubble Tomorrow Night
   <<: *bubble_shared
   modes:
@@ -9638,7 +9637,7 @@ Bubble Tomorrow Night:
 # ------------------------------------------------------------------------------
 # Dubble Tomorrow Night
 # ------------------------------------------------------------------------------
-Dubble Tomorrow Night:
+Dubble Tomorrow Night B:
   card-mod-theme: Dubble Tomorrow Night
   <<: *bubble_shared
   modes:
@@ -9719,7 +9718,7 @@ Dubble Tomorrow Night:
 # ------------------------------------------------------------------------------
 # Bubble Tomorrow Night Blue
 # ------------------------------------------------------------------------------
-Bubble Tomorrow Night Blue:
+Bubble Tomorrow Night Blue B:
   card-mod-theme: Bubble Tomorrow Night Blue
   <<: *bubble_shared
   modes:
@@ -9800,7 +9799,7 @@ Bubble Tomorrow Night Blue:
 # ------------------------------------------------------------------------------
 # Dubble Tomorrow Night Blue
 # ------------------------------------------------------------------------------
-Dubble Tomorrow Night Blue:
+Dubble Tomorrow Night Blue B:
   card-mod-theme: Dubble Tomorrow Night Blue
   <<: *bubble_shared
   modes:
@@ -9877,7 +9876,7 @@ Dubble Tomorrow Night Blue:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light_base
-Bubble Oceanic Next:
+Bubble Oceanic Next B:
   card-mod-theme: Bubble Oceanic Next
   <<: *bubble_shared
   modes:
@@ -9958,7 +9957,7 @@ Bubble Oceanic Next:
 # ------------------------------------------------------------------------------
 # Dubble Oceanic Next
 # ------------------------------------------------------------------------------
-Dubble Oceanic Next:
+Dubble Oceanic Next B:
   card-mod-theme: Dubble Oceanic Next
   <<: *bubble_shared
   modes:
@@ -10035,7 +10034,7 @@ Dubble Oceanic Next:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light_base
-Bubble City Lights:
+Bubble City Lights B:
   card-mod-theme: Bubble City Lights
   <<: *bubble_shared
   modes:
@@ -10116,7 +10115,7 @@ Bubble City Lights:
 # ------------------------------------------------------------------------------
 # Dubble City Lights
 # ------------------------------------------------------------------------------
-Dubble City Lights:
+Dubble City Lights B:
   card-mod-theme: Dubble City Lights
   <<: *bubble_shared
   modes:
@@ -10197,7 +10196,7 @@ Dubble City Lights:
 # ------------------------------------------------------------------------------
 # Bubble Lucario
 # ------------------------------------------------------------------------------
-Bubble Lucario:
+Bubble Lucario B:
   card-mod-theme: Bubble Lucario
   <<: *bubble_shared
   modes:
@@ -10278,7 +10277,7 @@ Bubble Lucario:
 # ------------------------------------------------------------------------------
 # Dubble Lucario
 # ------------------------------------------------------------------------------
-Dubble Lucario:
+Dubble Lucario B:
   card-mod-theme: Dubble Lucario
   <<: *bubble_shared
   modes:
@@ -10359,7 +10358,7 @@ Dubble Lucario:
 # ------------------------------------------------------------------------------
 # Bubble Material Ocean
 # ------------------------------------------------------------------------------
-Bubble Material Ocean:
+Bubble Material Ocean B:
   card-mod-theme: Bubble Material Ocean
   <<: *bubble_shared
   modes:
@@ -10440,7 +10439,7 @@ Bubble Material Ocean:
 # ------------------------------------------------------------------------------
 # Dubble Material Ocean
 # ------------------------------------------------------------------------------
-Dubble Material Ocean:
+Dubble Material Ocean B:
   card-mod-theme: Dubble Material Ocean
   <<: *bubble_shared
   modes:
@@ -10521,7 +10520,7 @@ Dubble Material Ocean:
 # ------------------------------------------------------------------------------
 # Bubble Snazzy
 # ------------------------------------------------------------------------------
-Bubble Snazzy:
+Bubble Snazzy B:
   card-mod-theme: Bubble Snazzy
   <<: *bubble_shared
   modes:
@@ -10602,7 +10601,7 @@ Bubble Snazzy:
 # ------------------------------------------------------------------------------
 # Dubble Snazzy
 # ------------------------------------------------------------------------------
-Dubble Snazzy:
+Dubble Snazzy B:
   card-mod-theme: Dubble Snazzy
   <<: *bubble_shared
   modes:
@@ -10683,7 +10682,7 @@ Dubble Snazzy:
 # ------------------------------------------------------------------------------
 # Bubble Level Up
 # ------------------------------------------------------------------------------
-Bubble Level Up:
+Bubble Level Up B:
   card-mod-theme: Bubble Level Up
   <<: *bubble_shared
   modes:
@@ -10764,7 +10763,7 @@ Bubble Level Up:
 # ------------------------------------------------------------------------------
 # Dubble Level Up
 # ------------------------------------------------------------------------------
-Dubble Level Up:
+Dubble Level Up B:
   card-mod-theme: Dubble Level Up
   <<: *bubble_shared
   modes:
@@ -10845,7 +10844,7 @@ Dubble Level Up:
 # ------------------------------------------------------------------------------
 # Bubble Aura
 # ------------------------------------------------------------------------------
-Bubble Aura:
+Bubble Aura B:
   card-mod-theme: Bubble Aura
   <<: *bubble_shared
   modes:
@@ -10926,7 +10925,7 @@ Bubble Aura:
 # ------------------------------------------------------------------------------
 # Dubble Aura
 # ------------------------------------------------------------------------------
-Dubble Aura:
+Dubble Aura B:
   card-mod-theme: Dubble Aura
   <<: *bubble_shared
   modes:
@@ -11007,7 +11006,7 @@ Dubble Aura:
 # ------------------------------------------------------------------------------
 # Bubble Nordic
 # ------------------------------------------------------------------------------
-Bubble Nordic:
+Bubble Nordic B:
   card-mod-theme: Bubble Nordic
   <<: *bubble_shared
   modes:
@@ -11088,7 +11087,7 @@ Bubble Nordic:
 # ------------------------------------------------------------------------------
 # Dubble Nordic
 # ------------------------------------------------------------------------------
-Dubble Nordic:
+Dubble Nordic B:
   card-mod-theme: Dubble Nordic
   <<: *bubble_shared
   modes:
@@ -11169,7 +11168,7 @@ Dubble Nordic:
 # ------------------------------------------------------------------------------
 # Bubble Blue
 # ------------------------------------------------------------------------------
-Bubble Blue:
+Bubble Blue B:
   card-mod-theme: Bubble Blue
   <<: *bubble_shared
   modes:
@@ -11250,7 +11249,7 @@ Bubble Blue:
 # ------------------------------------------------------------------------------
 # Dubble Blue
 # ------------------------------------------------------------------------------
-Dubble Blue:
+Dubble Blue B:
   card-mod-theme: Dubble Blue
   <<: *bubble_shared
   modes:
@@ -11331,7 +11330,7 @@ Dubble Blue:
 # ------------------------------------------------------------------------------
 # Bubble Kimbie Light
 # ------------------------------------------------------------------------------
-Bubble Kimbie Light:
+Bubble Kimbie Light B:
   card-mod-theme: Bubble Kimbie Light
   <<: *bubble_shared
   modes:
@@ -11412,7 +11411,7 @@ Bubble Kimbie Light:
 # ------------------------------------------------------------------------------
 # Dubble Kimbie Light
 # ------------------------------------------------------------------------------
-Dubble Kimbie Light:
+Dubble Kimbie Light B:
   card-mod-theme: Dubble Kimbie Light
   <<: *bubble_shared
   modes:
@@ -11493,7 +11492,7 @@ Dubble Kimbie Light:
 # ------------------------------------------------------------------------------
 # Bubble Espresso
 # ------------------------------------------------------------------------------
-Bubble Espresso:
+Bubble Espresso B:
   card-mod-theme: Bubble Espresso
   <<: *bubble_shared
   modes:
@@ -11574,7 +11573,7 @@ Bubble Espresso:
 # ------------------------------------------------------------------------------
 # Dubble Espresso
 # ------------------------------------------------------------------------------
-Dubble Espresso:
+Dubble Espresso B:
   card-mod-theme: Dubble Espresso
   <<: *bubble_shared
   modes:
@@ -11655,7 +11654,7 @@ Dubble Espresso:
 # ------------------------------------------------------------------------------
 # Bubble Flatland
 # ------------------------------------------------------------------------------
-Bubble Flatland:
+Bubble Flatland B:
   card-mod-theme: Bubble Flatland
   <<: *bubble_shared
   modes:
@@ -11736,7 +11735,7 @@ Bubble Flatland:
 # ------------------------------------------------------------------------------
 # Dubble Flatland
 # ------------------------------------------------------------------------------
-Dubble Flatland:
+Dubble Flatland B:
   card-mod-theme: Dubble Flatland
   <<: *bubble_shared
   modes:
@@ -11817,7 +11816,7 @@ Dubble Flatland:
 # ------------------------------------------------------------------------------
 # Bubble 3024 Night
 # ------------------------------------------------------------------------------
-Bubble 3024 Night:
+Bubble 3024 Night B:
   card-mod-theme: Bubble 3024 Night
   <<: *bubble_shared
   modes:
@@ -11898,7 +11897,7 @@ Bubble 3024 Night:
 # ------------------------------------------------------------------------------
 # Dubble 3024 Night
 # ------------------------------------------------------------------------------
-Dubble 3024 Night:
+Dubble 3024 Night B:
   card-mod-theme: Dubble 3024 Night
   <<: *bubble_shared
   modes:
@@ -11979,7 +11978,7 @@ Dubble 3024 Night:
 # ------------------------------------------------------------------------------
 # Bubble Adventure Time
 # ------------------------------------------------------------------------------
-Bubble Adventure Time:
+Bubble Adventure Time B:
   card-mod-theme: Bubble Adventure Time
   <<: *bubble_shared
   modes:
@@ -12060,7 +12059,7 @@ Bubble Adventure Time:
 # ------------------------------------------------------------------------------
 # Dubble Adventure Time
 # ------------------------------------------------------------------------------
-Dubble Adventure Time:
+Dubble Adventure Time B:
   card-mod-theme: Dubble Adventure Time
   <<: *bubble_shared
   modes:
@@ -12141,7 +12140,7 @@ Dubble Adventure Time:
 # ------------------------------------------------------------------------------
 # Bubble Afterglow
 # ------------------------------------------------------------------------------
-Bubble Afterglow:
+Bubble Afterglow B:
   card-mod-theme: Bubble Afterglow
   <<: *bubble_shared
   modes:
@@ -12222,7 +12221,7 @@ Bubble Afterglow:
 # ------------------------------------------------------------------------------
 # Dubble Afterglow
 # ------------------------------------------------------------------------------
-Dubble Afterglow:
+Dubble Afterglow B:
   card-mod-theme: Dubble Afterglow
   <<: *bubble_shared
   modes:
@@ -12303,7 +12302,7 @@ Dubble Afterglow:
 # ------------------------------------------------------------------------------
 # Bubble Alien Blood
 # ------------------------------------------------------------------------------
-Bubble Alien Blood:
+Bubble Alien Blood B:
   card-mod-theme: Bubble Alien Blood
   <<: *bubble_shared
   modes:
@@ -12384,7 +12383,7 @@ Bubble Alien Blood:
 # ------------------------------------------------------------------------------
 # Dubble Alien Blood
 # ------------------------------------------------------------------------------
-Dubble Alien Blood:
+Dubble Alien Blood B:
   card-mod-theme: Dubble Alien Blood
   <<: *bubble_shared
   modes:
@@ -12465,7 +12464,7 @@ Dubble Alien Blood:
 # ------------------------------------------------------------------------------
 # Bubble Ayu Dark
 # ------------------------------------------------------------------------------
-Bubble Ayu Dark:
+Bubble Ayu Dark B:
   card-mod-theme: Bubble Ayu Dark
   <<: *bubble_shared
   modes:
@@ -12546,7 +12545,7 @@ Bubble Ayu Dark:
 # ------------------------------------------------------------------------------
 # Dubble Ayu Dark
 # ------------------------------------------------------------------------------
-Dubble Ayu Dark:
+Dubble Ayu Dark B:
   card-mod-theme: Dubble Ayu Dark
   <<: *bubble_shared
   modes:
@@ -12627,7 +12626,7 @@ Dubble Ayu Dark:
 # ------------------------------------------------------------------------------
 # Bubble Ayu Light
 # ------------------------------------------------------------------------------
-Bubble Ayu Light:
+Bubble Ayu Light B:
   card-mod-theme: Bubble Ayu Light
   <<: *bubble_shared
   modes:
@@ -12708,7 +12707,7 @@ Bubble Ayu Light:
 # ------------------------------------------------------------------------------
 # Dubble Ayu Light
 # ------------------------------------------------------------------------------
-Dubble Ayu Light:
+Dubble Ayu Light B:
   card-mod-theme: Dubble Ayu Light
   <<: *bubble_shared
   modes:
@@ -12789,7 +12788,7 @@ Dubble Ayu Light:
 # ------------------------------------------------------------------------------
 # Bubble B3
 # ------------------------------------------------------------------------------
-Bubble B3:
+Bubble B3 B:
   card-mod-theme: Bubble B3
   <<: *bubble_shared
   modes:
@@ -12870,7 +12869,7 @@ Bubble B3:
 # ------------------------------------------------------------------------------
 # Dubble B3
 # ------------------------------------------------------------------------------
-Dubble B3:
+Dubble B3 B:
   card-mod-theme: Dubble B3
   <<: *bubble_shared
   modes:
@@ -12951,7 +12950,7 @@ Dubble B3:
 # ------------------------------------------------------------------------------
 # Bubble Base16
 # ------------------------------------------------------------------------------
-Bubble Base16:
+Bubble Base16 B:
   card-mod-theme: Bubble Base16
   <<: *bubble_shared
   modes:
@@ -13032,7 +13031,7 @@ Bubble Base16:
 # ------------------------------------------------------------------------------
 # Dubble Base16
 # ------------------------------------------------------------------------------
-Dubble Base16:
+Dubble Base16 B:
   card-mod-theme: Dubble Base16
   <<: *bubble_shared
   modes:
@@ -13113,7 +13112,7 @@ Dubble Base16:
 # ------------------------------------------------------------------------------
 # Bubble Birds of Paradise
 # ------------------------------------------------------------------------------
-Bubble Birds of Paradise:
+Bubble Birds of Paradise B:
   card-mod-theme: Bubble Birds of Paradise
   <<: *bubble_shared
   modes:
@@ -13194,7 +13193,7 @@ Bubble Birds of Paradise:
 # ------------------------------------------------------------------------------
 # Dubble Birds of Paradise
 # ------------------------------------------------------------------------------
-Dubble Birds of Paradise:
+Dubble Birds of Paradise B:
   card-mod-theme: Dubble Birds of Paradise
   <<: *bubble_shared
   modes:
@@ -13275,7 +13274,7 @@ Dubble Birds of Paradise:
 # ------------------------------------------------------------------------------
 # Bubble Blackboard
 # ------------------------------------------------------------------------------
-Bubble Blackboard:
+Bubble Blackboard B:
   card-mod-theme: Bubble Blackboard
   <<: *bubble_shared
   modes:
@@ -13356,7 +13355,7 @@ Bubble Blackboard:
 # ------------------------------------------------------------------------------
 # Dubble Blackboard
 # ------------------------------------------------------------------------------
-Dubble Blackboard:
+Dubble Blackboard B:
   card-mod-theme: Dubble Blackboard
   <<: *bubble_shared
   modes:
@@ -13437,7 +13436,7 @@ Dubble Blackboard:
 # ------------------------------------------------------------------------------
 # Bubble Blueberry
 # ------------------------------------------------------------------------------
-Bubble Blueberry:
+Bubble Blueberry B:
   card-mod-theme: Bubble Blueberry
   <<: *bubble_shared
   modes:
@@ -13518,7 +13517,7 @@ Bubble Blueberry:
 # ------------------------------------------------------------------------------
 # Dubble Blueberry
 # ------------------------------------------------------------------------------
-Dubble Blueberry:
+Dubble Blueberry B:
   card-mod-theme: Dubble Blueberry
   <<: *bubble_shared
   modes:
@@ -13599,7 +13598,7 @@ Dubble Blueberry:
 # ------------------------------------------------------------------------------
 # Bubble Brackets Light
 # ------------------------------------------------------------------------------
-Bubble Brackets Light:
+Bubble Brackets Light B:
   card-mod-theme: Bubble Brackets Light
   <<: *bubble_shared
   modes:
@@ -13680,7 +13679,7 @@ Bubble Brackets Light:
 # ------------------------------------------------------------------------------
 # Dubble Brackets Light
 # ------------------------------------------------------------------------------
-Dubble Brackets Light:
+Dubble Brackets Light B:
   card-mod-theme: Dubble Brackets Light
   <<: *bubble_shared
   modes:
@@ -13761,7 +13760,7 @@ Dubble Brackets Light:
 # ------------------------------------------------------------------------------
 # Bubble Brogrammer
 # ------------------------------------------------------------------------------
-Bubble Brogrammer:
+Bubble Brogrammer B:
   card-mod-theme: Bubble Brogrammer
   <<: *bubble_shared
   modes:
@@ -13842,7 +13841,7 @@ Bubble Brogrammer:
 # ------------------------------------------------------------------------------
 # Dubble Brogrammer
 # ------------------------------------------------------------------------------
-Dubble Brogrammer:
+Dubble Brogrammer B:
   card-mod-theme: Dubble Brogrammer
   <<: *bubble_shared
   modes:
@@ -13923,7 +13922,7 @@ Dubble Brogrammer:
 # ------------------------------------------------------------------------------
 # Bubble Chalk
 # ------------------------------------------------------------------------------
-Bubble Chalk:
+Bubble Chalk B:
   card-mod-theme: Bubble Chalk
   <<: *bubble_shared
   modes:
@@ -14004,7 +14003,7 @@ Bubble Chalk:
 # ------------------------------------------------------------------------------
 # Dubble Chalk
 # ------------------------------------------------------------------------------
-Dubble Chalk:
+Dubble Chalk B:
   card-mod-theme: Dubble Chalk
   <<: *bubble_shared
   modes:
@@ -14085,7 +14084,7 @@ Dubble Chalk:
 # ------------------------------------------------------------------------------
 # Bubble Chester
 # ------------------------------------------------------------------------------
-Bubble Chester:
+Bubble Chester B:
   card-mod-theme: Bubble Chester
   <<: *bubble_shared
   modes:
@@ -14166,7 +14165,7 @@ Bubble Chester:
 # ------------------------------------------------------------------------------
 # Dubble Chester
 # ------------------------------------------------------------------------------
-Dubble Chester:
+Dubble Chester B:
   card-mod-theme: Dubble Chester
   <<: *bubble_shared
   modes:
@@ -14247,7 +14246,7 @@ Dubble Chester:
 # ------------------------------------------------------------------------------
 # Bubble Cobalt
 # ------------------------------------------------------------------------------
-Bubble Cobalt:
+Bubble Cobalt B:
   card-mod-theme: Bubble Cobalt
   <<: *bubble_shared
   modes:
@@ -14328,7 +14327,7 @@ Bubble Cobalt:
 # ------------------------------------------------------------------------------
 # Dubble Cobalt
 # ------------------------------------------------------------------------------
-Dubble Cobalt:
+Dubble Cobalt B:
   card-mod-theme: Dubble Cobalt
   <<: *bubble_shared
   modes:
@@ -14409,7 +14408,7 @@ Dubble Cobalt:
 # ------------------------------------------------------------------------------
 # Bubble Cool Glow
 # ------------------------------------------------------------------------------
-Bubble Cool Glow:
+Bubble Cool Glow B:
   card-mod-theme: Bubble Cool Glow
   <<: *bubble_shared
   modes:
@@ -14490,7 +14489,7 @@ Bubble Cool Glow:
 # ------------------------------------------------------------------------------
 # Dubble Cool Glow
 # ------------------------------------------------------------------------------
-Dubble Cool Glow:
+Dubble Cool Glow B:
   card-mod-theme: Dubble Cool Glow
   <<: *bubble_shared
   modes:
@@ -14571,7 +14570,7 @@ Dubble Cool Glow:
 # ------------------------------------------------------------------------------
 # Bubble Cream
 # ------------------------------------------------------------------------------
-Bubble Cream:
+Bubble Cream B:
   card-mod-theme: Bubble Cream
   <<: *bubble_shared
   modes:
@@ -14652,7 +14651,7 @@ Bubble Cream:
 # ------------------------------------------------------------------------------
 # Dubble Cream
 # ------------------------------------------------------------------------------
-Dubble Cream:
+Dubble Cream B:
   card-mod-theme: Dubble Cream
   <<: *bubble_shared
   modes:
@@ -14733,7 +14732,7 @@ Dubble Cream:
 # ------------------------------------------------------------------------------
 # Bubble Cybertron
 # ------------------------------------------------------------------------------
-Bubble Cybertron:
+Bubble Cybertron B:
   card-mod-theme: Bubble Cybertron
   <<: *bubble_shared
   modes:
@@ -14814,7 +14813,7 @@ Bubble Cybertron:
 # ------------------------------------------------------------------------------
 # Dubble Cybertron
 # ------------------------------------------------------------------------------
-Dubble Cybertron:
+Dubble Cybertron B:
   card-mod-theme: Dubble Cybertron
   <<: *bubble_shared
   modes:
@@ -14895,7 +14894,7 @@ Dubble Cybertron:
 # ------------------------------------------------------------------------------
 # Bubble Cyberpunk Edge
 # ------------------------------------------------------------------------------
-Bubble Cyberpunk Edge:
+Bubble Cyberpunk Edge B:
   card-mod-theme: Bubble Cyberpunk Edge
   <<: *bubble_shared
   modes:
@@ -14976,7 +14975,7 @@ Bubble Cyberpunk Edge:
 # ------------------------------------------------------------------------------
 # Dubble Cyberpunk Edge
 # ------------------------------------------------------------------------------
-Dubble Cyberpunk Edge:
+Dubble Cyberpunk Edge B:
   card-mod-theme: Dubble Cyberpunk Edge
   <<: *bubble_shared
   modes:
@@ -15057,7 +15056,7 @@ Dubble Cyberpunk Edge:
 # ------------------------------------------------------------------------------
 # Bubble Dark Modern
 # ------------------------------------------------------------------------------
-Bubble Dark Modern:
+Bubble Dark Modern B:
   card-mod-theme: Bubble Dark Modern
   <<: *bubble_shared
   modes:
@@ -15138,7 +15137,7 @@ Bubble Dark Modern:
 # ------------------------------------------------------------------------------
 # Dubble Dark Modern
 # ------------------------------------------------------------------------------
-Dubble Dark Modern:
+Dubble Dark Modern B:
   card-mod-theme: Dubble Dark Modern
   <<: *bubble_shared
   modes:
@@ -15219,7 +15218,7 @@ Dubble Dark Modern:
 # ------------------------------------------------------------------------------
 # Bubble Dark+
 # ------------------------------------------------------------------------------
-Bubble Dark+:
+Bubble Dark+ B:
   card-mod-theme: Bubble Dark+
   <<: *bubble_shared
   modes:
@@ -15300,7 +15299,7 @@ Bubble Dark+:
 # ------------------------------------------------------------------------------
 # Dubble Dark+
 # ------------------------------------------------------------------------------
-Dubble Dark+:
+Dubble Dark+ B:
   card-mod-theme: Dubble Dark+
   <<: *bubble_shared
   modes:
@@ -15381,7 +15380,7 @@ Dubble Dark+:
 # ------------------------------------------------------------------------------
 # Bubble Doki
 # ------------------------------------------------------------------------------
-Bubble Doki:
+Bubble Doki B:
   card-mod-theme: Bubble Doki
   <<: *bubble_shared
   modes:
@@ -15462,7 +15461,7 @@ Bubble Doki:
 # ------------------------------------------------------------------------------
 # Dubble Doki
 # ------------------------------------------------------------------------------
-Dubble Doki:
+Dubble Doki B:
   card-mod-theme: Dubble Doki
   <<: *bubble_shared
   modes:
@@ -15543,7 +15542,7 @@ Dubble Doki:
 # ------------------------------------------------------------------------------
 # Bubble DotGov
 # ------------------------------------------------------------------------------
-Bubble DotGov:
+Bubble DotGov B:
   card-mod-theme: Bubble DotGov
   <<: *bubble_shared
   modes:
@@ -15624,7 +15623,7 @@ Bubble DotGov:
 # ------------------------------------------------------------------------------
 # Dubble DotGov
 # ------------------------------------------------------------------------------
-Dubble DotGov:
+Dubble DotGov B:
   card-mod-theme: Dubble DotGov
   <<: *bubble_shared
   modes:
@@ -15705,7 +15704,7 @@ Dubble DotGov:
 # ------------------------------------------------------------------------------
 # Bubble Earthsong
 # ------------------------------------------------------------------------------
-Bubble Earthsong:
+Bubble Earthsong B:
   card-mod-theme: Bubble Earthsong
   <<: *bubble_shared
   modes:
@@ -15786,7 +15785,7 @@ Bubble Earthsong:
 # ------------------------------------------------------------------------------
 # Dubble Earthsong
 # ------------------------------------------------------------------------------
-Dubble Earthsong:
+Dubble Earthsong B:
   card-mod-theme: Dubble Earthsong
   <<: *bubble_shared
   modes:
@@ -15867,7 +15866,7 @@ Dubble Earthsong:
 # ------------------------------------------------------------------------------
 # Bubble Eiffel
 # ------------------------------------------------------------------------------
-Bubble Eiffel:
+Bubble Eiffel B:
   card-mod-theme: Bubble Eiffel
   <<: *bubble_shared
   modes:
@@ -15948,7 +15947,7 @@ Bubble Eiffel:
 # ------------------------------------------------------------------------------
 # Dubble Eiffel
 # ------------------------------------------------------------------------------
-Dubble Eiffel:
+Dubble Eiffel B:
   card-mod-theme: Dubble Eiffel
   <<: *bubble_shared
   modes:
@@ -16029,7 +16028,7 @@ Dubble Eiffel:
 # ------------------------------------------------------------------------------
 # Bubble Espresso Soda
 # ------------------------------------------------------------------------------
-Bubble Espresso Soda:
+Bubble Espresso Soda B:
   card-mod-theme: Bubble Espresso Soda
   <<: *bubble_shared
   modes:
@@ -16110,7 +16109,7 @@ Bubble Espresso Soda:
 # ------------------------------------------------------------------------------
 # Dubble Espresso Soda
 # ------------------------------------------------------------------------------
-Dubble Espresso Soda:
+Dubble Espresso Soda B:
   card-mod-theme: Dubble Espresso Soda
   <<: *bubble_shared
   modes:
@@ -16191,7 +16190,7 @@ Dubble Espresso Soda:
 # ------------------------------------------------------------------------------
 # Bubble Free
 # ------------------------------------------------------------------------------
-Bubble Free:
+Bubble Free B:
   card-mod-theme: Bubble Free
   <<: *bubble_shared
   modes:
@@ -16272,7 +16271,7 @@ Bubble Free:
 # ------------------------------------------------------------------------------
 # Dubble Free
 # ------------------------------------------------------------------------------
-Dubble Free:
+Dubble Free B:
   card-mod-theme: Dubble Free
   <<: *bubble_shared
   modes:
@@ -16353,7 +16352,7 @@ Dubble Free:
 # ------------------------------------------------------------------------------
 # Bubble GitHub Plus
 # ------------------------------------------------------------------------------
-Bubble GitHub Plus:
+Bubble GitHub Plus B:
   card-mod-theme: Bubble GitHub Plus
   <<: *bubble_shared
   modes:
@@ -16434,7 +16433,7 @@ Bubble GitHub Plus:
 # ------------------------------------------------------------------------------
 # Dubble GitHub Plus
 # ------------------------------------------------------------------------------
-Dubble GitHub Plus:
+Dubble GitHub Plus B:
   card-mod-theme: Dubble GitHub Plus
   <<: *bubble_shared
   modes:
@@ -16515,7 +16514,7 @@ Dubble GitHub Plus:
 # ------------------------------------------------------------------------------
 # Bubble Glitter
 # ------------------------------------------------------------------------------
-Bubble Glitter:
+Bubble Glitter B:
   card-mod-theme: Bubble Glitter
   <<: *bubble_shared
   modes:
@@ -16596,7 +16595,7 @@ Bubble Glitter:
 # ------------------------------------------------------------------------------
 # Dubble Glitter
 # ------------------------------------------------------------------------------
-Dubble Glitter:
+Dubble Glitter B:
   card-mod-theme: Dubble Glitter
   <<: *bubble_shared
   modes:
@@ -16677,7 +16676,7 @@ Dubble Glitter:
 # ------------------------------------------------------------------------------
 # Bubble Gloom
 # ------------------------------------------------------------------------------
-Bubble Gloom:
+Bubble Gloom B:
   card-mod-theme: Bubble Gloom
   <<: *bubble_shared
   modes:
@@ -16758,7 +16757,7 @@ Bubble Gloom:
 # ------------------------------------------------------------------------------
 # Dubble Gloom
 # ------------------------------------------------------------------------------
-Dubble Gloom:
+Dubble Gloom B:
   card-mod-theme: Dubble Gloom
   <<: *bubble_shared
   modes:
@@ -16839,7 +16838,7 @@ Dubble Gloom:
 # ------------------------------------------------------------------------------
 # Bubble Gradient
 # ------------------------------------------------------------------------------
-Bubble Gradient:
+Bubble Gradient B:
   card-mod-theme: Bubble Gradient
   <<: *bubble_shared
   modes:
@@ -16920,7 +16919,7 @@ Bubble Gradient:
 # ------------------------------------------------------------------------------
 # Dubble Gradient
 # ------------------------------------------------------------------------------
-Dubble Gradient:
+Dubble Gradient B:
   card-mod-theme: Dubble Gradient
   <<: *bubble_shared
   modes:
@@ -17001,7 +17000,7 @@ Dubble Gradient:
 # ------------------------------------------------------------------------------
 # Bubble Gray Matter
 # ------------------------------------------------------------------------------
-Bubble Gray Matter:
+Bubble Gray Matter B:
   card-mod-theme: Bubble Gray Matter
   <<: *bubble_shared
   modes:
@@ -17082,7 +17081,7 @@ Bubble Gray Matter:
 # ------------------------------------------------------------------------------
 # Dubble Gray Matter
 # ------------------------------------------------------------------------------
-Dubble Gray Matter:
+Dubble Gray Matter B:
   card-mod-theme: Dubble Gray Matter
   <<: *bubble_shared
   modes:
@@ -17163,7 +17162,7 @@ Dubble Gray Matter:
 # ------------------------------------------------------------------------------
 # Bubble Green
 # ------------------------------------------------------------------------------
-Bubble Green:
+Bubble Green B:
   card-mod-theme: Bubble Green
   <<: *bubble_shared
   modes:
@@ -17244,7 +17243,7 @@ Bubble Green:
 # ------------------------------------------------------------------------------
 # Dubble Green
 # ------------------------------------------------------------------------------
-Dubble Green:
+Dubble Green B:
   card-mod-theme: Dubble Green
   <<: *bubble_shared
   modes:
@@ -17325,7 +17324,7 @@ Dubble Green:
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox Dark Hard
 # ------------------------------------------------------------------------------
-Bubble Gruvbox Dark Hard:
+Bubble Gruvbox Dark Hard B:
   card-mod-theme: Bubble Gruvbox Dark Hard
   <<: *bubble_shared
   modes:
@@ -17406,7 +17405,7 @@ Bubble Gruvbox Dark Hard:
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox Dark Hard
 # ------------------------------------------------------------------------------
-Dubble Gruvbox Dark Hard:
+Dubble Gruvbox Dark Hard B:
   card-mod-theme: Dubble Gruvbox Dark Hard
   <<: *bubble_shared
   modes:
@@ -17487,7 +17486,7 @@ Dubble Gruvbox Dark Hard:
 # ------------------------------------------------------------------------------
 # Bubble Gruvbox Dark Soft
 # ------------------------------------------------------------------------------
-Bubble Gruvbox Dark Soft:
+Bubble Gruvbox Dark Soft B:
   card-mod-theme: Bubble Gruvbox Dark Soft
   <<: *bubble_shared
   modes:
@@ -17568,7 +17567,7 @@ Bubble Gruvbox Dark Soft:
 # ------------------------------------------------------------------------------
 # Dubble Gruvbox Dark Soft
 # ------------------------------------------------------------------------------
-Dubble Gruvbox Dark Soft:
+Dubble Gruvbox Dark Soft B:
   card-mod-theme: Dubble Gruvbox Dark Soft
   <<: *bubble_shared
   modes:
@@ -17649,7 +17648,7 @@ Dubble Gruvbox Dark Soft:
 # ------------------------------------------------------------------------------
 # Bubble Iceberg
 # ------------------------------------------------------------------------------
-Bubble Iceberg:
+Bubble Iceberg B:
   card-mod-theme: Bubble Iceberg
   <<: *bubble_shared
   modes:
@@ -17730,7 +17729,7 @@ Bubble Iceberg:
 # ------------------------------------------------------------------------------
 # Dubble Iceberg
 # ------------------------------------------------------------------------------
-Dubble Iceberg:
+Dubble Iceberg B:
   card-mod-theme: Dubble Iceberg
   <<: *bubble_shared
   modes:
@@ -17811,7 +17810,7 @@ Dubble Iceberg:
 # ------------------------------------------------------------------------------
 # Bubble JetBrains Darcula
 # ------------------------------------------------------------------------------
-Bubble JetBrains Darcula:
+Bubble JetBrains Darcula B:
   card-mod-theme: Bubble JetBrains Darcula
   <<: *bubble_shared
   modes:
@@ -17892,7 +17891,7 @@ Bubble JetBrains Darcula:
 # ------------------------------------------------------------------------------
 # Dubble JetBrains Darcula
 # ------------------------------------------------------------------------------
-Dubble JetBrains Darcula:
+Dubble JetBrains Darcula B:
   card-mod-theme: Dubble JetBrains Darcula
   <<: *bubble_shared
   modes:
@@ -17973,7 +17972,7 @@ Dubble JetBrains Darcula:
 # ------------------------------------------------------------------------------
 # Bubble LaserWave
 # ------------------------------------------------------------------------------
-Bubble LaserWave:
+Bubble LaserWave B:
   card-mod-theme: Bubble LaserWave
   <<: *bubble_shared
   modes:
@@ -18054,7 +18053,7 @@ Bubble LaserWave:
 # ------------------------------------------------------------------------------
 # Dubble LaserWave
 # ------------------------------------------------------------------------------
-Dubble LaserWave:
+Dubble LaserWave B:
   card-mod-theme: Dubble LaserWave
   <<: *bubble_shared
   modes:
@@ -18135,7 +18134,7 @@ Dubble LaserWave:
 # ------------------------------------------------------------------------------
 # Bubble Light Modern
 # ------------------------------------------------------------------------------
-Bubble Light Modern:
+Bubble Light Modern B:
   card-mod-theme: Bubble Light Modern
   <<: *bubble_shared
   modes:
@@ -18216,7 +18215,7 @@ Bubble Light Modern:
 # ------------------------------------------------------------------------------
 # Dubble Light Modern
 # ------------------------------------------------------------------------------
-Dubble Light Modern:
+Dubble Light Modern B:
   card-mod-theme: Dubble Light Modern
   <<: *bubble_shared
   modes:
@@ -18297,7 +18296,7 @@ Dubble Light Modern:
 # ------------------------------------------------------------------------------
 # Bubble Luna
 # ------------------------------------------------------------------------------
-Bubble Luna:
+Bubble Luna B:
   card-mod-theme: Bubble Luna
   <<: *bubble_shared
   modes:
@@ -18378,7 +18377,7 @@ Bubble Luna:
 # ------------------------------------------------------------------------------
 # Dubble Luna
 # ------------------------------------------------------------------------------
-Dubble Luna:
+Dubble Luna B:
   card-mod-theme: Dubble Luna
   <<: *bubble_shared
   modes:
@@ -18459,7 +18458,7 @@ Dubble Luna:
 # ------------------------------------------------------------------------------
 # Bubble Material Theme
 # ------------------------------------------------------------------------------
-Bubble Material Theme:
+Bubble Material Theme B:
   card-mod-theme: Bubble Material Theme
   <<: *bubble_shared
   modes:
@@ -18540,7 +18539,7 @@ Bubble Material Theme:
 # ------------------------------------------------------------------------------
 # Dubble Material Theme
 # ------------------------------------------------------------------------------
-Dubble Material Theme:
+Dubble Material Theme B:
   card-mod-theme: Dubble Material Theme
   <<: *bubble_shared
   modes:
@@ -18621,7 +18620,7 @@ Dubble Material Theme:
 # ------------------------------------------------------------------------------
 # Bubble Mellow
 # ------------------------------------------------------------------------------
-Bubble Mellow:
+Bubble Mellow B:
   card-mod-theme: Bubble Mellow
   <<: *bubble_shared
   modes:
@@ -18702,7 +18701,7 @@ Bubble Mellow:
 # ------------------------------------------------------------------------------
 # Dubble Mellow
 # ------------------------------------------------------------------------------
-Dubble Mellow:
+Dubble Mellow B:
   card-mod-theme: Dubble Mellow
   <<: *bubble_shared
   modes:
@@ -18783,7 +18782,7 @@ Dubble Mellow:
 # ------------------------------------------------------------------------------
 # Bubble Mint
 # ------------------------------------------------------------------------------
-Bubble Mint:
+Bubble Mint B:
   card-mod-theme: Bubble Mint
   <<: *bubble_shared
   modes:
@@ -18864,7 +18863,7 @@ Bubble Mint:
 # ------------------------------------------------------------------------------
 # Dubble Mint
 # ------------------------------------------------------------------------------
-Dubble Mint:
+Dubble Mint B:
   card-mod-theme: Dubble Mint
   <<: *bubble_shared
   modes:
@@ -18945,7 +18944,7 @@ Dubble Mint:
 # ------------------------------------------------------------------------------
 # Bubble Moonlight
 # ------------------------------------------------------------------------------
-Bubble Moonlight:
+Bubble Moonlight B:
   card-mod-theme: Bubble Moonlight
   <<: *bubble_shared
   modes:
@@ -19026,7 +19025,7 @@ Bubble Moonlight:
 # ------------------------------------------------------------------------------
 # Dubble Moonlight
 # ------------------------------------------------------------------------------
-Dubble Moonlight:
+Dubble Moonlight B:
   card-mod-theme: Dubble Moonlight
   <<: *bubble_shared
   modes:
@@ -19107,7 +19106,7 @@ Dubble Moonlight:
 # ------------------------------------------------------------------------------
 # Bubble Night Rider
 # ------------------------------------------------------------------------------
-Bubble Night Rider:
+Bubble Night Rider B:
   card-mod-theme: Bubble Night Rider
   <<: *bubble_shared
   modes:
@@ -19188,7 +19187,7 @@ Bubble Night Rider:
 # ------------------------------------------------------------------------------
 # Dubble Night Rider
 # ------------------------------------------------------------------------------
-Dubble Night Rider:
+Dubble Night Rider B:
   card-mod-theme: Dubble Night Rider
   <<: *bubble_shared
   modes:
@@ -19269,7 +19268,7 @@ Dubble Night Rider:
 # ------------------------------------------------------------------------------
 # Bubble Nostromo
 # ------------------------------------------------------------------------------
-Bubble Nostromo:
+Bubble Nostromo B:
   card-mod-theme: Bubble Nostromo
   <<: *bubble_shared
   modes:
@@ -19350,7 +19349,7 @@ Bubble Nostromo:
 # ------------------------------------------------------------------------------
 # Dubble Nostromo
 # ------------------------------------------------------------------------------
-Dubble Nostromo:
+Dubble Nostromo B:
   card-mod-theme: Dubble Nostromo
   <<: *bubble_shared
   modes:
@@ -19431,7 +19430,7 @@ Dubble Nostromo:
 # ------------------------------------------------------------------------------
 # Bubble Obsidian
 # ------------------------------------------------------------------------------
-Bubble Obsidian:
+Bubble Obsidian B:
   card-mod-theme: Bubble Obsidian
   <<: *bubble_shared
   modes:
@@ -19512,7 +19511,7 @@ Bubble Obsidian:
 # ------------------------------------------------------------------------------
 # Dubble Obsidian
 # ------------------------------------------------------------------------------
-Dubble Obsidian:
+Dubble Obsidian B:
   card-mod-theme: Dubble Obsidian
   <<: *bubble_shared
   modes:
@@ -19593,7 +19592,7 @@ Dubble Obsidian:
 # ------------------------------------------------------------------------------
 # Bubble Oceanic
 # ------------------------------------------------------------------------------
-Bubble Oceanic:
+Bubble Oceanic B:
   card-mod-theme: Bubble Oceanic
   <<: *bubble_shared
   modes:
@@ -19674,7 +19673,7 @@ Bubble Oceanic:
 # ------------------------------------------------------------------------------
 # Dubble Oceanic
 # ------------------------------------------------------------------------------
-Dubble Oceanic:
+Dubble Oceanic B:
   card-mod-theme: Dubble Oceanic
   <<: *bubble_shared
   modes:
@@ -19755,7 +19754,7 @@ Dubble Oceanic:
 # ------------------------------------------------------------------------------
 # Bubble Pastel
 # ------------------------------------------------------------------------------
-Bubble Pastel:
+Bubble Pastel B:
   card-mod-theme: Bubble Pastel
   <<: *bubble_shared
   modes:
@@ -19836,7 +19835,7 @@ Bubble Pastel:
 # ------------------------------------------------------------------------------
 # Dubble Pastel
 # ------------------------------------------------------------------------------
-Dubble Pastel:
+Dubble Pastel B:
   card-mod-theme: Dubble Pastel
   <<: *bubble_shared
   modes:
@@ -19917,7 +19916,7 @@ Dubble Pastel:
 # ------------------------------------------------------------------------------
 # Bubble Plastic
 # ------------------------------------------------------------------------------
-Bubble Plastic:
+Bubble Plastic B:
   card-mod-theme: Bubble Plastic
   <<: *bubble_shared
   modes:
@@ -19998,7 +19997,7 @@ Bubble Plastic:
 # ------------------------------------------------------------------------------
 # Dubble Plastic
 # ------------------------------------------------------------------------------
-Dubble Plastic:
+Dubble Plastic B:
   card-mod-theme: Dubble Plastic
   <<: *bubble_shared
   modes:
@@ -20079,7 +20078,7 @@ Dubble Plastic:
 # ------------------------------------------------------------------------------
 # Bubble Plastic (Inverted)
 # ------------------------------------------------------------------------------
-Bubble Plastic (Inverted):
+Bubble Plastic (Inverted) B:
   card-mod-theme: Bubble Plastic (Inverted)
   <<: *bubble_shared
   modes:
@@ -20160,7 +20159,7 @@ Bubble Plastic (Inverted):
 # ------------------------------------------------------------------------------
 # Dubble Plastic (Inverted)
 # ------------------------------------------------------------------------------
-Dubble Plastic (Inverted):
+Dubble Plastic (Inverted) B:
   card-mod-theme: Dubble Plastic (Inverted)
   <<: *bubble_shared
   modes:
@@ -20241,7 +20240,7 @@ Dubble Plastic (Inverted):
 # ------------------------------------------------------------------------------
 # Bubble Polar
 # ------------------------------------------------------------------------------
-Bubble Polar:
+Bubble Polar B:
   card-mod-theme: Bubble Polar
   <<: *bubble_shared
   modes:
@@ -20322,7 +20321,7 @@ Bubble Polar:
 # ------------------------------------------------------------------------------
 # Dubble Polar
 # ------------------------------------------------------------------------------
-Dubble Polar:
+Dubble Polar B:
   card-mod-theme: Dubble Polar
   <<: *bubble_shared
   modes:
@@ -20403,7 +20402,7 @@ Dubble Polar:
 # ------------------------------------------------------------------------------
 # Bubble Red Sands
 # ------------------------------------------------------------------------------
-Bubble Red Sands:
+Bubble Red Sands B:
   card-mod-theme: Bubble Red Sands
   <<: *bubble_shared
   modes:
@@ -20484,7 +20483,7 @@ Bubble Red Sands:
 # ------------------------------------------------------------------------------
 # Dubble Red Sands
 # ------------------------------------------------------------------------------
-Dubble Red Sands:
+Dubble Red Sands B:
   card-mod-theme: Dubble Red Sands
   <<: *bubble_shared
   modes:
@@ -20565,7 +20564,7 @@ Dubble Red Sands:
 # ------------------------------------------------------------------------------
 # Bubble Retro
 # ------------------------------------------------------------------------------
-Bubble Retro:
+Bubble Retro B:
   card-mod-theme: Bubble Retro
   <<: *bubble_shared
   modes:
@@ -20646,7 +20645,7 @@ Bubble Retro:
 # ------------------------------------------------------------------------------
 # Dubble Retro
 # ------------------------------------------------------------------------------
-Dubble Retro:
+Dubble Retro B:
   card-mod-theme: Dubble Retro
   <<: *bubble_shared
   modes:
@@ -20727,7 +20726,7 @@ Dubble Retro:
 # ------------------------------------------------------------------------------
 # Bubble Rouge
 # ------------------------------------------------------------------------------
-Bubble Rouge:
+Bubble Rouge B:
   card-mod-theme: Bubble Rouge
   <<: *bubble_shared
   modes:
@@ -20808,7 +20807,7 @@ Bubble Rouge:
 # ------------------------------------------------------------------------------
 # Dubble Rouge
 # ------------------------------------------------------------------------------
-Dubble Rouge:
+Dubble Rouge B:
   card-mod-theme: Dubble Rouge
   <<: *bubble_shared
   modes:
@@ -20889,7 +20888,7 @@ Dubble Rouge:
 # ------------------------------------------------------------------------------
 # Bubble Selenitic
 # ------------------------------------------------------------------------------
-Bubble Selenitic:
+Bubble Selenitic B:
   card-mod-theme: Bubble Selenitic
   <<: *bubble_shared
   modes:
@@ -20970,7 +20969,7 @@ Bubble Selenitic:
 # ------------------------------------------------------------------------------
 # Dubble Selenitic
 # ------------------------------------------------------------------------------
-Dubble Selenitic:
+Dubble Selenitic B:
   card-mod-theme: Dubble Selenitic
   <<: *bubble_shared
   modes:
@@ -21051,7 +21050,7 @@ Dubble Selenitic:
 # ------------------------------------------------------------------------------
 # Bubble Slime
 # ------------------------------------------------------------------------------
-Bubble Slime:
+Bubble Slime B:
   card-mod-theme: Bubble Slime
   <<: *bubble_shared
   modes:
@@ -21132,7 +21131,7 @@ Bubble Slime:
 # ------------------------------------------------------------------------------
 # Dubble Slime
 # ------------------------------------------------------------------------------
-Dubble Slime:
+Dubble Slime B:
   card-mod-theme: Dubble Slime
   <<: *bubble_shared
   modes:
@@ -21213,7 +21212,7 @@ Dubble Slime:
 # ------------------------------------------------------------------------------
 # Bubble Soft
 # ------------------------------------------------------------------------------
-Bubble Soft:
+Bubble Soft B:
   card-mod-theme: Bubble Soft
   <<: *bubble_shared
   modes:
@@ -21294,7 +21293,7 @@ Bubble Soft:
 # ------------------------------------------------------------------------------
 # Dubble Soft
 # ------------------------------------------------------------------------------
-Dubble Soft:
+Dubble Soft B:
   card-mod-theme: Dubble Soft
   <<: *bubble_shared
   modes:
@@ -21375,7 +21374,7 @@ Dubble Soft:
 # ------------------------------------------------------------------------------
 # Bubble Sublime
 # ------------------------------------------------------------------------------
-Bubble Sublime:
+Bubble Sublime B:
   card-mod-theme: Bubble Sublime
   <<: *bubble_shared
   modes:
@@ -21456,7 +21455,7 @@ Bubble Sublime:
 # ------------------------------------------------------------------------------
 # Dubble Sublime
 # ------------------------------------------------------------------------------
-Dubble Sublime:
+Dubble Sublime B:
   card-mod-theme: Dubble Sublime
   <<: *bubble_shared
   modes:
@@ -21537,7 +21536,7 @@ Dubble Sublime:
 # ------------------------------------------------------------------------------
 # Bubble Sundial
 # ------------------------------------------------------------------------------
-Bubble Sundial:
+Bubble Sundial B:
   card-mod-theme: Bubble Sundial
   <<: *bubble_shared
   modes:
@@ -21618,7 +21617,7 @@ Bubble Sundial:
 # ------------------------------------------------------------------------------
 # Dubble Sundial
 # ------------------------------------------------------------------------------
-Dubble Sundial:
+Dubble Sundial B:
   card-mod-theme: Dubble Sundial
   <<: *bubble_shared
   modes:
@@ -21699,7 +21698,7 @@ Dubble Sundial:
 # ------------------------------------------------------------------------------
 # Bubble Terra
 # ------------------------------------------------------------------------------
-Bubble Terra:
+Bubble Terra B:
   card-mod-theme: Bubble Terra
   <<: *bubble_shared
   modes:
@@ -21780,7 +21779,7 @@ Bubble Terra:
 # ------------------------------------------------------------------------------
 # Dubble Terra
 # ------------------------------------------------------------------------------
-Dubble Terra:
+Dubble Terra B:
   card-mod-theme: Dubble Terra
   <<: *bubble_shared
   modes:
@@ -21861,7 +21860,7 @@ Dubble Terra:
 # ------------------------------------------------------------------------------
 # Bubble Tin
 # ------------------------------------------------------------------------------
-Bubble Tin:
+Bubble Tin B:
   card-mod-theme: Bubble Tin
   <<: *bubble_shared
   modes:
@@ -21942,7 +21941,7 @@ Bubble Tin:
 # ------------------------------------------------------------------------------
 # Dubble Tin
 # ------------------------------------------------------------------------------
-Dubble Tin:
+Dubble Tin B:
   card-mod-theme: Dubble Tin
   <<: *bubble_shared
   modes:
@@ -22023,7 +22022,7 @@ Dubble Tin:
 # ------------------------------------------------------------------------------
 # Bubble Tron
 # ------------------------------------------------------------------------------
-Bubble Tron:
+Bubble Tron B:
   card-mod-theme: Bubble Tron
   <<: *bubble_shared
   modes:
@@ -22104,7 +22103,7 @@ Bubble Tron:
 # ------------------------------------------------------------------------------
 # Dubble Tron
 # ------------------------------------------------------------------------------
-Dubble Tron:
+Dubble Tron B:
   card-mod-theme: Dubble Tron
   <<: *bubble_shared
   modes:
@@ -22181,7 +22180,7 @@ Dubble Tron:
       bubble-button-accent-color: var(--token-accent)
 
       <<: *bubble_colors_light_base
-Dubble Universe:
+Dubble Universe B:
   card-mod-theme: Dubble Universe
   <<: *bubble_shared
   modes:
@@ -22262,7 +22261,7 @@ Dubble Universe:
 # ------------------------------------------------------------------------------
 # Bubble Vapor
 # ------------------------------------------------------------------------------
-Bubble Vapor:
+Bubble Vapor B:
   card-mod-theme: Bubble Vapor
   <<: *bubble_shared
   modes:
@@ -22343,7 +22342,7 @@ Bubble Vapor:
 # ------------------------------------------------------------------------------
 # Dubble Vapor
 # ------------------------------------------------------------------------------
-Dubble Vapor:
+Dubble Vapor B:
   card-mod-theme: Dubble Vapor
   <<: *bubble_shared
   modes:
@@ -22424,7 +22423,7 @@ Dubble Vapor:
 # ------------------------------------------------------------------------------
 # Bubble Warm
 # ------------------------------------------------------------------------------
-Bubble Warm:
+Bubble Warm B:
   card-mod-theme: Bubble Warm
   <<: *bubble_shared
   modes:
@@ -22505,7 +22504,7 @@ Bubble Warm:
 # ------------------------------------------------------------------------------
 # Dubble Warm
 # ------------------------------------------------------------------------------
-Dubble Warm:
+Dubble Warm B:
   card-mod-theme: Dubble Warm
   <<: *bubble_shared
   modes:
@@ -22586,7 +22585,7 @@ Dubble Warm:
 # ------------------------------------------------------------------------------
 # Bubble Wombat
 # ------------------------------------------------------------------------------
-Bubble Wombat:
+Bubble Wombat B:
   card-mod-theme: Bubble Wombat
   <<: *bubble_shared
   modes:
@@ -22667,7 +22666,7 @@ Bubble Wombat:
 # ------------------------------------------------------------------------------
 # Dubble Wombat
 # ------------------------------------------------------------------------------
-Dubble Wombat:
+Dubble Wombat B:
   card-mod-theme: Dubble Wombat
   <<: *bubble_shared
   modes:
@@ -22748,7 +22747,7 @@ Dubble Wombat:
 # ------------------------------------------------------------------------------
 # Bubble Xcode
 # ------------------------------------------------------------------------------
-Bubble Xcode:
+Bubble Xcode B:
   card-mod-theme: Bubble Xcode
   <<: *bubble_shared
   modes:
@@ -22829,7 +22828,7 @@ Bubble Xcode:
 # ------------------------------------------------------------------------------
 # Dubble Xcode
 # ------------------------------------------------------------------------------
-Dubble Xcode:
+Dubble Xcode B:
   card-mod-theme: Dubble Xcode
   <<: *bubble_shared
   modes:
@@ -22910,7 +22909,7 @@ Dubble Xcode:
 # ------------------------------------------------------------------------------
 # Bubble Yellow
 # ------------------------------------------------------------------------------
-Bubble Yellow:
+Bubble Yellow B:
   card-mod-theme: Bubble Yellow
   <<: *bubble_shared
   modes:
@@ -22991,7 +22990,7 @@ Bubble Yellow:
 # ------------------------------------------------------------------------------
 # Dubble Yellow
 # ------------------------------------------------------------------------------
-Dubble Yellow:
+Dubble Yellow B:
   card-mod-theme: Dubble Yellow
   <<: *bubble_shared
   modes:
@@ -23072,7 +23071,7 @@ Dubble Yellow:
 # ------------------------------------------------------------------------------
 # Bubble Zenburn
 # ------------------------------------------------------------------------------
-Bubble Zenburn:
+Bubble Zenburn B:
   card-mod-theme: Bubble Zenburn
   <<: *bubble_shared
   modes:
@@ -23153,7 +23152,7 @@ Bubble Zenburn:
 # ------------------------------------------------------------------------------
 # Dubble Zenburn
 # ------------------------------------------------------------------------------
-Dubble Zenburn:
+Dubble Zenburn B:
   card-mod-theme: Dubble Zenburn
   <<: *bubble_shared
   modes:
