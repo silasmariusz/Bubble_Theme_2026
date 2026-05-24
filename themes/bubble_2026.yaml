@@ -64,49 +64,63 @@ x-bubble-shared: &bubble_shared
       --primary-text-color: var(--token-text);
       color: var(--token-text) !important;
     }
-    /* Tekst na tle accent – główna karta i sub-buttony */
+    /* [STATE BACKGROUND FIX]
+       Root cause: token-text-on-accent is for text on the THEME ACCENT color background.
+       For most dark themes it is white (#fff). Entity state colors (lights on = warm yellow,
+       RGB green/cyan, etc.) are always bright vivid colors — NOT the theme accent — and
+       need DARK text regardless of theme. Applying token-text-on-accent here made white
+       text appear on bright yellow/cyan backgrounds = unreadable.
+       Fix: split into two separate rules with dedicated tokens. */
+
+    /* State-based and generic on-state backgrounds → always dark (token-state-on-text-color) */
     .bubble-button-card-container[style*="background-color"],
     .bubble-button-card-container.background-on,
     .bubble-sub-button[style*="background-color"],
-    .bubble-sub-button[style*="bubble-accent-color"],
     .bubble-sub-button[style*="bubble-sub-button-light-background-color"],
     .bubble-sub-button.background-on {
-      --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-      --bubble-icon-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-      --bubble-name-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-      --bubble-state-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-      color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      --primary-text-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      --bubble-icon-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      --bubble-name-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      --bubble-state-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
     }
-    
-    /* Wymuszenie bezpośrednio na elementach tekstowych i ikonach */
+    /* Direct override on text/icon children for state backgrounds */
     .bubble-button-card-container.background-on .bubble-name,
     .bubble-button-card-container.background-on .bubble-state,
     .bubble-button-card-container.background-on ha-icon,
     .bubble-sub-button.background-on .bubble-sub-button-name-container,
-    .bubble-sub-button.background-on .bubble-sub-button-icon,
+    .bubble-sub-button.background-on .bubble-sub-button-icon {
+      color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+    }
+
+    /* Theme ACCENT color background → use token-text-on-accent (set per theme for the accent) */
+    /* This comes AFTER .background-on rules so it wins for the accent-color-specific case */
+    .bubble-sub-button[style*="bubble-accent-color"] {
+      --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+      --bubble-icon-color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+      --bubble-name-color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+      color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+    }
     .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
     .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-icon {
-      color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+      color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
     }
     ha-icon {
       color: inherit !important;
     }
   card-mod-card-yaml: |
     "ha-card$": |
-      /* Zmienne dla głównych i podrzędnych */
+      /* State-based backgrounds → dark text (token-state-on-text-color) */
       .bubble-button-card-container.background-on,
       .bubble-button-card-container[style*="background-color"],
       .bubble-sub-button.background-on,
-      .bubble-sub-button[style*="bubble-accent-color"],
       .bubble-sub-button[style*="bubble-sub-button-light-background-color"] {
-        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-        --bubble-icon-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-        --bubble-name-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-        --bubble-state-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        --primary-text-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+        --bubble-icon-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+        --bubble-name-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+        --bubble-state-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+        color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
       }
-
-      /* Twarde nadpisanie elementów tekstowych dla obu typów przycisków */
       .bubble-button-card-container.background-on .bubble-name,
       .bubble-button-card-container.background-on .bubble-state,
       .bubble-button-card-container.background-on ha-icon,
@@ -114,19 +128,32 @@ x-bubble-shared: &bubble_shared
       .bubble-button-card-container[style*="background-color"] .bubble-state,
       .bubble-button-card-container[style*="background-color"] ha-icon,
       .bubble-sub-button.background-on .bubble-sub-button-name-container,
-      .bubble-sub-button.background-on ha-icon,
+      .bubble-sub-button.background-on ha-icon {
+        color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      }
+      /* Theme accent background → use token-text-on-accent (accent-specific, per theme) */
+      .bubble-sub-button[style*="bubble-accent-color"] {
+        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+      }
       .bubble-sub-button[style*="bubble-accent-color"] .bubble-sub-button-name-container,
       .bubble-sub-button[style*="bubble-accent-color"] ha-icon {
-        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
       }
 
     "hui-element$ha-card$": |
+      /* State-based backgrounds → dark text */
       .bubble-button-card-container.background-on,
       .bubble-button-card-container[style*="background-color"],
       .bubble-sub-button.background-on,
+      .bubble-sub-button[style*="bubble-sub-button-light-background-color"] {
+        --primary-text-color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+        color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+      }
+      /* Theme accent background → use token-text-on-accent */
       .bubble-sub-button[style*="bubble-accent-color"] {
-        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
-        color: var(--token-text-on-accent, rgba(0,0,0,0.8)) !important;
+        --primary-text-color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+        color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
       }
 
 # ==============================================================================
@@ -134,6 +161,10 @@ x-bubble-shared: &bubble_shared
 # ==============================================================================
 # Base anchor – all shared styling except bubble-border and token-rgb-* palette
 x-bubble-colors-base-no-rgb: &bubble_colors_base_no_rgb
+  # Text color for sub-buttons driven by entity STATE color (lights on = warm yellow, RGB = cyan…).
+  # State colors are always bright → dark text is always correct here.
+  # Separate from token-text-on-accent (which is for the THEME ACCENT background, and is often white).
+  token-state-on-text-color: "rgba(0, 0, 0, 0.85)"
   # Fonts
   primary-font-family: "Inter, Lato, Roboto, Figtree, sans-serif"
   ha-font-family-body: "var(--primary-font-family)"
