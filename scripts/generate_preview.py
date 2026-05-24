@@ -101,6 +101,21 @@ def rgb_to_css(rgb):
     return f'rgb({rgb[0]},{rgb[1]},{rgb[2]})'
 
 
+def color_mix_black(rgb, pct_str):
+    """Simulate color-mix(in srgb, color pct%, black 100-pct%).
+    pct_str: '75%' or '75' or 0.75 — percent of the original color kept.
+    """
+    if rgb is None:
+        return None
+    try:
+        s = str(pct_str).strip().strip('"\'').rstrip('%')
+        pct = float(s) / 100.0
+    except (ValueError, TypeError):
+        pct = 0.75
+    pct = max(0.0, min(1.0, pct))
+    return (int(rgb[0] * pct), int(rgb[1] * pct), int(rgb[2] * pct))
+
+
 def to_display_css(value):
     """Best-effort CSS value for display — resolve bare RGB tuples, pass others through."""
     if not value or not isinstance(value, str):
@@ -161,13 +176,17 @@ def check_theme_mode(tokens, mode_label, theme_name):
         if cr is not None and cr < 3.0:
             issues.append(f'text/bg contrast {cr:.1f}:1 < 3:1 WCAG AA')
 
-    # Contrast: text-on-accent on accent background
+    # Contrast: text-on-accent on the simulated darkened button accent
     toa_rgb = parse_color(str(tokens.get('token-text-on-accent', '')))
     acc_rgb = parse_color(str(tokens.get('token-accent', '')))
-    if toa_rgb and acc_rgb:
-        cr = contrast_ratio(toa_rgb, acc_rgb)
+    mix_pct = tokens.get('token-accent-button-mix', '75%')
+    btn_rgb = color_mix_black(acc_rgb, mix_pct)
+    check_rgb = btn_rgb if btn_rgb else acc_rgb
+    if toa_rgb and check_rgb:
+        cr = contrast_ratio(toa_rgb, check_rgb)
         if cr is not None and cr < 3.0:
-            issues.append(f'text-on-accent/accent contrast {cr:.1f}:1 < 3:1 (button text will be unreadable)')
+            label = f'button ({mix_pct})' if btn_rgb else 'accent'
+            issues.append(f'text-on-accent/{label} contrast {cr:.1f}:1 < 3:1 (button text unreadable even after darkening)')
 
     return issues
 
@@ -212,11 +231,30 @@ def mode_preview(tokens, issues, mode_name):
     error = c('token-error', '#e74c3c')
     info = c('token-info', '#3498db')
 
+    # Simulate the color-mix() button darkening
+    mix_pct_raw = tokens.get('token-accent-button-mix', '75%')
+    mix_pct_str = str(mix_pct_raw).strip().strip('"\'')
+    acc_rgb = parse_color(str(tokens.get('token-accent', '')))
+    btn_rgb = color_mix_black(acc_rgb, mix_pct_str)
+    btn_accent = rgb_to_css(btn_rgb) if btn_rgb else accent
+    # mix label shown only when token is explicitly set (Option B)
+    has_mix_token = 'token-accent-button-mix' in tokens
+    mix_label = f'<span class="mix-label" title="token-accent-button-mix">{mix_pct_str}</span>' if has_mix_token else ''
+
     broken_class = ' broken' if issues else ''
     issue_html = ''
     if issues:
         issue_list = ''.join(f'<li>{i}</li>' for i in issues)
         issue_html = f'<div class="issues"><strong>⚠ Issues:</strong><ul>{issue_list}</ul></div>'
+
+    # Raw accent swatch + button swatch side by side for comparison
+    acc_swatch = swatch(tokens.get('token-accent'), 'raw accent (token-accent)', size=14)
+    btn_swatch_css = rgb_to_css(btn_rgb) if btn_rgb else None
+    btn_swatch = (
+        f'<div class="swatch" style="width:14px;height:14px;background:{btn_swatch_css};'
+        f'border:1px solid rgba(0,0,0,0.2);display:inline-block;margin:1px;border-radius:3px;" '
+        f'title="button accent after {mix_pct_str} mix"></div>'
+    ) if btn_swatch_css else ''
 
     palette_html = ''.join(
         swatch(tokens.get(tok), tok)
@@ -232,8 +270,11 @@ def mode_preview(tokens, issues, mode_name):
       <span style="color:{text};font-size:13px;font-weight:600;min-width:60px;">Label</span>
       <span style="color:{text2};font-size:11px;">Secondary</span>
       <button style="background:{bg2};color:{text};border:none;padding:5px 12px;border-radius:20px;font-size:12px;cursor:default;">Button</button>
-      <button style="background:{accent};color:{toa};border:none;padding:5px 12px;border-radius:20px;font-size:12px;cursor:default;font-weight:600;">Accent ON</button>
-      <span style="background:{accent};color:{toa};padding:3px 10px;border-radius:20px;font-size:11px;">Sub-pill</span>
+      <span style="display:inline-flex;flex-direction:column;align-items:center;gap:2px;">
+        <button style="background:{btn_accent};color:{toa};border:none;padding:5px 12px;border-radius:20px;font-size:12px;cursor:default;font-weight:600;">Active</button>
+        <span style="display:flex;gap:2px;align-items:center;">{acc_swatch}{btn_swatch}{mix_label}</span>
+      </span>
+      <span style="background:{btn_accent};color:{toa};padding:3px 10px;border-radius:20px;font-size:11px;">Sub-pill</span>
       <span style="color:{success};font-size:12px;">✓ OK</span>
       <span style="color:{warning};font-size:12px;">⚠ Warn</span>
       <span style="color:{error};font-size:12px;">✗ Error</span>
@@ -289,6 +330,22 @@ def generate_html(themes_data):
             check_theme_mode(extract_mode(data.get('modes', {}).get('light', {})), 'light', name)
         )
     )
+
+    # Detect Option B by checking for token-accent-button-mix in any theme's base tokens
+    all_keys = [k for k in themes_data if not k.startswith('x-')]
+    has_optionb_token = any(
+        'token-accent-button-mix' in {
+            **themes_data[k].get('modes', {}).get('dark', {}),
+            **themes_data[k].get('modes', {}).get('light', {}),
+        }
+        for k in all_keys
+    )
+    if has_optionb_token:
+        variant_label = '<span class="variant-badge optionb" title="Per-theme mix % via token-accent-button-mix">Option B — per-theme mix</span>'
+        variant_note = 'Active button shows simulated <code>color-mix()</code> darkening. Blue <code>75%</code> labels are per-theme mix values (Option B).'
+    else:
+        variant_label = '<span class="variant-badge optiona" title="Fixed 25% darkening via color-mix(accent 75%, black)">Option A — fixed 75% mix</span>'
+        variant_note = 'Active button shows simulated <code>color-mix(accent 75%, black)</code> darkening (Option A fixed value).'
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -380,14 +437,26 @@ def generate_html(themes_data):
   .palette {{ padding: 2px 0; }}
   .swatch {{ cursor: help; }}
   .hidden {{ display: none !important; }}
+  .mix-label {{
+    font-size: 9px; color: #7ecbff; background: rgba(126,203,255,0.12);
+    border-radius: 3px; padding: 0 3px; font-family: monospace; cursor: help;
+  }}
+  .variant-badge {{
+    display: inline-block; font-size: 11px; font-weight: 700;
+    padding: 2px 10px; border-radius: 20px; margin-left: 10px;
+    vertical-align: middle;
+  }}
+  .variant-badge.optionb {{ background: #7ecbff22; color: #7ecbff; border: 1px solid #7ecbff55; }}
+  .variant-badge.optiona {{ background: #a3e63522; color: #a3e635; border: 1px solid #a3e63555; }}
 </style>
 </head>
 <body>
-<h1>Bubble Theme 2026 — Theme Preview</h1>
+<h1>Bubble Theme 2026 — Theme Preview {variant_label}</h1>
 <div class="stats">
   {total} theme variants &nbsp;|&nbsp;
   <span class="broken-count">{broken} with contrast issues</span>
   &nbsp;|&nbsp; Generated from <code>themes/bubble_2026.yaml</code>
+  <br><span style="color:#888;font-size:12px;">{variant_note}</span>
 </div>
 <div class="filter-bar">
   <input type="text" id="search" placeholder="Filter by name…" oninput="filterThemes()">
