@@ -116,7 +116,8 @@ Theme Name:
 | `token-card` | Card background | rgba() | `rgba(79,69,87,1)` | `#dce0e8` |
 | `token-text` | Primary text | hex | `#ffffff` | `#4c4f69` |
 | `token-text-secondary` | Secondary/hint text | hex | `#b0b0b0` | `#6c6f85` |
-| `token-text-on-accent` | Text on accent bg | hex | `#ffffff` | `#ffffff` |
+| `token-text-on-accent` | Text on THEME ACCENT bg (e.g. active card accent color) | hex | `#ffffff` | `#ffffff` |
+| `token-state-on-text-color` | Text on entity STATE background (lights on = yellow/cyan). Always dark by default since state colors are always bright. Do NOT set to white. | rgba() | `rgba(0,0,0,0.85)` | `rgba(0,0,0,0.85)` |
 | `token-sidebar-icon` | Sidebar icon color | hex | `#98a7b9` | `#8c8fa1` |
 | `token-success` | Success state | rgba() | `rgba(0,202,139,1)` | `rgba(46,204,113,1)` |
 | `token-warning` | Warning state | rgba() | `rgba(222,176,107,1)` | `rgba(245,166,35,1)` |
@@ -260,13 +261,9 @@ White text on a bright accent (cyan, lime, yellow) is often unreadable.
 1. `--bubble-text-on-accent` is **not** a native Bubble Card variable. It does not affect
    Bubble Card's internal text rendering. Bubble Card reads `--primary-text-color` instead.
 
-2. The card-mod CSS selectors targeting `.background-on` and `[style*="background-color"]`
-   are correct in concept, but Bubble Card may set text color via inline JavaScript that
-   runs AFTER card-mod injects CSS, overriding our `!important` declarations in some cases.
+2. Bubble Card's auto-darkening is only 8-16% — insufficient for bright accents.
 
-3. Bubble Card's auto-darkening is only 8-16% — insufficient for bright accents.
-
-### Current Fix (Option A — active since v0.666-ble2)
+### Current Fix (Option A — active on `dev` branch)
 
 Located in `*bubble_shared` → `card-mod-card`:
 
@@ -277,20 +274,87 @@ ha-card {
 }
 ```
 
-**Why it works:**
-- Sets `--bubble-button-accent-color` at `ha-card` scope, which overrides the document-root
-  theme value via normal CSS cascade.
-- CSS custom properties inherit across shadow DOM boundaries, so Bubble Card's internals
-  see the darkened value.
-- Bubble Card then applies its own 8-16% darkening on top → ~30-35% total darkening.
-- `color-mix(in srgb, ...)` is supported in all Chromium 111+ browsers (HA frontend
-  uses Chromium, so this is safe).
+**Why it works:** CSS custom properties inherit across shadow DOM boundaries. Setting
+`--bubble-button-accent-color` at `ha-card` scope overrides the document-root theme value.
+Bubble Card then applies its own 8-16% darkening on top → ~30-35% total.
 
-**To remove the fix:** Delete the 2 `--bubble-button-accent-color` and `--bubble-accent-color`
-lines in the `card-mod-card` block. The TODO comment above them documents Option B.
+**Option B (on `dev-optionb` branch):** Per-theme mix via `token-accent-button-mix: "75%"`.
+Lower value = darker button. Allows per-theme fine-tuning without touching the shared block.
 
-**Option B (future):** Per-theme mix amount via `token-accent-button-mix: "75%"` variable.
-The TODO comment in the code describes the implementation pattern.
+---
+
+## State Background Text Color Problem
+
+### Problem (confirmed 2026-05-24)
+
+When a Bubble Card sub-button has **both** checked:
+- `[x] Show background when entity is on`
+- `[x] Background color based on state`
+
+...the background is set by Bubble Card JS to the entity's state color (e.g., warm yellow for
+a lit lamp, cyan for a colored light). This is always a bright/vivid color. Text appeared
+white (from `--primary-text-color`) = unreadable on bright backgrounds.
+
+### Bubble Card Mechanism (from source code analysis)
+
+1. JS function `updateBackground()` in `src/components/sub-button/utils.js`:
+   - Adds `.background-on` class to the sub-button element
+   - Calls `element.style.setProperty('--bubble-sub-button-light-background-color', color)`
+     to set the background as a CSS custom property via inline style
+   
+2. The text color is NOT set directly by JS — it comes from CSS cascade:
+   - `.background-on { background-color: var(--bubble-sub-button-light-background-color); }`
+   - `.bright-background { color: var(--bubble-sub-button-dark-text-color, rgb(0,0,0)); }`
+
+3. **The bug:** `.bright-background` class is **never added by JS** in current Bubble Card.
+   The infrastructure exists but the luminance check triggering it is missing from
+   `updateBackground()`. This is a Bubble Card bug, not ours.
+
+4. Without `.bright-background`, text inherits from parent → `--primary-text-color` → WHITE
+   in dark themes → white text on bright yellow background = unreadable.
+
+### Why Our Previous CSS Fix Also Failed
+
+The previous fix applied `color: var(--token-text-on-accent)` to `.bubble-sub-button.background-on`.
+
+This is **semantically wrong**: `token-text-on-accent` is the text color for the THEME ACCENT
+background (e.g., white for Nord's dark blue accent). Entity state backgrounds (lights on =
+warm yellow, RGB cyan, etc.) are completely DIFFERENT colors — they are always bright and need
+DARK text regardless of what the theme accent is.
+
+Example: Bubble Nord has `token-text-on-accent: "#ffffff"` (white, correct for dark blue accent).
+But when a light turns on with warm yellow state color, our CSS applied white text → still broken.
+
+### Current Fix
+
+Added `token-state-on-text-color: "rgba(0, 0, 0, 0.85)"` to `bubble_colors_base_no_rgb`.
+This defaults to dark for ALL themes (entity state colors are always bright when "on").
+
+Two separate rule groups in all card-mod injection paths (`$:`, `"ha-card$":`, `"hui-element$ha-card$":`):
+
+```css
+/* State/generic on-state → always dark */
+.bubble-sub-button.background-on,
+.bubble-sub-button[style*="bubble-sub-button-light-background-color"] {
+  color: var(--token-state-on-text-color, rgba(0,0,0,0.85)) !important;
+}
+
+/* Theme accent background → theme-specific (comes AFTER .background-on rule, wins on overlap) */
+.bubble-sub-button[style*="bubble-accent-color"] {
+  color: var(--token-text-on-accent, rgba(0,0,0,0.85)) !important;
+}
+```
+
+The accent rule is ordered AFTER the general `.background-on` rule (same CSS specificity →
+source order wins), so it overrides for the accent-color-specific case.
+
+### Per-Theme Override
+
+If a specific theme has unusual entity state colors where dark text doesn't work, add:
+```yaml
+token-state-on-text-color: "rgba(255, 255, 255, 0.9)"
+```
+to that theme's dark or light mode block.
 
 ---
 
@@ -387,7 +451,9 @@ The script:
 | Issue | Status | Notes |
 |-------|--------|-------|
 | Bright accent → white text unreadable on button | Fixed (Option A) | `color-mix` in card-mod-card |
-| `.background-on` CSS selector unreliable in deep shadow DOM | Partially fixed | Selectors work at $: level, not deeper |
+| State background text unreadable (lights on = yellow/cyan bg) | **Fixed** | Separate `token-state-on-text-color` token, dark by default |
+| `.bright-background` class never added by Bubble Card JS | Documented | This is a Bubble Card bug; our CSS workaround targets `.background-on` instead |
 | `--bubble-text-on-accent` not read by Bubble Card JS | Documented | Bubble Card uses `--primary-text-color` |
+| `token-text-on-accent` was incorrectly used for state backgrounds | **Fixed** | These are different backgrounds; state needs its own token |
 | Mobile header must be hidden via CSS, not HA API | By design | `display:none` at ≤768px breakpoint |
-| "Dubble" themes require card-mod | By design | Listed in README FAQ |
+| All themes require card-mod (not just Dubble) | Documented | Fixed in README; without card-mod colors load but CSS enhancements don't |
