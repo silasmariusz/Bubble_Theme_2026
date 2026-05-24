@@ -1,0 +1,62 @@
+name: Dev Auto Pre-Release
+
+# Automatically keeps a rolling "dev-latest" pre-release in sync with the dev branch.
+# HACS users can install it by enabling "Show pre-releases" in HACS settings.
+# The release is recreated (not accumulated) on every push — only one dev-latest exists.
+
+on:
+  push:
+    branches:
+      - dev
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  dev-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Delete existing dev-latest release and tag
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release delete dev-latest --yes --cleanup-tag 2>/dev/null || true
+          # Brief pause so GitHub processes the deletion before re-creating
+          sleep 3
+
+      - name: Create dev-latest pre-release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          COMMIT_SHA=$(git rev-parse --short HEAD)
+          TIMESTAMP=$(date -u '+%Y-%m-%d %H:%M UTC')
+          gh release create dev-latest \
+            --title "Dev Latest — ${TIMESTAMP}" \
+            --notes "$(cat <<'EOF'
+Automated pre-release tracking the \`dev\` branch. Updated on every push.
+
+> ⚠️ This build may contain unfinished changes. Use a numbered release for stable setups.
+
+## Install via HACS
+
+1. In HACS open **⋮ → Settings** and enable **Show pre-releases**
+2. Return to **Bubble Theme 2026** and select **dev-latest** from the version dropdown
+3. Click **Download**
+
+## Manual install
+
+Download directly from the \`dev\` branch:
+\`\`\`
+https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/dev/themes/bubble_2026.yaml
+\`\`\`
+Place in \`<config>/themes/bubble_themes_2026/bubble_2026.yaml\`
+
+---
+Commit: ${COMMIT_SHA}
+EOF
+)" \
+            --prerelease \
+            --target dev
