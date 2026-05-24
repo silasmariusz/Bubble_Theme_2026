@@ -23,6 +23,21 @@ Security issues: silas [at] qnapclub.pl
 
 ---
 
+## Requirements
+
+| Dependency | Required | Purpose |
+|------------|----------|---------|
+| [Bubble Card](https://github.com/Clooos/Bubble-Card) | Recommended | The cards these themes are designed for |
+| [card-mod](https://github.com/thomasloven/lovelace-card-mod) | **Required for all themes** | Enables header hiding, dialog blur, and accent contrast fix |
+
+> **card-mod must be installed for every theme variant** — both regular Bubble and Dubble.
+> Without it the theme still loads and applies colors, but the CSS enhancements (mobile header,
+> blurred dialogs, accent contrast fix) will not work.
+>
+> Install card-mod via HACS (Frontend category) before selecting any Bubble 2026 theme.
+
+---
+
 ## Features
 
 With [card-mod](https://github.com/thomasloven/lovelace-card-mod) installed you get:
@@ -65,27 +80,34 @@ HACS automatically tracks updates and notifies you when a new release is availab
 9. Save and restart Home Assistant
 10. Go to your profile settings and select a **Bubble 2026** theme variant
 
-#### Getting the latest development version via HACS
+#### Getting the latest development version
 
-By default HACS installs the latest tagged **release**. If you want the most recent
-unreleased changes from the `main` branch:
+HACS tracks **tagged releases** only — branches are not listed in its version selector.
+To install unreleased content from the `dev` branch you have two options:
 
-1. In HACS, find **Bubble Theme 2026**
-2. Click the **⋮** menu next to it and choose **Redownload**
-3. In the version selector that appears, open the dropdown and select **main** (or the
-   branch you want)
-4. Click **Download** to apply
+**Option A — Manual install (simplest):**
+1. Download the file directly from the `dev` branch:
+   ```
+   https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/dev/themes/bubble_2026.yaml
+   ```
+2. Place it in `<config>/themes/bubble_themes_2026/bubble_2026.yaml` and restart HA.
 
-> **Note:** Development versions may contain unfinished changes. Use a release for
-> stable production setups.
+**Option B — Via HACS pre-release:**
+1. In HACS, open **⋮ → Settings** and enable **Show pre-releases**
+2. Return to the Bubble Theme 2026 entry; if a pre-release tag exists on `dev` it will
+   now appear in the version dropdown — select it and click **Download**
+
+> **Note:** Development versions may contain unfinished changes. Use a tagged release for
+> stable production setups. Check the [releases page](https://github.com/silasmariusz/Bubble_Theme_2026/releases)
+> to see which pre-release tags (e.g. `v0.666-dev1`) are currently available.
 
 ---
 
 ### Without HACS (manual)
 
 1. Download the theme file directly:
-   - **Latest release:** [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml)
-   - **Latest development (main branch):** same URL above — the `main` branch always reflects the newest state
+   - **Latest stable release:** [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml) (from `main`)
+   - **Latest development build:** [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/dev/themes/bubble_2026.yaml) (from `dev`)
 2. Place the file in `<config>/themes/bubble_themes_2026/bubble_2026.yaml`
    (create the folder if it does not exist)
 3. Add the following to your `configuration.yaml` if it is not there already:
@@ -120,10 +142,24 @@ python3 scripts/generate_preview.py
 
 # FAQ
 
+## Do I need card-mod? What does it do?
+
+**Yes — card-mod is required for all Bubble 2026 themes**, including both Bubble and Dubble variants.
+
+Without card-mod:
+- The theme still loads and all colors are applied correctly
+- But header hiding on mobile, blurred more-info dialogs, and the accent contrast fix **will not work**
+
+Install [card-mod](https://github.com/thomasloven/lovelace-card-mod) via HACS (Frontend category),
+then reload your themes (`Developer Tools → Actions → frontend.reload_themes`).
+
+---
+
 ## I can't find the "Bubble 2026 Dubble" themes after installation
 
-The **Dubble** variants require the [card-mod](https://github.com/thomasloven/lovelace-card-mod)
-custom component. Install it via HACS (Frontend category), then reload your themes.
+If Dubble variants are missing even after card-mod is installed, make sure you reloaded themes
+and re-selected one from your profile settings. Dubble themes use additional card-mod CSS layers
+for the dual-tone style — they will not appear if card-mod failed to load.
 
 ---
 
