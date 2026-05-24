@@ -10,7 +10,7 @@ A modern Home Assistant theme pack designed for [Bubble Card](https://github.com
 | Sth | Bubble? | or Dubble? |
 | <img src="https://github.com/user-attachments/assets/856d9a18-c79c-4caa-a4ff-4c60c2b713ba" height="400"> | <img src="https://github.com/user-attachments/assets/4564c1b6-0446-4788-98b4-5610a42442b1" height="400"> | <img src="https://github.com/user-attachments/assets/1c5e01c7-c078-4afc-9334-4a71ad6fae65" height="400"> |
 
-**[→ Browse all 289 theme variants (live preview)](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html)**
+**[→ Browse all 289 theme variants — dev preview](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/dev/docs/theme-preview.html)** · [stable / main](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html)
 
 ---
 
@@ -102,7 +102,10 @@ unreleased changes from the `main` branch:
 
 Not sure which variant to pick? Browse them all before installing:
 
-**[Open the theme preview →](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html)**
+| Branch | Link | When to use |
+|--------|------|-------------|
+| `dev` | **[Open dev preview →](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/dev/docs/theme-preview.html)** | Latest unreleased changes |
+| `main` | [Open stable preview →](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html) | Current released version |
 
 The preview shows every theme variant with its dark and light mode side by side,
 including a full color palette strip. You can filter by name or show only themes with
