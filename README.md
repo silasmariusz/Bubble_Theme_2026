@@ -1,8 +1,8 @@
 # Bubble Theme 2026
-New look on a Bubble Cards with multiple variants and vibes
 
-> Latest release: **v0.666-ave7**  
-> See [`CHANGELOG.md`](CHANGELOG.md) for update details.
+A modern Home Assistant theme pack designed for [Bubble Card](https://github.com/Clooos/Bubble-Card), with 289 variants covering popular editor color schemes and custom vibes — each available in both dark and light mode.
+
+> **Latest release:** [v0.666-ble1](https://github.com/silasmariusz/Bubble_Theme_2026/releases) — see [`CHANGELOG.md`](CHANGELOG.md) for details.
 
 | Bubble 2026 | sample1 | sample2 |
 | :---: | :---: | :---: |
@@ -10,103 +10,160 @@ New look on a Bubble Cards with multiple variants and vibes
 | Sth | Bubble? | or Dubble? |
 | <img src="https://github.com/user-attachments/assets/856d9a18-c79c-4caa-a4ff-4c60c2b713ba" height="400"> | <img src="https://github.com/user-attachments/assets/4564c1b6-0446-4788-98b4-5610a42442b1" height="400"> | <img src="https://github.com/user-attachments/assets/1c5e01c7-c078-4afc-9334-4a71ad6fae65" height="400"> |
 
+**[→ Browse all 289 theme variants (live preview)](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html)**
 
-Silas Mariusz, BIO: [devspark.pl](https://devspark.pl)
+---
 
-Themes designed for [QNAP Club Poland](https://forum.qnap.net.pl), [QNAP Forum](https://forum.qnap.net.pl) crew
+By Silas Mariusz · [devspark.pl](https://devspark.pl)  
+Designed for the [QNAP Club Poland](https://forum.qnap.net.pl) community.  
+Thanks to **UberDudePL** for recent fixes.  
+Based on the original [Bubble theme](https://github.com/Clooos/Bubble) by Clooos and the [Noctis theme](https://github.com/aFFekopp/noctis) by aFFekopp.
 
-Report abuse or security issues: silas _AT&T_ qnapclub.pl
+Security issues: silas [at] qnapclub.pl
 
+---
 
-Podziekowania dla UberDudePL za ostanie fixy
+## Features
 
-Based on clooos Buuble theme
+With [card-mod](https://github.com/thomasloven/lovelace-card-mod) installed you get:
 
-Based on Noctis theme from aFFekopp
+- Header hidden on mobile (≤768 px) for a clean full-screen look
+- Compact mobile-style layout on desktop when views are set to subview mode
+- Blurred backdrop on more-info dialogs
+- Automatic accent-color contrast fix — text on active Bubble Card buttons is always readable
 
-With card-mod installed you got this features:
+---
 
-- A mobile view on desktop (like on the screenshot and you need to set your view in subview mode)
-- No header on mobile
+## Theme file
 
-### Plik motywu
+| File | Description |
+|------|-------------|
+| `bubble_2026.yaml` | Main theme pack — 289 variants, header hidden on mobile |
 
-| Plik | Opis |
-|------|------|
-| `bubble_2026.yaml` | Główny pack – 293 warianty, header ukryty na mobile |
+HACS installs this file automatically. Select a theme variant in your profile settings.
 
-HACS instaluje plik automatycznie. Wybierz motyw w ustawieniach profilu.
+---
 
 ## Installation
 
-### Without HACS (not recommended)
+### With HACS (recommended)
 
-1. Download the theme file: [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml)
-2. Add the file(s) into a new folder named `bubble_themes_2026` in the `<config>/themes/` folder
-3. In your configuration.yaml add this: 
-```yaml
-frontend:
-  themes: !include_dir_merge_named themes
-```
-4. Save and restart Home Assistant
-5. Now go to your personal account settings and select Bubble as your theme
+HACS automatically tracks updates and notifies you when a new release is available.
 
-### With HACS
-
-This method allows you to get updates directly in the HACS main page
-
-1. Download HACS following the instructions on [https://hacs.xyz/docs/setup/download](https://hacs.xyz/docs/setup/download/)
-2. Proceed to the initial configuration following the instructions on [https://hacs.xyz/docs/configuration/basic](https://hacs.xyz/docs/configuration/basic)
-3. On your sidebar go to `HACS` > `Integrations`
-4. click on the icon at the right top corner then on `Custom repositories`
-5. For the repository add this: `https://github.com/silasmariusz/Bubble_Theme_2026`
-6. For the category select `Theme` then click `Add`
-7. Now click on `Bubble Theme 2026` then on the `Dowload` button
-8. In your configuration.yaml add this: 
-```yaml
-frontend:
-  themes: !include_dir_merge_named themes
-```
+1. Install HACS by following [https://hacs.xyz/docs/setup/download](https://hacs.xyz/docs/setup/download)
+2. Complete the initial setup at [https://hacs.xyz/docs/configuration/basic](https://hacs.xyz/docs/configuration/basic)
+3. In the Home Assistant sidebar, go to **HACS**
+4. Click the **⋮** (three-dot) menu in the top-right corner, then **Custom repositories**
+5. Enter `https://github.com/silasmariusz/Bubble_Theme_2026` as the repository URL
+6. Set the category to **Theme** and click **Add**
+7. Find **Bubble Theme 2026** in the list and click **Download**
+8. Add the following to your `configuration.yaml` if it is not there already:
+   ```yaml
+   frontend:
+     themes: !include_dir_merge_named themes
+   ```
 9. Save and restart Home Assistant
-10. Now go to your personal account settings and select Bubble 2026 as your theme
+10. Go to your profile settings and select a **Bubble 2026** theme variant
+
+#### Getting the latest development version via HACS
+
+By default HACS installs the latest tagged **release**. If you want the most recent
+unreleased changes from the `main` branch:
+
+1. In HACS, find **Bubble Theme 2026**
+2. Click the **⋮** menu next to it and choose **Redownload**
+3. In the version selector that appears, open the dropdown and select **main** (or the
+   branch you want)
+4. Click **Download** to apply
+
+> **Note:** Development versions may contain unfinished changes. Use a release for
+> stable production setups.
+
+---
+
+### Without HACS (manual)
+
+1. Download the theme file directly:
+   - **Latest release:** [bubble_2026.yaml](https://raw.githubusercontent.com/silasmariusz/Bubble_Theme_2026/main/themes/bubble_2026.yaml)
+   - **Latest development (main branch):** same URL above — the `main` branch always reflects the newest state
+2. Place the file in `<config>/themes/bubble_themes_2026/bubble_2026.yaml`
+   (create the folder if it does not exist)
+3. Add the following to your `configuration.yaml` if it is not there already:
+   ```yaml
+   frontend:
+     themes: !include_dir_merge_named themes
+   ```
+4. Save and restart Home Assistant
+5. Go to your profile settings and select a **Bubble 2026** theme variant
+
+---
+
+## Theme Preview
+
+Not sure which variant to pick? Browse them all before installing:
+
+**[Open the theme preview →](https://htmlpreview.github.io/?https://github.com/silasmariusz/Bubble_Theme_2026/blob/main/docs/theme-preview.html)**
+
+The preview shows every theme variant with its dark and light mode side by side,
+including a full color palette strip. You can filter by name or show only themes with
+known contrast issues.
+
+To regenerate the preview locally after editing the YAML:
+```bash
+python3 scripts/generate_preview.py
+```
+
+---
 
 # FAQ
 
-## After installation cant find Bubble 2026 Dubble* themes
+## I can't find the "Bubble 2026 Dubble" themes after installation
 
-Uuh
+The **Dubble** variants require the [card-mod](https://github.com/thomasloven/lovelace-card-mod)
+custom component. Install it via HACS (Frontend category), then reload your themes.
 
-I see. Did I mention mod card addon and card mod is required? XDDDDD
+---
 
-PLEASE make sure you have installed it
+## How do I verify everything loaded correctly?
 
-Here is SOP Guide for absolutely anyone modyfing his HA and should be performed always after changes are done:
+Run through this checklist after any installation or configuration change:
 
-Have you checked your yaml config is healthy? Steps you should do you always after installing anything or modifying: 
+### In Home Assistant
 
+1. Go to **Developer Tools** in the left sidebar
+2. Check that your configuration has **no errors** (warnings are acceptable; errors must be
+   fixed before continuing)
+3. In Developer Tools → **Actions**, search for `frontend.reload_themes` and execute it
+4. Go to your profile settings and re-select your theme
 
-### (Home Assistant actions)
+### In your browser
 
-1.	⁠go to Developer Tools from left sidebar
-2.	⁠Check if your configuration has no errors (warnings are not errors) but basically do not continue if there are errors (fix them first)
-3.	⁠If all is okay then click Actions in Developer tools and start typing reload or themes - you should fine action reload themes
-4.	⁠Click execute
-5.	⁠Leave developer tools, go to your profile settings in HA (hold on on that page)
+5. Press **F12** to open Developer Tools (make sure the Home Assistant tab is active)
+6. Open the **Network** tab and check the **Disable cache** checkbox
+7. Press **Ctrl+F5** (hard refresh)
+8. Switch to the **Console** tab — if there are no red errors, everything is working
 
-### (Browser actions)
-6. Hit F12 on keyboard to open Developed Tools (make sure you are on Home Assistant tab in your browser) 7. From the browser developer tools look for Network tab 8. Look for small check box DISABLE CACHE 9. Hit Ctrl+F5 in your browser 10. If there are no errors in console tab tab it’s fine. If there are errors resolve them
+### On iOS / Android
 
-### (iOS/Android troubleshooting)
-1. (if possivle) Swipe phone left/right to open debug menu if was already enabled, 
-2. If above is not working go to HA settings and find Companion App menu 
-3. Clear cache
+1. Open the debug menu by swiping left/right if you have it enabled, or
+2. Go to HA **Settings → Companion App** and clear the cache
 
-IMO Those steps should be done each time by user always when modyfing any settings in HA. Unfortunately Home Assistant is lack of implementation Test Changes button and if something is wrong Revert button and Apply button if all is fine. HA in Test action could automatically rebuild cache and js/css links. Yes this mean Home Assistant is not friendly for newbies and devs IMHO
+> These steps should be performed after any change to your HA configuration. Home
+> Assistant does not have a built-in "test and revert" mechanism, so a clean reload is
+> the most reliable way to confirm changes took effect.
 
-HOPE THIS HELPS
+---
 
-## Text white colour on vibe Lime / bright accents is not visible
+## Text on bright accent colors (Lime, Cyan, Yellow) is not readable
 
-Fixed in the current release. The theme now pre-darkens the accent background used by Bubble Card button cards via `color-mix()`, ensuring white text remains readable on bright accent colors (cyan, lime, yellow).
+This was a known issue caused by how [Bubble Card](https://github.com/Clooos/Bubble-Card)
+calculates button background brightness — it only darkened the accent color by 8–16%,
+which was insufficient for light accent colors used with white text.
 
-If you experience contrast issues with a specific theme variant, open an issue.
+**Fixed** in the current build. The theme now pre-darkens the button accent background
+by ~25% using CSS `color-mix()` before Bubble Card applies its own adjustment, giving
+~30–35% total darkening. This makes white text readable on all accent colors including
+cyan, lime, and yellow.
+
+If you still experience a contrast issue with a specific theme variant, please
+[open an issue](https://github.com/silasmariusz/Bubble_Theme_2026/issues).
